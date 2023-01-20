@@ -1,0 +1,26 @@
+:root {
+  // border radius cards and buttons
+  --border-radius: 5px;
+
+  //  color
+  --light-color: #ffffff;
+  --dark-color: #000000;
+  --gray-color: #545454;
+  --modal-gray-color: #8c8c8c;
+  --orange-color: #ff6b01;
+  --ganre-orange-color: #ff6b08;
+  --color-error: #ff001b;
+
+  // filter hover / focus
+  --shadow: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+
+  // animation(transition)
+  --animationTransition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  // font family
+  --font-family: 'Roboto', sans-serif;
+
+  // font weight
+  --font-weight-normal: 400;
+  --font-weight-media: 500;
+}

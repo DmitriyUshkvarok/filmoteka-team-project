@@ -1,0 +1,11 @@
+// mixin centr
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// mixin line height
+@mixin font($fs, $lh) {
+  font-size: $fs;
+  line-height: calc($lh / $fs);
+}
