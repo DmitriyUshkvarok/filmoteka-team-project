@@ -124,13 +124,6 @@ body {
   margin-bottom: 120px;
 }
 
-.slider-wrapper {
-  position: absolute;
-  top: 10%;
-  left: 23%;
-  transform: perspective(600px) translate(0px, -100%) rotateY(45deg);
-}
-
 .slider-tv {
   position: relative;
   max-width: 200px;
@@ -304,4 +297,73 @@ body {
   display: flex;
   -moz-column-gap: 15px;
        column-gap: 15px;
+}
+
+@media (min-width: 320px) {
+  .modal-form-registration_title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .modal-form-registration_sub-title {
+    font-size: 14px;
+  }
+  .slider-wrapper {
+    top: -29%;
+    left: 50%;
+    transform: perspective(600px) translate(0px, -100%) rotateY(0deg);
+  }
+  .slider-tv {
+    max-width: 200px;
+  }
+  .icon-tv {
+    position: absolute;
+    fill: aliceblue;
+    top: 0;
+    left: 0;
+    width: 150px;
+    opacity: 0.4;
+  }
+  .form-swiper {
+    position: absolute;
+    top: 80px;
+    left: 6%;
+  }
+  .form-movies-img {
+    border-radius: 10px;
+    width: 127px;
+    height: 85px;
+  }
+  .man-watch.hidden {
+    display: none;
+  }
+  .forgotten-label {
+    font-size: 12px;
+  }
+  .forgoten-password {
+    width: 250px;
+  }
+}
+@media (min-width: 768px) {
+  .slider-wrapper {
+    left: 40%;
+  }
+}
+@media (min-width: 1280px) {
+  .modal-form-registration_title {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  .modal-form-registration_sub-title {
+    font-size: 22px;
+  }
+  .slider-wrapper {
+    position: absolute;
+    top: 10%;
+    left: 23%;
+    transform: perspective(600px) translate(0px, -100%) rotateY(45deg);
+  }
+  .man-watch.hidden {
+    display: block;
+    opacity: 0.4;
+  }
 }/*# sourceMappingURL=index.css.map */
