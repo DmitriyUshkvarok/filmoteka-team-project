@@ -46,6 +46,7 @@ const refs = {
   facebookBtn: document.querySelector('.log-by-facebook-btn'),
   resetPassword: document.querySelector('.btn-new-password'),
   inputMailForgot: document.querySelector('.forgoten-password'),
+  manSvg: document.querySelector('.man-watch'),
 };
 
 refs.forgotPassword.addEventListener('click', onOpenForgotForm);
@@ -59,6 +60,7 @@ onLoginFacebook;
 function onOpenForgotForm(e) {
   e.preventDefault();
   refs.forgotForm.classList.toggle('hidden');
+  refs.manSvg.classList.toggle('hidden');
 }
 
 const authStateChange = getAuth();
@@ -104,7 +106,6 @@ function onRegisterUsers(e) {
         Notify.success('Спасибо за регестрацию');
       }
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      console.log(user);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -177,7 +178,6 @@ function onLogInGithub(e) {
 }
 
 // facebook авторизация
-
 function onLoginFacebook(e) {
   const authFace = getAuth();
   const providerFacebook = new FacebookAuthProvider();

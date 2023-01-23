@@ -124,6 +124,37 @@ body {
   margin-bottom: 120px;
 }
 
+.slider-wrapper {
+  position: absolute;
+  top: 10%;
+  left: 23%;
+  transform: perspective(600px) translate(0px, -100%) rotateY(45deg);
+}
+
+.slider-tv {
+  position: relative;
+  max-width: 200px;
+}
+
+.icon-tv {
+  position: absolute;
+  fill: aliceblue;
+  top: 0;
+  left: 0;
+}
+
+.form-swiper {
+  position: absolute;
+  top: 80px;
+  left: 12.5%;
+}
+
+.form-movies-img {
+  border-radius: 10px;
+  width: 160px;
+  height: 100px;
+}
+
 .modal-form-registration_title {
   margin-bottom: 30px;
   color: var(--orange-color);
@@ -134,11 +165,27 @@ body {
 }
 
 .form-registration {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   row-gap: 15px;
+}
+
+.man-watch {
+  position: absolute;
+  bottom: 39%;
+  right: 28%;
+  display: none;
+}
+
+.man-watch.hidden {
+  display: block;
+}
+
+.icon-watch {
+  fill: rgb(246, 244, 243);
 }
 
 .form-group-registaration {
@@ -238,6 +285,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group-registaration-btn {
