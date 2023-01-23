@@ -1,0 +1,60 @@
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.lazyload,
+.lazyloading {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 1000ms;
+}
+.lazyloaded {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1000ms, opacity 1000ms;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body {
+  font-family: var(--font-family), Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: #abbaab;
+  background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
+  background: linear-gradient(to right, #ffffff, #abbaab);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+}

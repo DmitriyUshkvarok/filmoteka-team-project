@@ -1,0 +1,258 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+:root {
+  --border-radius: 5px;
+  --light-color: #ffffff;
+  --dark-color: #000000;
+  --gray-color: #545454;
+  --modal-gray-color: #8c8c8c;
+  --orange-color: #ff6b01;
+  --ganre-orange-color: #ff6b08;
+  --color-error: #ff001b;
+  --shadow: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+  --animationTransition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --font-family: "Roboto", sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-media: 500;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.lazyload,
+.lazyloading {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 1000ms;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1000ms, opacity 1000ms;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body {
+  font-family: var(--font-family), Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: #abbaab;
+  background: linear-gradient(to right, #ffffff, #abbaab);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+.btn-form {
+  font-size: 10px;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  outline: 2px solid var(--gray-color);
+  border: none;
+  background-color: transparent;
+  color: var(--orange-color);
+  border-radius: var(--border-radius);
+  transition: var(--animationTransition);
+  text-transform: uppercase;
+}
+.btn-form:hover, .btn-form:focus {
+  background-color: var(--orange-color);
+  outline: 2px solid var(--orange-color);
+  color: var(--light-color);
+}
+
+.modal-form-registration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  padding: 30px;
+  background: #333333;
+  background: linear-gradient(to right, #333333, #dd1818);
+}
+
+.modal-form-registration.is-hidden {
+  display: none;
+}
+
+.title-wrapper {
+  max-width: 500px;
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  margin-bottom: 120px;
+}
+
+.modal-form-registration_title {
+  margin-bottom: 30px;
+  color: var(--orange-color);
+}
+
+.modal-form-registration_sub-title {
+  color: var(--orange-color);
+}
+
+.form-registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.form-group-registaration {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-form-title,
+.password-form-title {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 5px;
+  color: var(--orange-color);
+}
+
+.input-password,
+.input-email,
+.forgoten-password {
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+  outline: 2px solid var(--gray-color);
+  border: none;
+  background-color: transparent;
+  color: var(--light-color);
+  border-radius: var(--border-radius);
+}
+.input-password:focus,
+.input-email:focus,
+.forgoten-password:focus {
+  outline: 2px solid var(--orange-color);
+  transition: var(--animationTransition);
+}
+
+.password-container {
+  position: relative;
+}
+
+.icon-open {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
+
+.icon-close {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
+
+.icon-close.hide {
+  opacity: 1;
+}
+
+.forgoten-group-registaration {
+  display: none;
+}
+
+.forgoten-group-registaration.hidden {
+  display: block;
+}
+
+.forfgot-password {
+  color: var(--light-color);
+  transition: color var(--animationTransition);
+}
+.forfgot-password:hover, .forfgot-password:focus {
+  color: var(--orange-color);
+  outline: none;
+}
+
+.forgotten-label {
+  display: flex;
+  margin-bottom: 5px;
+  color: var(--orange-color);
+}
+
+.forgotten-container {
+  display: flex;
+}
+
+.forgoten-password {
+  margin-right: 15px;
+}
+
+.btn-new-password {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group-registaration-btn {
+  display: flex;
+  flex-direction: row;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+}
+
+.social-form-question {
+  color: var(--light-color);
+}
+
+.button-sign-group {
+  display: flex;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+}/*# sourceMappingURL=index.css.map */

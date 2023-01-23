@@ -1,0 +1,22 @@
+// registration form btn
+.btn-form {
+  font-size: 10px;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  outline: 2px solid var(--gray-color);
+  border: none;
+  background-color: transparent;
+  color: var(--orange-color);
+  border-radius: var(--border-radius);
+  transition: var(--animationTransition);
+  text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    background-color: var(--orange-color);
+    outline: 2px solid var(--orange-color);
+    color: var(--light-color);
+  }
+}

@@ -1,0 +1,97 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+:root {
+  --border-radius: 5px;
+  --light-color: #ffffff;
+  --dark-color: #000000;
+  --gray-color: #545454;
+  --modal-gray-color: #8c8c8c;
+  --orange-color: #ff6b01;
+  --ganre-orange-color: #ff6b08;
+  --color-error: #ff001b;
+  --shadow: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+  --animationTransition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --font-family: "Roboto", sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-media: 500;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.lazyload,
+.lazyloading {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 1000ms;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1000ms, opacity 1000ms;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body {
+  font-family: var(--font-family), Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  background: #abbaab;
+  background: linear-gradient(to right, #ffffff, #abbaab);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+.btn-form {
+  font-size: 10px;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  padding: 5px;
+  outline: 2px solid var(--gray-color);
+  border: none;
+  background-color: transparent;
+  color: var(--orange-color);
+  border-radius: var(--border-radius);
+  transition: var(--animationTransition);
+  text-transform: uppercase;
+}
+.btn-form:hover, .btn-form:focus {
+  background-color: var(--orange-color);
+  outline: 2px solid var(--orange-color);
+  color: var(--light-color);
+}/*# sourceMappingURL=library.css.map */

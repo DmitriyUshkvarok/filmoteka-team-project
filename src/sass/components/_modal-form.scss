@@ -1,0 +1,156 @@
+.modal-form-registration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100vh;
+  padding: 30px;
+  background: #333333;
+  background: -webkit-linear-gradient(to right, #333333, #dd1818);
+  background: linear-gradient(to right, #333333, #dd1818);
+}
+
+.modal-form-registration.is-hidden {
+  display: none;
+}
+
+.title-wrapper {
+  max-width: 500px;
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  margin-bottom: 120px;
+}
+
+.modal-form-registration_title {
+  margin-bottom: 30px;
+  color: var(--orange-color);
+}
+
+.modal-form-registration_sub-title {
+  color: var(--orange-color);
+}
+
+.form-registration {
+  @include flexCenter();
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.form-group-registaration {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-form-title,
+.password-form-title {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 5px;
+  color: var(--orange-color);
+}
+
+.input-password,
+.input-email,
+.forgoten-password {
+  width: 300px;
+  height: 30px;
+  padding: 10px;
+  outline: 2px solid var(--gray-color);
+  border: none;
+  background-color: transparent;
+  color: var(--light-color);
+  border-radius: var(--border-radius);
+
+  &:focus {
+    outline: 2px solid var(--orange-color);
+    transition: var(--animationTransition);
+  }
+}
+
+.password-container {
+  position: relative;
+}
+
+.icon-open {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
+
+.icon-close {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+}
+
+.icon-close.hide {
+  opacity: 1;
+}
+
+.forgoten-group-registaration {
+  display: none;
+}
+
+.forgoten-group-registaration.hidden {
+  display: block;
+}
+
+.forfgot-password {
+  color: var(--light-color);
+  transition: color var(--animationTransition);
+
+  &:hover,
+  &:focus {
+    color: var(--orange-color);
+    outline: none;
+  }
+}
+
+.forgotten-label {
+  display: flex;
+  margin-bottom: 5px;
+  color: var(--orange-color);
+}
+
+.forgotten-container {
+  display: flex;
+}
+
+.forgoten-password {
+  margin-right: 15px;
+}
+
+.btn-new-password {
+  @include flexCenter();
+}
+
+.form-group-registaration-btn {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+}
+
+.social-form-question {
+  color: var(--light-color);
+}
+
+.button-sign-group {
+  display: flex;
+  column-gap: 15px;
+}
