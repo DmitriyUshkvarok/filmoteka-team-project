@@ -33,7 +33,9 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const analytics = getAnalytics(app);
 
+// переменные для функционала регистрации и авторизации
 const refs = {
+  TOKEN_KEY: 'token',
   registrationModal: document.querySelector('.modal-form-registration'),
   registerBtn: document.querySelector('.registration-btn'),
   logIn: document.querySelector('.log-in-btn'),
@@ -47,8 +49,16 @@ const refs = {
   resetPassword: document.querySelector('.btn-new-password'),
   inputMailForgot: document.querySelector('.forgoten-password'),
   manSvg: document.querySelector('.man-watch'),
+  userInfoWrapper: document.querySelector('.info-user-container'),
+  btnOut: document.querySelector('.btn-log-out'),
 };
+const token = localStorage.getItem(refs.TOKEN_KEY);
+// проверка ключа локального хранилища (убираем окно авторизации делаем фон активным)
+if (token) {
+  refs.registrationModal.classList.add('is-hidden');
+}
 
+// оброботчики событий
 refs.forgotPassword.addEventListener('click', onOpenForgotForm);
 refs.registerBtn.addEventListener('click', onRegisterUsers);
 refs.logIn.addEventListener('click', onLogInUsers);
@@ -56,37 +66,46 @@ refs.googleLogIn.addEventListener('click', onLogInGoogle);
 refs.gitHubLogIn.addEventListener('click', onLogInGithub);
 refs.facebookBtn.addEventListener('click', onLoginFacebook);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
-onLoginFacebook;
+refs.btnOut.addEventListener('click', onOutFunction);
+
+// открыть панель для сброса пароля
 function onOpenForgotForm(e) {
   e.preventDefault();
   refs.forgotForm.classList.toggle('hidden');
   refs.manSvg.classList.toggle('hidden');
 }
 
+// наблюдаем за изминением состояния авторизации
 const authStateChange = getAuth();
 function authState() {
   onAuthStateChanged(authStateChange, user => {
     if (user) {
-      // console.log(user);
       const uid = user.uid;
-      // userInfoWrapper.innerHTML = `<div class='info-user'>
-      //   <img
-      //     class='info-usrer-photo'
-      //     src='${user.photoURL}'
-      //     alt=''
-      //   />
-      //   <div class='info-container'>
-      //   <h3 class='info-user-name'>${user.displayName}</h3>
-      //   <div class='info-user-email'>${user.email}</div>
-      //   </div>
-      // </div>`;
+      if (user.displayName !== null && user.photoURL !== null) {
+        refs.userInfoWrapper.innerHTML = `<div class='info-user'>
+        <img
+          class='info-usrer-photo'
+          src='${user.photoURL}'
+          alt=''
+        />
+        <div class='info-container'>
+        <h3 class='info-user-name'>${user.displayName}</h3>
+        <div class='info-user-email'>${user.email}</div>
+        </div>
+      </div>`;
+      }
     } else {
-      // userInfoWrapper.innerHTML = `<div class='info-user'>
-      //   <div class='info-container'>
-      //   <h3 class='info-user-name'>гость</h3>
-      //   <div class='info-user-email'>нет адреса</div>
-      //   </div>
-      // </div>`;
+      refs.userInfoWrapper.innerHTML = `<div class='info-user'>
+        <img
+          class='info-usrer-photo'
+          src='../images/OldTV.svg'
+          alt=''
+        />
+        <div class='info-container'>
+        <h3 class='info-user-name'>No Name</h3>
+        <div class='info-user-email'>No email</div>
+        </div>
+      </div>`;
     }
   });
 }
@@ -104,6 +123,7 @@ function onRegisterUsers(e) {
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
         Notify.success('Спасибо за регестрацию');
+        localStorage.setItem(refs.TOKEN_KEY, token);
       }
       writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
@@ -114,6 +134,7 @@ function onRegisterUsers(e) {
     });
 }
 
+// вход если уже зарегестрирован
 const authSign = getAuth();
 function onLogInUsers(e) {
   e.preventDefault();
@@ -125,6 +146,7 @@ function onLogInUsers(e) {
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
         Notify.success('Рады тебя снова видеть на нашем сайте');
+        localStorage.setItem(refs.TOKEN_KEY, token);
       }
       console.log(user);
     })
@@ -146,6 +168,7 @@ function onLogInGoogle(e) {
       const user = result.user.displayName;
       Notify.success(`привет ${user}`);
       refs.registrationModal.classList.add('is-hidden');
+      localStorage.setItem(refs.TOKEN_KEY, token);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -168,6 +191,7 @@ function onLogInGithub(e) {
       const user = result.user.displayName;
       Notify.success(`привет ${user}`);
       refs.registrationModal.classList.add('is-hidden');
+      localStorage.setItem(refs.TOKEN_KEY, token);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -190,6 +214,7 @@ function onLoginFacebook(e) {
       console.log('uel');
       Notify.success(`привет`);
       refs.registrationModal.classList.add('is-hidden');
+      localStorage.setItem(refs.TOKEN_KEY, token);
       console.log('good');
     })
     .catch(error => {
@@ -220,6 +245,29 @@ async function onSubmitNewPassword(e) {
         background: '#c9a22de6',
       });
     });
+}
+
+// выход из аккаунта
+function onOutFunction() {
+  Notiflix.Confirm.show(
+    'Are You sure you want to go out',
+    'Do you agree with me?',
+    'Yes',
+    'No',
+    function okCb() {
+      refs.registrationModal.classList.remove('is-hidden');
+      // signOut(authGit, auth, authSign, authForm);
+      localStorage.removeItem(refs.TOKEN_KEY);
+    },
+    function cancelCb() {
+      return;
+    },
+    {
+      width: '320px',
+      borderRadius: '8px',
+      fontFamily: 'Aboreto',
+    }
+  );
 }
 
 // error valid
