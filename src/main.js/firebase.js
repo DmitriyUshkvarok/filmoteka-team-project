@@ -81,8 +81,7 @@ function authState() {
   onAuthStateChanged(authStateChange, user => {
     if (user) {
       const uid = user.uid;
-      if (user.displayName !== null && user.photoURL !== null) {
-        refs.userInfoWrapper.innerHTML = `<div class='info-user'>
+      refs.userInfoWrapper.innerHTML = `<div class='info-user'>
         <img
           class='info-usrer-photo'
           src='${user.photoURL}'
@@ -93,19 +92,18 @@ function authState() {
         <div class='info-user-email'>${user.email}</div>
         </div>
       </div>`;
-      }
     } else {
-      refs.userInfoWrapper.innerHTML = `<div class='info-user'>
-        <img
-          class='info-usrer-photo'
-          src='../images/OldTV.svg'
-          alt=''
-        />
-        <div class='info-container'>
-        <h3 class='info-user-name'>No Name</h3>
-        <div class='info-user-email'>No email</div>
-        </div>
-      </div>`;
+      // refs.userInfoWrapper.innerHTML = `<div class='info-user'>
+      //   <img
+      //     class='info-usrer-photo'
+      //     src='../images/OldTV.svg'
+      //     alt=''
+      //   />
+      //   <div class='info-container'>
+      //   <h3 class='info-user-name'>No Name</h3>
+      //   <div class='info-user-email'>No email</div>
+      //   </div>
+      // </div>`;
     }
   });
 }
