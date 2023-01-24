@@ -132,7 +132,7 @@ function onRegisterUsers(e) {
         Notify.success('Спасибо за регестрацию');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
-      writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -177,6 +177,7 @@ function onLogInGoogle(e) {
       const user = result.user.displayName;
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
+      // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch(error => {
       const errorCode = error.code;
