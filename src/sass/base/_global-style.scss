@@ -58,3 +58,7 @@ body {
   background-attachment: fixed;
   margin: 0;
 }
+
+body.stop-fon {
+  overflow: hidden;
+}

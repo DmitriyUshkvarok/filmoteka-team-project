@@ -76,6 +76,10 @@ body {
   margin: 0;
 }
 
+body.stop-fon {
+  overflow: hidden;
+}
+
 .btn-form {
   font-size: 10px;
   cursor: pointer;
@@ -105,10 +109,11 @@ body {
   bottom: 0;
   z-index: 100;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 30px;
   background: #333333;
   background: linear-gradient(to right, #333333, #dd1818);
+  display: block;
 }
 
 .modal-form-registration.is-hidden {

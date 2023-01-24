@@ -76,6 +76,10 @@ body {
   margin: 0;
 }
 
+body.stop-fon {
+  overflow: hidden;
+}
+
 .btn-form {
   font-size: 10px;
   cursor: pointer;

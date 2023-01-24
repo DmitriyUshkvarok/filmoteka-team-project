@@ -36,6 +36,7 @@ const analytics = getAnalytics(app);
 // переменные для функционала регистрации и авторизации
 const refs = {
   TOKEN_KEY: 'token',
+  body: document.querySelector('body'),
   registrationModal: document.querySelector('.modal-form-registration'),
   registerBtn: document.querySelector('.registration-btn'),
   logIn: document.querySelector('.log-in-btn'),
@@ -67,12 +68,18 @@ refs.gitHubLogIn.addEventListener('click', onLogInGithub);
 refs.facebookBtn.addEventListener('click', onLoginFacebook);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
 refs.btnOut.addEventListener('click', onOutFunction);
+window.addEventListener('load', onStopBackground);
 
 // открыть панель для сброса пароля
 function onOpenForgotForm(e) {
   e.preventDefault();
   refs.forgotForm.classList.toggle('hidden');
   refs.manSvg.classList.toggle('hidden');
+}
+
+// стоп фон при авторизации
+function onStopBackground() {
+  refs.body.classList.add('stop-fon');
 }
 
 // наблюдаем за изминением состояния авторизации
@@ -120,6 +127,8 @@ function onRegisterUsers(e) {
       const user = userCredential.user;
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
+        window.removeEventListener('load', onStopBackground);
+        refs.body.classList.remove('stop-fon');
         Notify.success('Спасибо за регестрацию');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
@@ -143,6 +152,8 @@ function onLogInUsers(e) {
       const user = userCredential.user;
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
+        window.removeEventListener('load', onStopBackground);
+        refs.body.classList.remove('stop-fon');
         Notify.success('Рады тебя снова видеть на нашем сайте');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
@@ -165,7 +176,6 @@ function onLogInGoogle(e) {
       const token = credential.accessToken;
       const user = result.user.displayName;
       Notify.success(`привет ${user}`);
-      refs.registrationModal.classList.add('is-hidden');
       localStorage.setItem(refs.TOKEN_KEY, token);
     })
     .catch(error => {
@@ -174,6 +184,9 @@ function onLogInGoogle(e) {
       const email = error.customData.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
     });
+  refs.registrationModal.classList.add('is-hidden');
+  refs.body.classList.remove('stop-fon');
+  window.removeEventListener('load', onStopBackground);
 }
 
 // github авторизация
@@ -188,7 +201,6 @@ function onLogInGithub(e) {
       const token = credential.accessToken;
       const user = result.user.displayName;
       Notify.success(`привет ${user}`);
-      refs.registrationModal.classList.add('is-hidden');
       localStorage.setItem(refs.TOKEN_KEY, token);
     })
     .catch(error => {
@@ -197,6 +209,9 @@ function onLogInGithub(e) {
       const email = error.customData.email;
       const credential = GithubAuthProvider.credentialFromError(error);
     });
+  refs.registrationModal.classList.add('is-hidden');
+  refs.body.classList.remove('stop-fon');
+  window.removeEventListener('load', onStopBackground);
 }
 
 // facebook авторизация
@@ -210,8 +225,10 @@ function onLoginFacebook(e) {
       const user = result.user;
       const accessToken = credential.accessToken;
       console.log('uel');
-      Notify.success(`привет`);
       refs.registrationModal.classList.add('is-hidden');
+      window.removeEventListener('load', onStopBackground);
+      refs.body.classList.remove('stop-fon');
+      Notify.success(`привет`);
       localStorage.setItem(refs.TOKEN_KEY, token);
       console.log('good');
     })
