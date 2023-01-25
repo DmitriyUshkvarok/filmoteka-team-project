@@ -100,6 +100,37 @@ body.stop-fon {
   color: var(--light-color);
 }
 
+.modal {
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.img-container {
+  max-width: 50%;
+}
+
+.modal-img {
+  width: 100%;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+}
+
+.modal-wrapper {
+  display: flex;
+}
+
+.modal-info {
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
 .skiptranslate {
   display: none;
   height: 0;
@@ -114,7 +145,6 @@ body.stop-fon {
 }
 
 .wrapper-language {
-  box-shadow: 0 0 10px 7px rgba(6, 230, 246, 0.7);
   border-radius: 10px;
   position: relative;
   z-index: 50;
@@ -127,16 +157,12 @@ body.stop-fon {
   font-size: 12px;
   width: 150px;
   background-color: transparent;
-  color: gold;
+  color: var(--orange-color);
+  outline: 1px solid black;
   transition: transform 0.3s;
 }
 .wrapper-language:hover, .wrapper-language:focus {
   transform: scale(1.1);
-  outline: none;
-}
-
-body.white-theme .wrapper-language {
-  box-shadow: 0 0 10px 10px rgba(242, 10, 10, 0.7);
 }
 
 .language {

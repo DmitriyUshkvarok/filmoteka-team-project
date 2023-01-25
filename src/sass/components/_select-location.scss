@@ -13,7 +13,6 @@
 }
 
 .wrapper-language {
-  box-shadow: 0 0 10px 7px rgba(6, 230, 246, 0.7);
   border-radius: 10px;
   position: relative;
   z-index: 50;
@@ -26,18 +25,14 @@
   font-size: 12px;
   width: 150px;
   background-color: transparent;
-  color: gold;
+  color: var(--orange-color);
+  outline: 1px solid black;
   transition: transform 0.3s;
 
   &:hover,
   &:focus {
     transform: scale(1.1);
-    outline: none;
   }
-}
-
-body.white-theme .wrapper-language {
-  box-shadow: 0 0 10px 10px rgba(242, 10, 10, 0.7);
 }
 
 .language {
