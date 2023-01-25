@@ -12,6 +12,32 @@ function onLoadAllMovies() {
 }
 onLoadAllMovies();
 
+function getAllGenres() {
+  apiTheMovies.fetchAllgenres();
+}
+getAllGenres();
+// const setGenresList = array => {
+//   genresList = [...array];
+// };
+
+// const makeValidatesGenreName = array => {
+//   array.forEach(object => {
+//     if (object.genre_ids) {
+//       object.genre_ids.forEach((idGenre, indexGenre) => {
+//         genresList.forEach(objectNames => {
+//           if (objectNames.id === idGenre) {
+//             object.genre_ids.splice(indexGenre, 1, objectNames['name']);
+//           }
+//         });
+//       });
+//     } else {
+//       object.genre_ids = '';
+//     }
+//   });
+
+//   return array;
+// };
+
 function renderMarkupAllMovieCard(responseAll) {
   const resultAll = allCollectionFunction(responseAll);
   gallery.insertAdjacentHTML('beforeend', resultAll);
