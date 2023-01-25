@@ -1,0 +1,48 @@
+<div class='modal'>
+    <div class='modal-wrapper'>
+        <div class='img-container'>
+            <img class='modal-img' src='https://image.tmdb.org/t/p/w500/{{poster_path}}' alt='{{title}}'
+                data-id='{{id}}' />
+        </div>
+        <div class='modal-info'>
+            <h2 class='modal-title'>{{title}}</h2>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Vote/Votes</th>
+                        <td>{{vote_average}}/{{vote_count}}</td>
+                    </tr>
+                    <tr>
+                        <th>Popularity</th>
+                        <td>{{popularity}}</td>
+                    </tr>
+                    <tr>
+                        <th>Original Title</th>
+                        <td>{{original_title}}</td>
+                    </tr>
+                    <tr>
+                        <th>Genre</th>
+                        <td>
+                            {{#each genres}}
+                            <span class='sub-genre'>{{this.name}}</span>
+                            {{/each}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class='modal-review'>{{overview}}</p>
+
+            <div class='moda-btn-wrapper'>
+                <button class='modal-btn' type='button' data-id='{{id}}' id='open'>Add
+                    to Watched</button>
+            </div>
+            <div class='moda-btn-wrapper'>
+                <button class='modal-btn' type='button' data-id='{{id}}' id='open'>Add
+                    to Queue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
