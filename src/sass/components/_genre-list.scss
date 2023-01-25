@@ -1,0 +1,16 @@
+.genre-list {
+    display: flex;
+}
+
+.genre-item {
+    margin: 0px 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: 1px solid #ccc;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-item:hover {
+    color: var(--orange-color);
+}
