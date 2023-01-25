@@ -12,7 +12,7 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
@@ -30,7 +30,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+// const database = getDatabase(app);
+const db = getDatabase(app);
+console.log(db);
 const analytics = getAnalytics(app);
 
 // переменные для функционала регистрации и авторизации
@@ -175,19 +177,26 @@ function onLogInGoogle(e) {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user.displayName;
+      refs.registrationModal.classList.add('is-hidden');
+      refs.body.classList.remove('stop-fon');
+      window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
       // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      get(child(dbRef, `users/${user.uid}`)).then(snapshot => {
+        if (snapshot.exists()) {
+          // ....
+        } else {
+          writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+        }
+      });
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      const email = error.customData.email;
+      // const email = error.customData.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
     });
-  refs.registrationModal.classList.add('is-hidden');
-  refs.body.classList.remove('stop-fon');
-  window.removeEventListener('load', onStopBackground);
 }
 
 // github авторизация
@@ -201,6 +210,9 @@ function onLogInGithub(e) {
       const credential = GithubAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user.displayName;
+      refs.registrationModal.classList.add('is-hidden');
+      refs.body.classList.remove('stop-fon');
+      window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
     })
@@ -210,16 +222,14 @@ function onLogInGithub(e) {
       const email = error.customData.email;
       const credential = GithubAuthProvider.credentialFromError(error);
     });
-  refs.registrationModal.classList.add('is-hidden');
-  refs.body.classList.remove('stop-fon');
-  window.removeEventListener('load', onStopBackground);
 }
 
 // facebook авторизация
+
 function onLoginFacebook(e) {
+  e.preventDefault();
   const authFace = getAuth();
   const providerFacebook = new FacebookAuthProvider();
-  e.preventDefault();
   signInWithPopup(authFace, providerFacebook)
     .then(result => {
       const credential = FacebookAuthProvider.credentialFromResult(result);
@@ -312,9 +322,8 @@ function onErrorValid(error) {
   return;
 }
 
-// база данных
+// база/ запись данных
 function writeUserData(userId, name, email, imageUrl) {
-  const db = getDatabase();
   set(ref(db, 'users/' + userId), {
     username: name,
     email: email,

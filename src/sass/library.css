@@ -98,4 +98,85 @@ body.stop-fon {
   background-color: var(--orange-color);
   outline: 2px solid var(--orange-color);
   color: var(--light-color);
+}
+
+.skiptranslate {
+  display: none;
+  height: 0;
+}
+
+.language__img {
+  cursor: pointer;
+}
+
+.cont-lang {
+  position: relative;
+}
+
+.wrapper-language {
+  box-shadow: 0 0 10px 7px rgba(6, 230, 246, 0.7);
+  border-radius: 10px;
+  position: relative;
+  z-index: 50;
+  margin-left: 50px;
+  cursor: pointer;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  width: 150px;
+  background-color: transparent;
+  color: gold;
+  transition: transform 0.3s;
+}
+.wrapper-language:hover, .wrapper-language:focus {
+  transform: scale(1.1);
+  outline: none;
+}
+
+body.white-theme .wrapper-language {
+  box-shadow: 0 0 10px 10px rgba(242, 10, 10, 0.7);
+}
+
+.language {
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+  background-color: rgba(13, 13, 13, 0.3);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: perspective(600px) translate(0px, -50%) rotateX(45deg) scale(0);
+  pointer-events: none;
+  transition: all 0.4s;
+  color: gold;
+  text-shadow: 0 0 1px rgb(6, 230, 246);
+}
+
+.language.shows {
+  transform: perspective(600px) translate(0px, 0%) rotateX(0deg) scale(1);
+  pointer-events: painted;
+}
+
+.item-language {
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: rgba(9, 137, 235, 0.7);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.item-language:hover {
+  transform: scale(1.02);
+}
+
+.item-language:not(:last-child) {
+  margin-bottom: 5px;
 }/*# sourceMappingURL=library.css.map */
