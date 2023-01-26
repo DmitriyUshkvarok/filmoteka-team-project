@@ -71,47 +71,57 @@
     }
 }
 
-.header-logo {
-    display: flex;
-    align-items: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    cursor: pointer;
-}
-
-.header-logo-icon {
-    margin-right: 12px;
-}
-
 .header-wrapper {
     display: flex;
-    align-items: center;
+   justify-content: space-between;
     margin-bottom: 34px;
 
     @media screen and (min-width: 768px) {
         margin-bottom: 30px;
     }
-
-    color: var(--light-color);
 }
 
-.header-title {
+.header-logo {
+    @include flexCenter();
     font-family: var(--font-family);
     font-weight: var(--font-weight-media);
-    font-size: 30px;
-    line-height: calc(35 / 30);
+    @include font(30px, 35px);
     color: var(--light-color);
+    fill: currentColor;
+    transition: var(--animationTransition);
 
-    &:hover, &:focus {
-        fill: var(--orange-color);
-        color: var(--orange-color);
-        transition: color var(--animationTransition);
-    }
-
-    @media screen and (max-width: (768px - 0.02px)){
-        display: none;
+    &:hover,
+    &:focus {
+      color: var(--orange-color);
     }
 }
+
+.header-logo-icon {
+    margin-right: 10px;
+}
+
+.logo-title {
+    display: inline-flex;
+}
+
+.info-user {
+    display: flex;
+  }
+
+.info-usrer-photo {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .info-user-name,
+  .info-user-email {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-media);
+    @include font(8px, 10px);
+    color: var(--light-color);
+  }
 
 .header-navigation {
 margin-left: auto;
@@ -135,14 +145,126 @@ margin-right: 20px;
     }
 }
 
-.header-navigation-item {
-    padding-top: 20px;
-    padding-bottom: 20px;
+.header-navigation-link {
+    position: relative;
+    text-transform: uppercase;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-media);
+    @include font(12px, 14px);
     color: var(--light-color);
-    transition: var(--animationTransition);
+    transition: color var(--animationTransition);
 
-    &:hover, &focus {
+    &:hover, &:focus {
         color: var(--orange-color);
         transition: color var(--animationTransition);
     }
 }
+
+.utils-wrapper {
+    margin-bottom: 30px;
+    @include flexCenter();
+    column-gap: 10px;
+  }
+
+  .btn-log-out {
+    width: 100px;
+    height: 32px;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: transparent;
+    outline: 1px solid var(--light-color);
+    @include font(12px, 16px);
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--light-color);
+    font-weight: var(--font-weight-media);
+
+    &:hover,
+    &:focus {
+      background-color: var(--orange-color);
+      outline: none;
+    }
+  }
+
+  .utils-wrapper-form {
+    @include flexCenter();
+    column-gap: 10px;
+  }
+
+  .header-form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header-input-wrapper {
+    position: relative;
+    display: inline-block;
+    &.hidden {
+        display: none;
+    }
+  }
+
+  .header-input {
+    position: relative;
+    min-width: 280px;
+
+    font-size: 14px;
+    @include font(16px, 14px);
+    color: var(--light-color);
+    background-color: transparent;
+
+    border: none;
+    outline: transparent;
+    border-bottom: 0.5px solid var(--light-color);
+
+    &::placeholder {
+        font-weight: 14px;
+        @include font(16px, 14px);
+        color: var(--light-color);
+    }
+
+    @media screen and (min-width: 768px) {
+        min-width: 336px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        min-width: 394px;
+    }
+  }
+
+  .header-input-info {
+    position: absolute;
+    right: 0;
+    bottom: -55px;
+
+    @media screen and (min-width: 768px) {
+        bottom: -45px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        bottom: -35px;
+    }
+  }
+
+  .genres-button {
+    width: 140px;
+    height: 32px;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--light-color);
+    outline: 1px solid var(--light-color);
+    @include font(12px, 16px);
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--orange-color);
+    font-weight: var(--font-weight-media);
+
+    &:hover,
+    &:focus {
+        color: var(--light-color);
+      background-color: var(--orange-color);
+      outline: none;
+    }
+  }
+
