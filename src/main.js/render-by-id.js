@@ -2,12 +2,8 @@ import { ApiTheMovie } from './fetch-class';
 import modalFunction from '../templates/modal-movies.hbs';
 import * as basicLightBox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
-import {
-  getWatchedList,
-  renderMoviesinWatchedLibrary,
-  setMovieToLocalStorage,
-} from './watched-library-temp';
-import { getQueueList, renderMoviesinQueueLibrary } from './queue-library';
+import { renderMoviesinWatchedLibrary } from './watched-library-temp';
+import { renderMoviesinQueueLibrary } from './queue-library';
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');

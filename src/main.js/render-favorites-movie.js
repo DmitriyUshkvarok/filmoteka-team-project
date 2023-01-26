@@ -2,14 +2,13 @@ import { ApiTheMovie } from './fetch-class';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import movieWatches from '../templates/card-movie-watched.hbs';
-import movieQueue from '../templates/card-movie-queue.hbs'
+import movieQueue from '../templates/card-movie-queue.hbs';
 import { Notify } from 'notiflix';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 export const gallery = document.querySelector('.gallery');
 import { QUEUE_KEY } from './queue-library';
 const apiTheMovies = new ApiTheMovie();
-
 
 //== WATCHED LIBRARRY
 const WATCHED_KEY = 'watched-key';
@@ -41,7 +40,6 @@ function onOpenWatchLibrary(e) {
   }
 }
 
-
 //==QUEUE LIBRARRY
 const queueLibrBtn = document.querySelector('.queue');
 queueLibrBtn.addEventListener('click', onOpenQueueLibrary);
@@ -53,7 +51,7 @@ function getQueueList() {
     return;
   }
   return data;
-};
+}
 
 function onOpenQueueLibrary(e) {
   e.preventDefault();
