@@ -6,6 +6,15 @@ import { searchTrailer } from './play-movie';
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
+const WATCHED_KEY = 'watched-key';
+
+function getWatchedList() {
+  const data = JSON.parse(localStorage.getItem(WATCHED_KEY));
+  if (!data) {
+    return;
+  }
+  return data;
+}
 
 gallery.addEventListener('click', onCardClick);
 
