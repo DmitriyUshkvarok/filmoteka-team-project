@@ -1,0 +1,30 @@
+.scroll-btn-up {
+    position: relative;
+}
+
+.scroll-btn {
+    position: fixed;
+    z-index: 15;
+    display: none;
+    bottom: 30px;
+    right: 30px;
+    height: 45px;
+    padding: 10px;
+    background-color: var(--orange-color);
+    border-radius: 50%;
+    transition: var(--animationTransition);
+    opacity: 60%;
+
+    &:hover {
+        opacity: 80%;
+        transform: scale(1.1);
+    }
+}
+
+.scroll-btn__svg {
+    fill: var(--gray-color);
+}
+
+.scroll-btn.shown {
+    display: block;
+}
