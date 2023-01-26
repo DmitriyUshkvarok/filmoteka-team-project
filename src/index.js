@@ -6,7 +6,7 @@ import './main.js/render-all-collection';
 import './main.js/location';
 import './main.js/google-translate';
 import './main.js/render-by-id';
-// import './main.js/render-by-genre';
+import './main.js/render-by-genre';
 import './main.js/queue-library';
 import './main.js/watched-library-temp';
 import './main.js/scroll-up-btn';
