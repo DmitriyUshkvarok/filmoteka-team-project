@@ -1,0 +1,123 @@
+.header {
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100%;
+
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.56),
+      rgba(0, 0, 0, 0.56)
+    ),
+    url(../images/main-header/sm.jpg);
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url(../images/main-header/sm@2x.jpg);
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url(../images/main-header/md.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/main-header/md@2x.jpg);
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url(../images/main-header/lg.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/main-header/lg@2x.jpg);
+    }
+  }
+}
+
+.header-container {
+    padding-top: 30px;
+    padding-bottom: 92px;
+
+    @media screen and (min-width: 768px) {
+        padding-bottom: 81px;
+    }
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.header-logo-icon {
+    margin-right: 12px;
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 34px;
+
+    @media screen and (min-width: 768px) {
+        margin-bottom: 30px;
+    }
+
+    color: var(--light-color);
+}
+
+.header-title {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-media);
+    font-size: 30px;
+    line-height: calc(35 / 30);
+    color: var(--light-color);
+
+    &:hover, &:focus {
+        fill: var(--orange-color);
+        color: var(--orange-color);
+        transition: color var(--animationTransition);
+    }
+
+    @media screen and (max-width: (768px - 0.02px)){
+        display: none;
+    }
+}
+
+.header-navigation {
+margin-left: auto;
+margin-right: 20px;
+
+@media screen and (min-width: 768px) {
+    margin-right: 40px;
+}
+}
