@@ -1,5 +1,6 @@
 <div class="container">
-    <ul class='genre-list'>
+    <button type="button" class="js-show-genres">Genres</button>
+    <ul class='genre-list' style="display: none;">
         <li class='genre-item' data-id="28">Action</li>
         <li class='genre-item' data-id="12">Adventure</li>
         <li class='genre-item' data-id="16">Animation</li>
@@ -22,3 +23,17 @@
         <li class='genre-item genre-item--choose-all'>Choose All</li>
     </ul>
 </div>
+
+<script>
+    const btnShowGenre = document.querySelector(".js-show-genres");
+    btnShowGenre.addEventListener('click', onShowGenres);
+
+    function onShowGenres() {
+        var x = document.querySelector(".genre-list");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

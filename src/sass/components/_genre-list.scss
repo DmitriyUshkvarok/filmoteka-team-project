@@ -1,14 +1,23 @@
+.js-show-genres {
+    cursor: pointer;
+}
+
 .genre-list {
     display: flex;
+    width: 100%;
+    display: none;
 }
 
 .genre-item {
-    margin: 0px 2px;
     padding: 5px 10px;
     cursor: pointer;
-    outline: 1px solid #ccc;
+
     align-items: center;
     justify-content: center;
+
+        &:not(:last-child) {
+                margin-right: 8px;
+            }
 }
 
 .genre-item:hover {
