@@ -12,28 +12,23 @@
   // z-index: 50;
 }
 
-.wrapper-language {
-  border-radius: 10px;
-  position: relative;
-  z-index: 50;
-  margin-left: 50px;
-  cursor: pointer;
-  padding: 5px;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 12px;
-  width: 150px;
-  background-color: transparent;
-  color: var(--orange-color);
-  outline: 1px solid black;
-  transition: transform 0.3s;
+// .wrapper-language {
+//   width: 24px;
+//   height: 24px;
+//   border-radius: var(--border-radius);
+//   border: none;
+//   background-color: var(--orange-color);
+//   @include font(8px, 10px);
+//   cursor: pointer;
+//   color: var(--light-color);
+//   font-weight: var(--font-weight-media);
+//   transition: transform 0.3s;
 
-  &:hover,
-  &:focus {
-    transform: scale(1.1);
-  }
-}
+//   &:hover,
+//   &:focus {
+//     transform: scale(1.1);
+//   }
+// }
 
 .language {
   border-radius: 10px;

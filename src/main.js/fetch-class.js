@@ -69,6 +69,11 @@ export class ApiTheMovie {
       .catch(this.onError);
   }
 
+  // список жанров
+  fetchAllgenres() {
+    return axios.get(`${this.URL}/genre/movie/list?api_key=${this.key}`);
+  }
+
   onError() {
     return Notify.failure('sorry this is error');
   }
