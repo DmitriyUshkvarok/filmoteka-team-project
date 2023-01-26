@@ -1,42 +1,73 @@
 <header class="header">
 <div class="header-container container">
-    <div class="header-wrapper">
+<div class="header-wrapper">
 <div class="header-logo">
-    <a href="#" class="header-link">
+    <!-- <a href="#" class="header-link"> -->
     <img class="header-logo-icon" src="./images/film.svg" width="24" alt="logo"/>
     <h1 class="header-title">Filmoteka</h1>
     </a>
 </div>
 
-<nav class="header-nav">
-    <ul class="header-nav-list">
-        <li class="header-nav-item">
-            <a class="header-nav-link" href="#homepage">Home</a>
+<nav class="header-navigation">
+    <ul class="header-navigation-list">
+        <li class="header-navigation-item js-homepage">
+            <a class="header-navigation-link" href="#homepage">Home</a>
         </li>
-        <li class="header-nav-item">
-            <a class="header-nav-link" href="#mylibrary">My library</a>
+        <li class="header-navigation-item js-mylibrary">
+            <a class="header-navigation-link" href="#mylibrary">My library</a>
         </li>
 
         <!-- Theme switcher -->
         <li id="icon-love" class="header-nav-item">
-            <svg class="header-nav-link" width="16" height="16">
+            <svg class="header-navigation-link" width="16" height="16">
                 <use href="./images/sprite.svg#icon-love"></use>
             </svg>
         </li>
-        <li id="icon-love" class="visually-hidden header-nav-item">
-            <svg class="header-nav-link" width="16" height="16">
+        <li id="icon-love" class="visually-hidden header-navigation-item">
+            <svg class="header-navigation-link" width="16" height="16">
                 <use href="./images/sprite.svg#icon-love"></use>
             </svg>
         </li>
+
+        <!-- User account -->
+        <li class="user-account">
+        <div class="info-user-container"></div>
+        <button class="btn-log-out" type="button">log out</button>
+        </li>
+
+    <!-- Localization -->
+    <li class="localization">
+        <div class="cont-lang">
+        <div class="wrapper-language" tabindex="2">
+            <p>Choose language</p>
+        </div>
+        <ul class="language">
+            <li class="item-language" data-google-lang="en">english <img
+                    src="./images/gb.svg" alt="en" data-google-lang="en"
+                    width="22"
+                    height="15"></li>
+            <li class="item-language" data-google-lang="de">deuthch <img
+                    src="./images/de.svg" alt="de" data-google-lang="de"
+                    width="22" height="15"></li>
+            <li class="item-language" data-google-lang="es">espanio <img
+                    src="./images/es.svg" alt="es" data-google-lang="es"
+                    width="22" height="15"></li>
+            <li class="item-language" data-google-lang="uk">ukraine <img
+                    src="./images/ua.svg" alt="uk" data-google-lang="uk"
+                    width="22" height="15"></li>
+        </ul>
+        </div>
+    </li>
     </ul>
 </nav>
+</div>
 
 <!-- Header input form -->
 <form class="header-form">
-    <div class="header-input-wrapper" hidden>
+    <div class="header-input-wrapper js-input-form">
         <input class="header-input" type="text" placeholder="Movie search" name="searchFilm" autocomplete="off"/>
         <p class="header-input-info" hidden>Search result not successful. Enter the correct movie name.</p>
-        <button class="search-button" type="submit">
+        <button class="search-button js-search-button" type="submit">
             <svg class="search-button-icon" width="12" height="12">
                 <use class="search-icon" href="./images/sprite.svg#icon-search-2"></use>
             </svg>
@@ -44,32 +75,8 @@
     </div>
     <button class="genres-button" type="button" data-open-genres>Show a genres</button>
 </form>
-
-    <div class="info-user-container"></div>
-    <button class="btn-log-out" type="button">log out</button>
+    
 </div>
-</div>
-
-<!-- Location -->
-<div class="cont-lang">
-    <div class="wrapper-language" tabindex="2">
-        <p>Choose language</p>
-    </div>
-    <ul class="language">
-        <li class="item-language" data-google-lang="en">english <img
-                src="./images/gb.svg" alt="en" data-google-lang="en"
-                width="22"
-                height="15"></li>
-        <li class="item-language" data-google-lang="de">deuthch <img
-                src="./images/de.svg" alt="de" data-google-lang="de"
-                width="22" height="15"></li>
-        <li class="item-language" data-google-lang="es">espanio <img
-                src="./images/es.svg" alt="es" data-google-lang="es"
-                width="22" height="15"></li>
-        <li class="item-language" data-google-lang="uk">ukraine <img
-                src="./images/ua.svg" alt="uk" data-google-lang="uk"
-                width="22" height="15"></li>
-    </ul>
 </div>
 </header>
 <!--  -->
