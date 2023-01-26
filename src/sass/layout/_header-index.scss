@@ -121,3 +121,28 @@ margin-right: 20px;
     margin-right: 40px;
 }
 }
+
+.header-navigation-list {
+    display: flex;
+    gap: 20px;
+
+    @media screen and (min-width: 768px) {
+        gap: 40px;    
+    }
+
+    @media screen and (min-width: 1280px) {
+        gap: 50px;
+    }
+}
+
+.header-navigation-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: var(--light-color);
+    transition: var(--animationTransition);
+
+    &:hover, &focus {
+        color: var(--orange-color);
+        transition: color var(--animationTransition);
+    }
+}
