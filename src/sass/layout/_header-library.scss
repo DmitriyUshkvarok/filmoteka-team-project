@@ -83,6 +83,7 @@
     font-weight: var(--font-weight-media);
     @include font(12px, 14px);
     color: var(--light-color);
+    text-transform: uppercase;
   }
 
   .btn-group-gallery {
