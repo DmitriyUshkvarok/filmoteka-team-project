@@ -1,0 +1,13 @@
+.header-nav-item.current {
+    position: relative;
+}
+
+.header-nav-link.current::after {
+    position: absolute;
+    content: "";
+    display: block;
+    bottom: -2px;
+    width: 100%;
+    height: 2.86px;
+    background-color: var(--color-error);
+}
