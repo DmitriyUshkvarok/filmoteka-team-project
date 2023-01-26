@@ -1,8 +1,56 @@
-<div class="container">
+<header class="header">
+<div class="header-container container">
+    <div class="header-wrapper">
+<div class="header-logo">
+    <a href="#" class="header-link">
+    <img class="header-logo-icon" src="./images/film.svg" width="24" alt="logo"/>
+    <h1 class="header-title">Filmoteka</h1>
+    </a>
+</div>
+
+<nav class="header-nav">
+    <ul class="header-nav-list">
+        <li class="header-nav-item">
+            <a class="header-nav-link" href="#homepage">Home</a>
+        </li>
+        <li class="header-nav-item">
+            <a class="header-nav-link" href="#mylibrary">My library</a>
+        </li>
+
+        <!-- Theme switcher -->
+        <li id="icon-love" class="header-nav-item">
+            <svg class="header-nav-link" width="16" height="16">
+                <use href="./images/sprite.svg#icon-love"></use>
+            </svg>
+        </li>
+        <li id="icon-love" class="visually-hidden header-nav-item">
+            <svg class="header-nav-link" width="16" height="16">
+                <use href="./images/sprite.svg#icon-love"></use>
+            </svg>
+        </li>
+    </ul>
+</nav>
+
+<!-- Header input form -->
+<form class="header-form">
+    <div class="header-input-wrapper" hidden>
+        <input class="header-input" type="text" placeholder="Movie search" name="searchFilm" autocomplete="off"/>
+        <p class="header-input-info" hidden>Search result not successful. Enter the correct movie name.</p>
+        <button class="search-button" type="submit">
+            <svg class="search-button-icon" width="12" height="12">
+                <use class="search-icon" href="./images/sprite.svg#icon-search-2"></use>
+            </svg>
+        </button>
+    </div>
+    <button class="genres-button" type="button" data-open-genres>Show a genres</button>
+</form>
+
     <div class="info-user-container"></div>
     <button class="btn-log-out" type="button">log out</button>
 </div>
-<!-- location -->
+</div>
+
+<!-- Location -->
 <div class="cont-lang">
     <div class="wrapper-language" tabindex="2">
         <p>Choose language</p>
@@ -23,4 +71,5 @@
                 width="22" height="15"></li>
     </ul>
 </div>
+</header>
 <!--  -->
