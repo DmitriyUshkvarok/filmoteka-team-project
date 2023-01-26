@@ -6,3 +6,4 @@ import './main.js/render-all-collection';
 import './main.js/location';
 import './main.js/google-translate';
 import './main.js/render-by-id';
+import './main.js/play-movie';
