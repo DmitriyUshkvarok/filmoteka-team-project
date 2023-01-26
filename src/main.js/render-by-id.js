@@ -4,6 +4,7 @@ import * as basicLightBox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { renderMoviesinWatchedLibrary } from './watched-library-temp';
 import { renderMoviesinQueueLibrary } from './queue-library';
+import { getQueueList } from './queue-library';
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
@@ -43,12 +44,12 @@ function onOpenCard(data) {
   } else {
     modalWathcedLibraryBtn.textContent = 'Remove from watched';
   }
-  
+
   //== міняємо ADD TO QUEUE на REMOVE FROM QUEUE
   let queueList = getQueueList();
   console.log('this', queueList);
   const modalQueueLibraryBtn = document.querySelector('.modal-btn__queue');
-if (!queueList.find(film => film.id === data.id)) {
+  if (!queueList.find(film => film.id === data.id)) {
     modalQueueLibraryBtn.textContent = 'Add to Queue';
   } else {
     modalQueueLibraryBtn.textContent = 'Remove from Queue';
