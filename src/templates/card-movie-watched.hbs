@@ -1,0 +1,35 @@
+<li class='movie-card__item' data-id='{{id}}' id='open'>
+  <div class='movie-card'>
+    <div class='poster-wrapper'>
+      {{#if poster_path}}
+        <img
+          src='https://image.tmdb.org/t/p/w500/{{poster_path}}'
+          alt='{{title}}'
+          class='movie-card__poster lazyload'
+          loading='lazy'
+        />
+      {{else}}
+        <img
+          src='https://yt3.ggpht.com/AAKF_677TIvjFz_9xFF0R6PgiVd0kRpEtY6APSxSDRP65nXg8hkn9NFsz2bRd9_Z37DJ9D_b=s900-c-k-c0x00ffffff-no-rj'
+          alt='{{title}}'
+          class='movie-card__poster'
+          loading='lazy'
+        />
+      {{/if}}
+    </div>
+    <div class='card-info'>
+      <h2 class='movie-info-title'> {{title}}</h2>
+      <div class='info-wrapper'>
+        <div class='movie-icon-decor'>
+          <span>&#127871;</span>
+        </div>
+        <p class='info-item-year'>{{release_date}}</p>
+        <p class='info-item-rating'><span class='rating-icon'>&#9733;</span>
+          {{vote_average}}</p>
+      </div>
+    </div>
+  </div>
+  <div class='watched-delete-wrapper'>
+    <button class='watched-delete' type='button' id='close'></button>
+  </div>
+</li>
