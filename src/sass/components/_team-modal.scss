@@ -1,0 +1,42 @@
+.team-modal {
+    max-width: 300px;
+    align-items: center;
+    background-color: var(--light-color);
+    border-radius: 10px;
+    overflow: scroll;
+    padding: 10px;
+}
+
+.team-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.team-modal__title{
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+  @media screen and (min-width: 480px) {
+      .team-modal {
+          max-width: 400px;
+      }
+  }
+
+  @media screen and (min-width: 767px) {
+      .team-modal {
+          max-width: 500px;
+      }
+
+      .team-list {
+          gap: 15px;
+      }
+  }
+
+  @media screen and (min-width: 1200px) {
+      .team-modal {
+          max-width: 700px;
+      }
+  }
