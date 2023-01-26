@@ -1,16 +1,15 @@
-import { ApiTheMovie } from "./fetch-class";
-import { Notify } from "notiflix";
+import { ApiTheMovie } from './fetch-class';
+import { Notify } from 'notiflix';
 
-export const WATCHED_KEY = 'watched-key'
+export const WATCHED_KEY = 'watched-key';
 const apiTheMovies = new ApiTheMovie();
 
 export function getWatchedList() {
-    const data = JSON.parse(localStorage.getItem(WATCHED_KEY));
-    // console.log('LocalStorage', data);
-    if (!data) {
-        return;
-    }
-    return data;
+  const data = JSON.parse(localStorage.getItem(WATCHED_KEY));
+  if (!data) {
+    return;
+  }
+  return data;
 }
 if (!JSON.parse(localStorage.getItem(WATCHED_KEY))) {
   localStorage.setItem(WATCHED_KEY, JSON.stringify([]));
@@ -18,8 +17,7 @@ if (!JSON.parse(localStorage.getItem(WATCHED_KEY))) {
 
 export function renderMoviesinWatchedLibrary(e) {
   let data = getWatchedList();
-    const currentIdBtnWatch = e.target.dataset.id;
-    console.log('curBtnWatch', currentIdBtnWatch)
+  const currentIdBtnWatch = e.target.dataset.id;
   if (data.find(film => film.id === Number(currentIdBtnWatch))) {
     const modalLibrarryBtn = document.querySelector('.modal-btn__watched');
     modalLibrarryBtn.textContent = 'Add to watched';
@@ -32,32 +30,40 @@ export function renderMoviesinWatchedLibrary(e) {
     modalLibrarryBtn.textContent = 'remove from watch';
     let data = getWatchedList();
     localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
-    apiTheMovies
-      .fetchById(currentIdBtnWatch)
-      .then(setMovieToLocalStorage);
+    apiTheMovies.setMovieId(currentIdBtnWatch);
+    apiTheMovies.fetchById(currentIdBtnWatch).then(setMovieToLocalStorage);
     Notify.success('Фильм добавлен в библиотеку');
   }
 }
 
 //== устанавливаем ключ локального хранилища
 export function setMovieToLocalStorage({
-    poster_path,
-    id,
-    title,
-    vote_average,
-    vote_count,
-    popularity,
-    original_title,
-    genres,
-    overview
+  poster_path,
+  id,
+  title,
+  vote_average,
+  vote_count,
+  popularity,
+  original_title,
+  genres,
+  overview,
 }) {
   const dataFromLocalStorage = JSON.parse(localStorage.getItem(WATCHED_KEY));
-    localStorage.setItem(
-        WATCHED_KEY,
-        JSON.stringify([
-            ...dataFromLocalStorage,
-            { poster_path, id, title, vote_average, vote_count, popularity, original_title, genres, overview },
-        ])
-        );
-        console.log('dataFromLocStor', dataFromLocalStorage);
+  localStorage.setItem(
+    WATCHED_KEY,
+    JSON.stringify([
+      ...dataFromLocalStorage,
+      {
+        poster_path,
+        id,
+        title,
+        vote_average,
+        vote_count,
+        popularity,
+        original_title,
+        genres,
+        overview,
+      },
+    ])
+  );
 }

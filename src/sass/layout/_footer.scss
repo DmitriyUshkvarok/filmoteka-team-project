@@ -1,0 +1,98 @@
+p {
+  padding: 0;
+  margin: 0;
+}
+
+footer {
+  background-color: rgb(247, 247, 247);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+// .container {
+//     margin-left: auto;
+//     margin-right: auto;
+//     padding-top: 0;
+//     padding-bottom: 0;
+//     color: #545454;
+
+//     .footer__image {
+//         padding-left: 10px;
+//         padding-right: 10px;
+//     }
+
+//     @media screen and (min-width: 320px) {
+//         width: 320px;
+//         padding-left: 20px;
+//         padding-right: 20px;
+//     }
+
+//     @media screen and (min-width: 768px) {
+//         width: 768px;
+//         padding-left: 75px;
+//         padding-right: 75px;
+//     }
+
+//     @media screen and (min-width: 1024px) {
+//         width: 1024px;
+//         padding-left: 71px;
+//         padding-right: 71px;
+//     }
+// }
+
+.footer__team-link {
+  color: #545454;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+}
+@media screen and (min-width: 320px) {
+  .copyright {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    padding-top: 29px;
+    padding-bottom: 10px;
+  }
+
+  .developers {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+  }
+
+  .page__footer {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
+
+.footer-icon {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .page__footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .copyright {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .developers {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .page__footer {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
