@@ -22,7 +22,7 @@ function onRenderbyGenre(owner) {
   gallery.innerHTML = markupGenre;
 }
 
-const btnShowGenre = document.querySelector('.genres-button');
+const btnShowGenre = document.querySelector('.js-show-genres');
 btnShowGenre.addEventListener('click', onShowGenres);
 
 function onShowGenres() {
