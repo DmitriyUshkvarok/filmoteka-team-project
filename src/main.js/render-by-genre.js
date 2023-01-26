@@ -30,7 +30,7 @@ import { apiTheMovies} from './render-all-collection';
     function onShowGenres() {
         var x = document.querySelector(".genre-list");
         if (x.style.display === "none") {
-            x.style.display = "block";
+            x.style.display = "flex";
         } else {
             x.style.display = "none";
         }
