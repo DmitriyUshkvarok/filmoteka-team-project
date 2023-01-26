@@ -37,14 +37,21 @@ function onOpenCard(data) {
   document.body.classList.add('stop-fon');
   //==  міняємо ADD TO WATCHED на REMOVE FROM WATCHED
   let watchedList = getWatchedList();
-  const modalWathcedLibrarryBtn = document.querySelector('.modal-btn__watched');
-  const modalQueueLibrarryBtn = document.querySelector('.modal-btn__queue');
+  const modalWathcedLibraryBtn = document.querySelector('.modal-btn__watched');
   if (!watchedList.find(film => film.id === data.id)) {
-    modalWathcedLibrarryBtn.textContent = 'Add to watched';
-    modalQueueLibrarryBtn.textContent = 'Add to Queue';
+    modalWathcedLibraryBtn.textContent = 'Add to watched';
   } else {
-    modalWathcedLibrarryBtn.textContent = 'Remove from watched';
-    modalQueueLibrarryBtn.textContent = 'Remove from Queue';
+    modalWathcedLibraryBtn.textContent = 'Remove from watched';
+  }
+  
+  //== міняємо ADD TO QUEUE на REMOVE FROM QUEUE
+  let queueList = getQueueList();
+  console.log('this', queueList);
+  const modalQueueLibraryBtn = document.querySelector('.modal-btn__queue');
+if (!queueList.find(film => film.id === data.id)) {
+    modalQueueLibraryBtn.textContent = 'Add to Queue';
+  } else {
+    modalQueueLibraryBtn.textContent = 'Remove from Queue';
   }
 
   //== закриття бекдропа ESC
@@ -65,9 +72,9 @@ function onOpenCard(data) {
   }
 
   //== добавити карточку в WATCHED
-  modalWathcedLibrarryBtn.addEventListener(
+  modalWathcedLibraryBtn.addEventListener(
     'click',
     renderMoviesinWatchedLibrary
   );
-  modalQueueLibrarryBtn.addEventListener('click', renderMoviesinQueueLibrary);
+  modalQueueLibraryBtn.addEventListener('click', renderMoviesinQueueLibrary);
 }
