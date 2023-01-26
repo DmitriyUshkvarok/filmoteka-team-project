@@ -1,25 +1,29 @@
-import { apiTheMovies} from './render-all-collection';
+    import { ApiTheMovie } from './fetch-class';
 	
 	import allCollection from '../templates/all-collection-movies.hbs';
 	
 
-	const genreList = document.querySelector('.genre-list');
-	genreList.addEventListener('click', onCallByGanre);
-	
+    const genreList = document.querySelector('.genre-list');
+    const gallery = document.querySelector('.gallery');
+    
+    genreList.addEventListener('click', onCallByGenre);
+    
+    const apiTheMovies = new ApiTheMovie();
 
-	function onCallByGanre(e) {
+	function onCallByGenre(e) {
 	  if (e.currentTarget === e.target) {
 	    return;
-	  }
-	  apiTheMoviesdb.resetPage();
-	  apiThemoviedb.genreId = e.target.dataset.id;
-	  apiThemoviedb.fetchFilmsByGenre(apiThemoviedb.genreId).then(onRenderbyGenre);
+        }
+        
+	  apiTheMovies.resetPage();
+	  apiTheMovies.genreId = e.target.dataset.id;
+	  apiTheMovies.fetchByGenre(apiTheMovies.genreId).then(onRenderbyGenre);
 	}
 	
 
 	function onRenderbyGenre(owner) {
 	  const markupGenre = allCollection(owner);
-	  refs.gallery.innerHTML = markupGenre;
+	  gallery.innerHTML = markupGenre;
 }
     
 
