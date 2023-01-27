@@ -1,23 +1,72 @@
 .modal {
-  position: relative;
-  justify-content: center;
-  align-items: center;
   background-color: var(--light-color);
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
-  max-height: 100%;
   overflow-y: scroll;
 
+  @media screen and (max-width: 767px) {
+    height: 100vh;
+  }
+
+  @media screen and (min-width: 768px) {
+    padding: 40px 36px;
+  }
+
   @media screen and (min-width: 1200px) {
-    max-width: 700px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--light-color);
+    padding: 40px 12px;
+    max-width: 806px;
   }
 }
 
+//== контейнери
+.modal-wrapper {
+  width: 240px;
+
+  @media screen and(min-width: 768px) {
+    display: flex;
+    width: 632px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 782px;
+    display: flex;
+  }
+}
+
+.img-container {
+  @media screen and (min-width: 768px) {
+    margin-right: 68px;
+  }
+  @media screen and (min-width: 1200px) {
+    max-width: 375px;
+    margin-right: 16px;
+  }
+}
+
+.modal-img {
+  @media screen and (min-width: 768px) {
+    width: 264px;
+  }
+  @media screen and (min-width: 1199px) {
+    width: 100%;
+    border-radius: 10px 0 0 10px;
+    cursor: pointer;
+  }
+}
+
+.modal-info {
+  @media screen and (min-width: 768px) {
+    width: 264px;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+//== Title
 .modal-title {
   margin: 20px auto;
   width: 100%;
@@ -25,11 +74,21 @@
   font-size: 20px;
   line-height: 1.15;
   color: var(--dark-color);
+
+  @media screen and (min-width: 1200px) {
+    font-size: 30px;
+    line-height: 1.16;
+  }
 }
 
-//== table:
+//== таблиця:
 .modal-table {
   margin-bottom: 20px;
+}
+
+.modal-table__string {
+  display: block;
+  margin-bottom: 8px;
 }
 
 .modal-table__descr,
@@ -40,42 +99,44 @@
 }
 
 .modal-table__descr {
+  width: 108px;
+  text-align: start;
   line-height: 1.3;
   color: var(--modal-gray-color);
+
+  @media screen and(min-width:1200px) {
+    width: 151px;
+  }
 }
 
 .modal-table__value {
   line-height: 1.16;
 }
 
-.img-container {
-  @media screen and (min-width: 1200px) {
-    max-width: 50%;
-  }
+//== рейтинг фільмів
+.modal-table__vote-count {
+  border-radius: 5px;
+  padding: 1px 9px;
+  background-color: var(--vote-light-grey-color);
 }
 
-.modal-img {
-  @media screen and (min-width: 1199px) {
-    width: 100%;
-    border-radius: 10px 0 0 10px;
-    cursor: pointer;
-  }
+.modal-table__value-avr {
+  border-radius: 5px;
+  padding: 1px 9px;
+  background-color: var(--orange-color);
+  color: var(--light-color);
 }
 
-.modal-wrapper {
-  @media screen and (min-width: 1200px) {
-    display: flex;
-  }
-}
-
-.modal-info {
-  @media screen and (min-width: 1200px) {
-    width: 50%;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-  }
+//== Опис фільму
+.modal-review__title {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--dark-color);
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .modal-review {
@@ -88,11 +149,14 @@
 .modal-btn-wrapper {
   display: flex;
   justify-content: space-between;
+
+  @media screen and (min-width: 1200px) {
+    width: 287px;
+  }
 }
 .modal-btn__watched,
 .modal-btn__queue {
   width: 110px;
-  height: 44px;
   padding: 6px 27px;
   border-radius: 5px;
   text-transform: uppercase;
@@ -101,9 +165,17 @@
   background-color: var(--light-color);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 125px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 136px;
+  }
 }
 
-.is-active {
+.modal-btn__watched {
   color: var(--light-color);
   background-color: var(--orange-color);
   border-color: transparent;
