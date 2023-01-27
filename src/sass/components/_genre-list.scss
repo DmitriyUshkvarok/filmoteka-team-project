@@ -1,0 +1,68 @@
+.js-show-genres {
+    border-radius: 10px;
+    position: relative;
+    z-index: 50;
+    cursor: pointer;
+    margin: 10px 0;
+    padding: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    width: 150px;
+    background-color: transparent;
+    color: var(--orange-color);
+    outline: 1px solid #ccc;
+    transition: transform 0.3s;
+
+    &:hover,
+    &:focus {
+        transform: scale(1.1);
+    }
+}
+
+.genre-list {
+    margin: 10px 0;
+    width: 100%;
+    display: none;
+    gap: 10px;
+}
+
+.genre-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+        &:not(:last-child) {
+                margin-right: 8px;
+            }
+}
+
+.genre-item:hover {
+    color: var(--orange-color);
+    outline: 1px solid var(--orange-color);
+}
+
+@media screen and (min-width: 320px) {
+    .genre-list {
+        flex-direction: column;
+    }
+
+    .pgenre-item {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .genre-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .genre-item {
+        flex-basis: calc((100% - 10px) / 6);
+    }
+}

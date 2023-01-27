@@ -16,25 +16,6 @@ import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 
-// объект настроек авторизации firebase
-const firebaseConfig = {
-  apiKey: 'AIzaSyCHbS2wZ3n6qYm6oLbJ10PX1s99PjdQPZQ',
-  authDomain: 'filmoteka-team-project-6e0d7.firebaseapp.com',
-  projectId: 'filmoteka-team-project-6e0d7',
-  storageBucket: 'filmoteka-team-project-6e0d7.appspot.com',
-  messagingSenderId: '837667202097',
-  appId: '1:837667202097:web:2d2a12ed50e0f702782110',
-  measurementId: 'G-NPG4Y8VLH9',
-  databaseURL:
-    'https://filmoteka-team-project-6e0d7-default-rtdb.europe-west1.firebasedatabase.app/',
-};
-
-const app = initializeApp(firebaseConfig);
-// const database = getDatabase(app);
-const db = getDatabase(app);
-console.log(db);
-const analytics = getAnalytics(app);
-
 // переменные для функционала регистрации и авторизации
 const refs = {
   TOKEN_KEY: 'token',
@@ -55,11 +36,6 @@ const refs = {
   userInfoWrapper: document.querySelector('.info-user-container'),
   btnOut: document.querySelector('.btn-log-out'),
 };
-const token = localStorage.getItem(refs.TOKEN_KEY);
-// проверка ключа локального хранилища (убираем окно авторизации делаем фон активным)
-if (token) {
-  refs.registrationModal.classList.add('is-hidden');
-}
 
 // оброботчики событий
 refs.forgotPassword.addEventListener('click', onOpenForgotForm);
@@ -71,6 +47,19 @@ refs.facebookBtn.addEventListener('click', onLoginFacebook);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
 refs.btnOut.addEventListener('click', onOutFunction);
 window.addEventListener('load', onStopBackground);
+const token = localStorage.getItem(refs.TOKEN_KEY);
+
+// стоп фон при авторизации
+function onStopBackground() {
+  refs.body.classList.add('stop-fon');
+}
+
+// проверка ключа локального хранилища (убираем окно авторизации делаем фон активным)
+if (token) {
+  refs.registrationModal.classList.add('is-hidden');
+  refs.body.classList.remove('stop-fon');
+  window.removeEventListener('load', onStopBackground);
+}
 
 // открыть панель для сброса пароля
 function onOpenForgotForm(e) {
@@ -79,10 +68,24 @@ function onOpenForgotForm(e) {
   refs.manSvg.classList.toggle('hidden');
 }
 
-// стоп фон при авторизации
-function onStopBackground() {
-  refs.body.classList.add('stop-fon');
-}
+// объект настроек авторизации firebase
+const firebaseConfig = {
+  apiKey: 'AIzaSyCHbS2wZ3n6qYm6oLbJ10PX1s99PjdQPZQ',
+  authDomain: 'filmoteka-team-project-6e0d7.firebaseapp.com',
+  projectId: 'filmoteka-team-project-6e0d7',
+  storageBucket: 'filmoteka-team-project-6e0d7.appspot.com',
+  messagingSenderId: '837667202097',
+  appId: '1:837667202097:web:2d2a12ed50e0f702782110',
+  measurementId: 'G-NPG4Y8VLH9',
+  databaseURL:
+    'https://filmoteka-team-project-6e0d7-default-rtdb.europe-west1.firebasedatabase.app/',
+};
+
+const app = initializeApp(firebaseConfig);
+// const database = getDatabase(app);
+const db = getDatabase(app);
+console.log(db);
+const analytics = getAnalytics(app);
 
 // наблюдаем за изминением состояния авторизации
 const authStateChange = getAuth();
@@ -182,14 +185,14 @@ function onLogInGoogle(e) {
       window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
-      // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      get(child(dbRef, `users/${user.uid}`)).then(snapshot => {
-        if (snapshot.exists()) {
-          // ....
-        } else {
-          writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-        }
-      });
+      // // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      // get(child(dbRef, `users/${user.uid}`)).then(snapshot => {
+      //   if (snapshot.exists()) {
+      //     // ....
+      //   } else {
+      //     writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+      //   }
+      // });
     })
     .catch(error => {
       const errorCode = error.code;
