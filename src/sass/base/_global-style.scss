@@ -82,6 +82,12 @@ body {
   height: 100%;
 }
 
+body.toggle-theme {
+  background: #8e0e00;
+  background: -webkit-linear-gradient(to right, #1f1c18, #8e0e00);
+  background: linear-gradient(to right, #1f1c18, #8e0e00);
+}
+
 body.stop-fon {
   overflow: hidden;
 }
