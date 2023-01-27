@@ -71,7 +71,9 @@ export class ApiTheMovie {
 
   // список жанров
   fetchAllgenres() {
-    return axios.get(`${this.URL}/genre/movie/list?api_key=${this.key}`);
+    return axios.get(`${this.URL}/genre/movie/list?api_key=${this.key}`)
+      .then(response => response.data.genres)
+      .catch(this.onError);
   }
 
   onError() {
