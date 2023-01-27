@@ -22,14 +22,13 @@ function onRenderbyGenre(owner) {
   gallery.innerHTML = markupGenre;
 }
 
-const btnShowGenre = document.querySelector('.js-show-genres');
+const btnShowGenre = document.querySelector('.genres-button');
 btnShowGenre.addEventListener('click', onShowGenres);
 
-function onShowGenres() {
-  var x = document.querySelector('.genre-list');
-  if (x.style.display === 'none') {
-    x.style.display = 'flex';
-  } else {
-    x.style.display = 'none';
-  }
-}
+    function onShowGenres() {
+        if (genreList.style.display === "none") {
+            genreList.style.display = "flex";
+        } else {
+            genreList.style.display = "none";
+        }
+    }
