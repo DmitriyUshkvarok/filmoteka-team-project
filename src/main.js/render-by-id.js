@@ -5,7 +5,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import { renderMoviesinWatchedLibrary } from './watched-library-temp';
 import { renderMoviesinQueueLibrary } from './queue-library';
 import { getQueueList } from './queue-library';
-import { searchTrailer } from './play-movie';
+import { searchTrailer, instanceTrailer } from './play-movie';
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
@@ -59,7 +59,7 @@ function onOpenCard(data) {
   //== закриття бекдропа ESC
   window.addEventListener('keydown', onKeydownEsc);
   function onKeydownEsc(event) {
-    if (event.code === 'Escape') {
+    if (event.code === 'Escape' && !instanceTrailer.visible()) {
       instance.close();
       document.body.classList.remove('stop-fon');
     }
@@ -79,5 +79,6 @@ function onOpenCard(data) {
     renderMoviesinWatchedLibrary
   );
   modalQueueLibraryBtn.addEventListener('click', renderMoviesinQueueLibrary);
+  // найти и запустить трейлер фильма
   searchTrailer();
 }
