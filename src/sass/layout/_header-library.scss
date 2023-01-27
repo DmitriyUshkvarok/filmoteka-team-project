@@ -88,6 +88,7 @@ body.toggle-theme .info-user-email {
   cursor: pointer;
   color: var(--light-color);
   font-weight: var(--font-weight-media);
+  transition: var(--animationTransition);
 
   &:hover,
   &:focus {

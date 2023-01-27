@@ -47,6 +47,7 @@ export function setMovieToLocalStorage({
   original_title,
   genres,
   overview,
+  release_date,
 }) {
   const dataFromLocalStorage = JSON.parse(localStorage.getItem(QUEUE_KEY));
   localStorage.setItem(
@@ -63,6 +64,7 @@ export function setMovieToLocalStorage({
         original_title,
         genres,
         overview,
+        release_date,
       },
     ])
   );

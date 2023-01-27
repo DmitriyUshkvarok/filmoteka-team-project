@@ -18,6 +18,14 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 1s, opacity 1s;
+}
+
+footer.hiden-footer {
+  opacity: 0;
+  transform: translateX(-100%);
 }
 
 body.toggle-theme footer {

@@ -11,3 +11,4 @@ import './main.js/queue-library';
 import './main.js/watched-library-temp';
 import './main.js/scroll-up-btn';
 import './main.js/switcher';
+import './main.js/hidden-footer';

@@ -19,6 +19,12 @@
   }
 }
 
+body.toggle-theme .modal {
+  background: #8e0e00;
+  background: -webkit-linear-gradient(to right, #1f1c18, #8e0e00);
+  background: linear-gradient(to right, #1f1c18, #8e0e00);
+}
+
 //== контейнери
 .modal-wrapper {
   width: 240px;
@@ -149,6 +155,7 @@
 .modal-btn-wrapper {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 
   @media screen and (min-width: 1200px) {
     width: 287px;
@@ -156,15 +163,25 @@
 }
 .modal-btn__watched,
 .modal-btn__queue {
-  width: 110px;
-  padding: 6px 27px;
+  width: 136px;
+  height: 44px;
+  border: none;
   border-radius: 5px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  background-color: var(--light-color);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   cursor: pointer;
+  background-color: transparent;
+  outline: 1px solid black;
+  transition: var(--animationTransition);
+
+  &:hover,
+  &:focus {
+    background-color: var(--orange-color);
+    color: var(--light-color);
+    outline: none;
+  }
 
   @media screen and (min-width: 768px) {
     width: 125px;
@@ -175,8 +192,23 @@
   }
 }
 
-.modal-btn__watched {
-  color: var(--light-color);
-  background-color: var(--orange-color);
-  border-color: transparent;
+body.toggle-theme .modal-btn__watched,
+body.toggle-theme .modal-btn__queue {
+  background-color: transparent;
+  outline: 1px solid brown;
+
+  &:hover,
+  &:focus {
+    background: #eb5757;
+    background: -webkit-linear-gradient(to right, #eb5757, #000000);
+    background: linear-gradient(to right, #eb5757, #000000);
+    color: var(--light-color);
+    outline: none;
+  }
 }
+
+// .modal-btn__watched {
+//   color: var(--light-color);
+//   background-color: var(--orange-color);
+//   border-color: transparent;
+// }
