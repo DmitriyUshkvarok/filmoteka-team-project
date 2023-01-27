@@ -4,14 +4,13 @@ import Notiflix from 'notiflix';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
-
 // Intersection Observer
 
 const options = {
-    root : null,
-    rootMargin: '300px',
-    threshold: 1.0
-}
+  root: null,
+  rootMargin: '300px',
+  threshold: 1.0,
+};
 
 const observer = new IntersectionObserver(onInfinityMoviesLoad, options);
 
@@ -19,11 +18,11 @@ const observer = new IntersectionObserver(onInfinityMoviesLoad, options);
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
-const guard = document.querySelector('.js-guard')
+const guard = document.querySelector('.js-guard');
 
 function onLoadAllMovies() {
   apiTheMovies.fetchAllFilms(apiTheMovies.page).then(renderMarkupAllMovieCard);
-  observer.observe(guard);
+  //observer.observe(guard);
 }
 onLoadAllMovies();
 

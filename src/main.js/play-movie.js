@@ -53,10 +53,12 @@ function showTrailer(url) {
   // );
   // ТОЖЕ САМОЕ
   // document.getElementById('video_trailer').contentWindow.postMessage(
-  //   '{"event":"command","func":"playVideo","args":""}',  // НЕ РАБОТАЕТ автоматическая загрузка
-  //   '*'
+  //   '{"event":"command","func":"playVideo","args":""}', // НЕ РАБОТАЕТ автоматическая загрузка
+  //   'https://www.youtube.com/'
   // );
   instance.show();
+  // const ins = instance.element();
+  //  console.log(ins);
 }
 
 // снять слушателя, когда модалка  с видео закроется
