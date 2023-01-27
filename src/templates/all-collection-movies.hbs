@@ -1,5 +1,6 @@
 {{#each results}}
   <li class='movie-card__item' data-id='{{id}}'>
+    <div class='js-guard'>
       <div class='poster-wrapper'>
         {{#if poster_path}}
           <img
@@ -26,6 +27,7 @@
           <p class='info-item-rating'><span class='rating-icon'>&#9733;</span>
             {{vote_average}}</p>
         </div>
+      </div>
       </div>
   </li>
 {{/each}}
