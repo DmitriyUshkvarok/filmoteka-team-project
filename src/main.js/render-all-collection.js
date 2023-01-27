@@ -32,18 +32,18 @@ function getAllGenres() {
 }
 getAllGenres();
 // ===================
-function ganreList() {
-  apiTheMovies.fetchAllgenres().then(makeValidatesGenreName);
-}
-ganreList();
+// function ganreList() {
+//   apiTheMovies.fetchAllgenres().then(makeValidatesGenreName);
+// }
+// ganreList();
 
-function makeValidatesGenreName({ data }) {
-  data.genres.forEach(genres => {
-    return genresList.push(genres.name);
-  });
-}
-let o = genresList;
-console.log(o);
+// function makeValidatesGenreName({ data }) {
+//   data.genres.forEach(genres => {
+//     return genresList.push(genres.name);
+//   });
+// }
+// let o = genresList;
+// console.log(o);
 
 function renderMarkupAllMovieCard(responseAll) {
   const resultAll = allCollectionFunction(responseAll);
