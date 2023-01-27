@@ -2,6 +2,9 @@ import { ApiTheMovie } from './fetch-class';
 import modalFunction from '../templates/modal-movies.hbs';
 import * as basicLightBox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import { renderMoviesinWatchedLibrary } from './watched-library-temp';
+import { renderMoviesinQueueLibrary } from './queue-library';
+import { getQueueList } from './queue-library';
 import { searchTrailer } from './play-movie';
 
 const apiTheMovies = new ApiTheMovie();
@@ -33,5 +36,48 @@ function onOpenCard(data) {
   const markUp = modalFunction(data);
   const instance = basicLightBox.create(markUp);
   instance.show();
+  document.body.classList.add('stop-fon');
+  //==  міняємо ADD TO WATCHED на REMOVE FROM WATCHED
+  let watchedList = getWatchedList();
+  const modalWathcedLibraryBtn = document.querySelector('.modal-btn__watched');
+  if (!watchedList.find(film => film.id === data.id)) {
+    modalWathcedLibraryBtn.textContent = 'Add to watched';
+  } else {
+    modalWathcedLibraryBtn.textContent = 'Remove from watched';
+  }
+
+  //== міняємо ADD TO QUEUE на REMOVE FROM QUEUE
+  let queueList = getQueueList();
+  console.log('this', queueList);
+  const modalQueueLibraryBtn = document.querySelector('.modal-btn__queue');
+  if (!queueList.find(film => film.id === data.id)) {
+    modalQueueLibraryBtn.textContent = 'Add to Queue';
+  } else {
+    modalQueueLibraryBtn.textContent = 'Remove from Queue';
+  }
+
+  //== закриття бекдропа ESC
+  window.addEventListener('keydown', onKeydownEsc);
+  function onKeydownEsc(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+      document.body.classList.remove('stop-fon');
+    }
+  }
+
+  //  закрытие модального окна по клику бекдропа
+  const basic = document.querySelector('.basicLightbox');
+  basic.addEventListener('click', onOffHidden);
+
+  function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
+
+  //== добавити карточку в WATCHED
+  modalWathcedLibraryBtn.addEventListener(
+    'click',
+    renderMoviesinWatchedLibrary
+  );
+  modalQueueLibraryBtn.addEventListener('click', renderMoviesinQueueLibrary);
   searchTrailer();
 }

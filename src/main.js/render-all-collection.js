@@ -16,7 +16,7 @@ const observer = new IntersectionObserver(onInfinityMoviesLoad, options);
 
 // Rendering movies
 
-const apiTheMovies = new ApiTheMovie();
+export const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
 const guard = document.querySelector('.js-guard');
 
@@ -69,7 +69,7 @@ export function onInfinityMoviesLoad(entries) {
     if (entry.isIntersecting) {
       apiTheMovies.incrementPage();
       if (apiTheMovies.genreId) {
-        apiTheMovies.fetchByGenre(genreId).then(renderMarkupAllMovieCard);
+        apiTheMovies.fetchByGenre(this.genreId).then(renderMarkupAllMovieCard);
       } else if (apiTheMovies.searchValue) {
         apiTheMovies.fetchById(searchValue).then(renderMarkupAllMovieCard);
       } else {
