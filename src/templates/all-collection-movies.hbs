@@ -1,6 +1,5 @@
 {{#each results}}
-  <div class='movie-card__item' data-id='{{id}}'>
-    <div class='movie-card'>
+  <li class='movie-card__item' data-id='{{id}}'>
       <div class='poster-wrapper'>
         {{#if poster_path}}
           <img
@@ -23,14 +22,10 @@
       <div class='card-info'>
         <h2 class='movie-info-title'> {{title}}</h2>
         <div class='info-wrapper'>
-          <div class='movie-icon-decor'>
-            <span>&#127871;</span>
-          </div>
           <p class='info-item-year'>{{release_date}}</p>
           <p class='info-item-rating'><span class='rating-icon'>&#9733;</span>
             {{vote_average}}</p>
         </div>
       </div>
-    </div>
-  </div>
+  </li>
 {{/each}}
