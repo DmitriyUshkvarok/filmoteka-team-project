@@ -4,6 +4,7 @@ import Notiflix from 'notiflix';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
+let genresList = [];
 // Intersection Observer
 
 const options = {
@@ -25,14 +26,51 @@ function onLoadAllMovies() {
   observer.observe(guard);
 }
 onLoadAllMovies();
-
+// ===================
 function getAllGenres() {
   apiTheMovies.fetchAllgenres();
 }
 getAllGenres();
-// const setGenresList = array => {
-//   genresList = [...array];
-// };
+// ===================
+function ganreList() {
+  apiTheMovies.fetchAllgenres().then(makeValidatesGenreName);
+}
+ganreList();
+
+function makeValidatesGenreName({ data }) {
+  data.genres.forEach(genres => {
+    return genresList.push(genres.name);
+  });
+}
+let o = genresList;
+console.log(o);
+
+function renderMarkupAllMovieCard(responseAll) {
+  const resultAll = allCollectionFunction(responseAll);
+  gallery.insertAdjacentHTML('beforeend', resultAll);
+  // console.log(responseAll.results);
+  if (responseAll.results.length === 0) {
+    Notiflix.Notify.warning(
+      "We're sorry, but you've reached the end of search results."
+    );
+  }
+}
+
+// Infinity scroll
+export function onInfinityMoviesLoad(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      apiTheMovies.incrementPage();
+      if (apiTheMovies.genreId) {
+        apiTheMovies.fetchByGenre(this.genreId).then(renderMarkupAllMovieCard);
+      } else if (apiTheMovies.searchValue) {
+        apiTheMovies.fetchById(searchValue).then(renderMarkupAllMovieCard);
+      } else {
+        apiTheMovies.fetchAllFilms().then(renderMarkupAllMovieCard);
+      }
+    }
+  });
+}
 
 // const makeValidatesGenreName = array => {
 //   array.forEach(object => {
@@ -51,30 +89,3 @@ getAllGenres();
 
 //   return array;
 // };
-
-function renderMarkupAllMovieCard(responseAll) {
-  const resultAll = allCollectionFunction(responseAll);
-  gallery.insertAdjacentHTML('beforeend', resultAll);
-  if (responseAll.results.length === 0) {
-    Notiflix.Notify.warning(
-      "We're sorry, but you've reached the end of search results."
-    );
-  }
-}
-
-// Infinity scroll
-
-export function onInfinityMoviesLoad(entries) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      apiTheMovies.incrementPage();
-      if (apiTheMovies.genreId) {
-        apiTheMovies.fetchByGenre(this.genreId).then(renderMarkupAllMovieCard);
-      } else if (apiTheMovies.searchValue) {
-        apiTheMovies.fetchById(searchValue).then(renderMarkupAllMovieCard);
-      } else {
-        apiTheMovies.fetchAllFilms().then(renderMarkupAllMovieCard);
-      }
-    }
-  });
-}

@@ -1,120 +1,126 @@
 .gallery {
-    display: block;
-    margin-bottom: -30px;
+  display: block;
+  margin-bottom: -30px;
 
-    @media screen and (min-width: 768px) {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 30px;
-    }
-
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
 }
 
 .movie {
-    padding-top: 20px;
-    padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 40px;
 
-    @media screen and (min-width: 768px) {
-        padding-top: 10px;
-        padding-bottom: 50px;
-    }
+  @media screen and (min-width: 768px) {
+    padding-top: 10px;
+    padding-bottom: 50px;
+  }
+}
+
+.poster-wrapper {
+  overflow: hidden;
+}
+
+.movie-card__poster {
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .movie-card__item {
-    margin-bottom: 30px;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    overflow: hidden;
+  margin-bottom: 30px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    filter: saturate(165%);
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    flex-basis: calc(100% / 2 - 30px);
+    margin-left: 30px;
+    width: 294px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    flex-basis: calc(100% / 3 - 30px);
+    margin-left: 30px;
+    width: 274px;
+  }
+
+  &:hover {
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
     cursor: pointer;
-    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-
-
-    @media screen and (min-width: 768px) and (max-width: 1023px) {
-        flex-basis: calc(100% / 2 - 30px);
-        margin-left: 30px;
-        width: 294px;
+    & .poster-wrapper {
+      opacity: 0.9;
     }
-
-    @media screen and (min-width: 1024px) {
-        flex-basis: calc(100% / 3 - 30px);
-        margin-left: 30px;
-        width: 274px;
-    }
-
-    &:hover {
-        transform: scale(1.03);
-        box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-        cursor: pointer;
-
-        & .poster-wrapper {
-            opacity: 0.9;
-        }
-    }
+  }
 }
 
-
-
 .movie-card__item:last-child {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .card-info {
-padding: 10px 5px 10px 5px;
+  padding: 10px 5px 10px 5px;
 
-    @media screen and (min-width: 768px) {
-        padding-top: 8px;
-    }
+  @media screen and (min-width: 768px) {
+    padding-top: 8px;
+  }
 }
 
-.movie-info-title{
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.17;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-    
-    @media screen and (min-width: 768px) {
-            line-height: 1.33;
-        }
-}
+.movie-info-title {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 
+  @media screen and (min-width: 768px) {
+    line-height: 1.33;
+  }
+}
 
 .info-item-year {
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    color: var(--ganre-orange-color);
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--ganre-orange-color);
 }
 
 .info-item-year::before {
-    content: '';
-    display: inline-block;
-    width: 1px;
-    height: 12px;
-    margin-left: 5px;
-    margin-right: 5px;
-    background-color: var(--ganre-orange-color);
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: var(--ganre-orange-color);
 }
 
 .info-item-rating {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 30px;
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.17;
-    text-transform: uppercase;
-    background-color: var(--ganre-orange-color);
-    color: var(--light-color);
-
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 30px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  background-color: var(--ganre-orange-color);
+  color: var(--light-color);
 }

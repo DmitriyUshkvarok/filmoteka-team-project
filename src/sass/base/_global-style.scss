@@ -47,22 +47,22 @@ p {
   padding-right: 10px;
 
   @media screen and (min-width: 320px) {
-      width: 320px;
-    }
-  
-    @media screen and (min-width: 768px) {
-      width: 768px;
-      padding-left: 32px;
-      padding-right: 32px;
-    }
-  
-    @media screen and (min-width: 1024px) {
-      width: 1024px;
-    }
+    width: 320px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
+  }
 }
 
 body {
-  font-family: var(--font-family) Arial, Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-size: 14px;
   background: #abbaab;
   background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
