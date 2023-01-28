@@ -1,21 +1,17 @@
-import { ApiTheMovie } from './fetch-class';
-import * as basicLightbox from 'basiclightbox';
-import 'basiclightbox/dist/basicLightbox.min.css';
 import movieWatches from '../templates/card-movie-watched.hbs';
 import movieQueue from '../templates/card-movie-queue.hbs';
-import { Notify } from 'notiflix';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-export const gallery = document.querySelector('.gallery');
 import { QUEUE_KEY } from './queue-library';
 import { watchedModalOpenOnCardClick } from './modal-watched-library';
-const apiTheMovies = new ApiTheMovie();
-
+export const gallery = document.querySelector('.gallery');
 //== WATCHED LIBRARRY
 const WATCHED_KEY = 'watched-key';
 const watchLibBtn = document.querySelector('.watched');
 watchLibBtn.addEventListener('click', onOpenWatchLibrary);
 const showMeModal = document.querySelector('.gallery');
+//== відкриття модалки в бібліотеці Watched
+showMeModal.addEventListener('click', watchedModalOpenOnCardClick);
 
 // получение списка фильмов из локального хранилища для библиотеки и проверка на пустую библиотеку
 export function getWatchesList() {
@@ -26,8 +22,7 @@ export function getWatchesList() {
   return data;
 }
 
-export function onOpenWatchLibrary(e) {
-  e.preventDefault();
+export function onOpenWatchLibrary() {
   let data = getWatchesList();
   const markup = data
     .map(el => {
@@ -42,9 +37,6 @@ export function onOpenWatchLibrary(e) {
   }
 }
 
-//== відкриття модалки в бібліотеці Watched
-showMeModal.addEventListener('click', watchedModalOpenOnCardClick);
-
 //==QUEUE LIBRARRY
 const queueLibrBtn = document.querySelector('.queue');
 queueLibrBtn.addEventListener('click', onOpenQueueLibrary);
@@ -58,7 +50,7 @@ function getQueueList() {
   return data;
 }
 
-function onOpenQueueLibrary(e) {
+export function onOpenQueueLibrary(e) {
   e.preventDefault();
   let data = getQueueList();
   console.log(data);

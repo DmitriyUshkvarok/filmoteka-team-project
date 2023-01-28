@@ -2,23 +2,11 @@ import { ApiTheMovie } from './fetch-class';
 import * as basicLightBox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import { Notify } from 'notiflix';
-import { WATCHED_KEY } from './render-favorites-movie';
 import modalWatchedMarkup from '../templates/modal-watched-library.hbs';
-import movieWatches from '../templates/card-movie-watched.hbs';
 import { getWatchedList } from './watched-library-temp';
-import { getWatchesList } from './render-favorites-movie';
-import { gallery } from './render-favorites-movie';
 const apiTheMovies = new ApiTheMovie();
 import { onOpenWatchLibrary } from './render-favorites-movie';
-
-function getWatchesList() {
-  const data = JSON.parse(localStorage.getItem(WATCH_KEY));
-  if (!data) {
-    gallery.innerHTML = noFilmsInLibrarry();
-    return;
-  }
-  return data;
-}
+const WATCHED_KEY = 'watched-key';
 
 //== реалізація відкриття модалки по кліку на картку
 export async function watchedModalOpenOnCardClick(event) {
@@ -51,23 +39,7 @@ function onOpenCard(respModal) {
       Notify.warning('Фильм Удалён из библиотеки');
       instance.close();
     }
-    renderMarkupListMovies();
-
-    //== знову рендер після видалення з бібліотеки
-    // function renderMarkupListMovies() {
-    //   let data = getWatchesList();
-    //   const markup = data
-    //     .map(el => {
-    //       return movieWatches(el);
-    //     })
-    //     .join('');
-
-    //   gallery.innerHTML = markup;
-
-    //   if (!markup) {
-    //     gallery.innerHTML = noFilmsInLibrarry();
-    //   }
-    // }
+    onOpenWatchLibrary();
 
     //== закриття бекдропа ESC
     window.addEventListener('keydown', onKeydownEsc);
@@ -85,7 +57,5 @@ function onOpenCard(respModal) {
     function onOffHidden() {
       document.body.classList.remove('stop-fon');
     }
-    const watchLibBtn = document.querySelector('.watched');
-    watchLibBtn.addEventListener('click', onOpenWatchLibrary);
   }
 }
