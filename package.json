@@ -25,7 +25,8 @@
     "lazysizes": "^5.3.2",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.6",
-    "swiper": "^8.4.6"
+    "swiper": "^8.4.6",
+    "webgl-fluid": "^0.3.2"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
