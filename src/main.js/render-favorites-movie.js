@@ -18,7 +18,7 @@ watchLibBtn.addEventListener('click', onOpenWatchLibrary);
 const showMeModal = document.querySelector('.gallery');
 
 // получение списка фильмов из локального хранилища для библиотеки и проверка на пустую библиотеку
- export function getWatchesList() {
+export function getWatchesList() {
   const data = JSON.parse(localStorage.getItem(WATCHED_KEY));
   if (!data) {
     return;
