@@ -1,4 +1,5 @@
 .header-library {
+  position: relative;
   background-image: url('../images/library-header/sm.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -81,9 +82,8 @@ body.toggle-theme .info-user-email {
   width: 54px;
   height: 24px;
   border-radius: var(--border-radius);
-  border: none;
   background-color: transparent;
-  outline: 1px solid var(--light-color);
+  border: 1px solid var(--light-color);
   @include font(8px, 10px);
   cursor: pointer;
   color: var(--light-color);
@@ -93,12 +93,12 @@ body.toggle-theme .info-user-email {
   &:hover,
   &:focus {
     background-color: var(--orange-color);
-    outline: none;
+    border: none;
   }
 }
 
 body.toggle-theme .btn-log-out {
-  outline: 1px solid brown;
+  border: 1px solid brown;
 
   &:hover,
   &:focus {
@@ -106,7 +106,7 @@ body.toggle-theme .btn-log-out {
     background: -webkit-linear-gradient(to right, #eb5757, #000000);
     background: linear-gradient(to right, #eb5757, #000000);
     // background-color: var(--orange-color);
-    outline: none;
+    border: none;
   }
 }
 
@@ -121,6 +121,11 @@ body.toggle-theme .btn-log-out {
   @include font(12px, 14px);
   color: var(--light-color);
   text-transform: uppercase;
+
+  &:hover,
+  &:focus {
+    color: var(--orange-color);
+  }
 }
 
 body.toggle-theme .header-nav-link {
@@ -149,31 +154,30 @@ body.toggle-theme .header-nav-link {
   @include font(12px, 16px);
   color: var(--light-color);
   @include flexCenter();
-  outline: 1px solid var(--light-color);
+  border: 1px solid var(--light-color);
   background-color: transparent;
   border-radius: var(--border-radius);
   text-align: center;
   cursor: pointer;
-  border: none;
   transition: var(--animationTransition);
 
   &:hover,
   &:focus {
     background-color: var(--orange-color);
-    outline: none;
+    border: none;
   }
 }
 
 body.toggle-theme .watched,
 body.toggle-theme .queue {
-  outline: 1px solid brown;
+  border: 1px solid brown;
 
   &:hover,
   &:focus {
     background: #eb5757;
     background: -webkit-linear-gradient(to right, #eb5757, #000000);
     background: linear-gradient(to right, #eb5757, #000000);
-    outline: none;
+    border: none;
   }
 }
 
@@ -181,9 +185,8 @@ body.toggle-theme .queue {
   width: 54px;
   height: 24px;
   border-radius: var(--border-radius);
-  border: none;
   background-color: transparent;
-  outline: 1px solid var(--light-color);
+  border: 1px solid var(--light-color);
   @include font(8px, 10px);
   @include flexCenter();
   text-align: center;
@@ -195,7 +198,7 @@ body.toggle-theme .queue {
   &:hover,
   &:focus {
     background-color: var(--orange-color);
-    outline: none;
+    border: none;
   }
 }
 
@@ -249,18 +252,18 @@ body.toggle-theme .item-language {
   background: #eb5757;
   background: -webkit-linear-gradient(to right, #eb5757, #000000);
   background: linear-gradient(to right, #eb5757, #000000);
-  outline: none;
+  border: none;
 }
 
 body.toggle-theme .wrapper-language {
-  outline: 1px solid brown;
+  border: 1px solid brown;
 
   &:hover,
   &:focus {
     background: #eb5757;
     background: -webkit-linear-gradient(to right, #eb5757, #000000);
     background: linear-gradient(to right, #eb5757, #000000);
-    outline: none;
+    border: none;
   }
 }
 
