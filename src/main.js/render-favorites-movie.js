@@ -8,15 +8,17 @@ import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 export const gallery = document.querySelector('.gallery');
 import { QUEUE_KEY } from './queue-library';
+import { watchedModalOpenOnCardClick } from './modal-watched-library';
 const apiTheMovies = new ApiTheMovie();
 
 //== WATCHED LIBRARRY
 const WATCHED_KEY = 'watched-key';
 const watchLibBtn = document.querySelector('.watched');
 watchLibBtn.addEventListener('click', onOpenWatchLibrary);
+const showMeModal = document.querySelector('.gallery');
 
 // получение списка фильмов из локального хранилища для библиотеки и проверка на пустую библиотеку
-function getWatchesList() {
+ export function getWatchesList() {
   const data = JSON.parse(localStorage.getItem(WATCHED_KEY));
   if (!data) {
     return;
@@ -24,7 +26,7 @@ function getWatchesList() {
   return data;
 }
 
-function onOpenWatchLibrary(e) {
+export function onOpenWatchLibrary(e) {
   e.preventDefault();
   let data = getWatchesList();
   const markup = data
@@ -39,6 +41,9 @@ function onOpenWatchLibrary(e) {
     // gallery.innerHTML = noFilmsInLibrarry();
   }
 }
+
+//== відкриття модалки в бібліотеці Watched
+showMeModal.addEventListener('click', watchedModalOpenOnCardClick);
 
 //==QUEUE LIBRARRY
 const queueLibrBtn = document.querySelector('.queue');
