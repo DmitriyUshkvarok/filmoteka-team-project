@@ -1,0 +1,43 @@
+<div class='modal'>
+    <div class='modal-wrapper'>
+        <div class='img-container'>
+            <img class='modal-img' src='https://image.tmdb.org/t/p/w500/{{poster_path}}' alt='{{title}}'
+                data-id='{{id}}' />
+        </div>
+        <div class='modal-info'>
+            <h2 class='modal-title'>{{title}}</h2>
+
+            <table class="modal-table">
+                <tbody>
+                    <tr>
+                        <th class="modal-table__descr">Vote/Votes</th>
+                        <td class="modal-table__value"><span class="modal-table__value-avr">{{vote_average}}</span> / <span
+                            class="modal-table__vote-count">{{vote_count}}</span></td>
+                    </tr>
+                    <tr>
+                        <th class="modal-table__descr">Popularity</th>
+                        <td class="modal-table__value">{{popularity}}</td>
+                    </tr>
+                    <tr>
+                        <th class="modal-table__descr">Original Title</th>
+                        <td class="modal-table__value">{{original_title}}</td>
+                    </tr>
+                    <tr>
+                        <th class="modal-table__descr">Genre</th>
+                        <td class="modal-table__value">
+                            {{#each genres}}
+                            <span class='sub-genre'> {{this.name}} </span>
+                            {{/each}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class='modal-review'>{{overview}}</p>
+
+            <div class='modal-btn-wrapper'>
+                <button class='modal-btn__watched' type='button' data-id='{{id}}' id='open'>Watched</button>
+
+            </div>
+        </div>
+    </div>
+</div>

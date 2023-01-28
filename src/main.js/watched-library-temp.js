@@ -15,6 +15,7 @@ if (!JSON.parse(localStorage.getItem(WATCHED_KEY))) {
   localStorage.setItem(WATCHED_KEY, JSON.stringify([]));
 }
 
+//== функція відповідає за "добавити якщо нема", "забрати якщо є"
 export function renderMoviesinWatchedLibrary(e) {
   let data = getWatchedList();
   const currentIdBtnWatch = e.target.dataset.id;
@@ -25,7 +26,9 @@ export function renderMoviesinWatchedLibrary(e) {
     data = data.filter(film => film.id !== Number(currentIdBtnWatch));
     localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
     Notify.warning('Фильм Удалён из библиотеки');
-  } else {
+  }
+   else {
+    //== добавити якщо немає
     const modalLibrarryBtn = document.querySelector('.modal-btn__watched');
     modalLibrarryBtn.textContent = 'remove from watch';
     let data = getWatchedList();
