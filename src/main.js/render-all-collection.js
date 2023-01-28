@@ -14,53 +14,41 @@ const options = {
 
 const observer = new IntersectionObserver(onInfinityMoviesLoad, options);
 
-// Rendering movies
-
 export const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
 const guard = document.querySelector('.js-guard');
 
 function onLoadAllMovies() {
   apiTheMovies.fetchAllFilms(apiTheMovies.page).then(renderMarkupAllMovieCard);
-  //observer.observe(guard);
+  observer.observe(guard);
 }
 onLoadAllMovies();
 
-function getAllGenres() {
-  apiTheMovies.fetchAllgenres();
-}
-getAllGenres();
-// const setGenresList = array => {
-//   genresList = [...array];
-// };
+return response;
 
-// const makeValidatesGenreName = array => {
-//   array.forEach(object => {
-//     if (object.genre_ids) {
-//       object.genre_ids.forEach((idGenre, indexGenre) => {
-//         genresList.forEach(objectNames => {
-//           if (objectNames.id === idGenre) {
-//             object.genre_ids.splice(indexGenre, 1, objectNames['name']);
-//           }
-//         });
-//       });
-//     } else {
-//       object.genre_ids = '';
-//     }
-//   });
-
-//   return array;
-// };
+// Creating Markup
 
 function renderMarkupAllMovieCard(responseAll) {
-  const resultAll = allCollectionFunction(responseAll);
-  gallery.insertAdjacentHTML('beforeend', resultAll);
-  if (responseAll.results.length === 0) {
+  const markup = allCollectionFunction(responseAll);
+  gallery.insertAdjacentHTML('beforeend', markup);
+  if (!markup) {
     Notiflix.Notify.warning(
       "We're sorry, but you've reached the end of search results."
     );
   }
 }
+
+// Rendering movies
+
+function onLoadAllMovies() {
+  apiTheMovies
+    .fetchAllFilms(apiTheMovies.page)
+    .then(makeValidatesGenreName)
+    .then(makeShortReleaseDate)
+    .then(renderMarkupAllMovieCard);
+  observer.observe(guard);
+}
+onLoadAllMovies();
 
 // Infinity scroll
 
@@ -73,7 +61,10 @@ export function onInfinityMoviesLoad(entries) {
       } else if (apiTheMovies.searchValue) {
         apiTheMovies.fetchById(searchValue).then(renderMarkupAllMovieCard);
       } else {
-        apiTheMovies.fetchAllFilms().then(renderMarkupAllMovieCard);
+        apiTheMovies
+          .fetchAllFilms()
+          .then(makeValidatesGenreName)
+          .then(renderMarkupAllMovieCard);
       }
     }
   });

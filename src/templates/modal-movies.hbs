@@ -9,19 +9,19 @@
 
             <table class="modal-table">
                 <tbody>
-                    <tr>
+                    <tr class="modal-table__string">
                         <th class="modal-table__descr">Vote/Votes</th>
-                        <td class="modal-table__value">{{vote_average}} / {{vote_count}}</td>
+                        <td class="modal-table__value"><span class="modal-table__value-avr">{{vote_average}}</span> / <span class="modal-table__vote-count">{{vote_count}}</span></td>
                     </tr>
-                    <tr>
+                    <tr class="modal-table__string">
                         <th class="modal-table__descr">Popularity</th>
                         <td class="modal-table__value">{{popularity}}</td>
                     </tr>
-                    <tr>
+                    <tr class="modal-table__string">
                         <th class="modal-table__descr">Original Title</th>
                         <td class="modal-table__value">{{original_title}}</td>
                     </tr>
-                    <tr>
+                    <tr class="modal-table__string">
                         <th class="modal-table__descr">Genre</th>
                         <td class="modal-table__value">
                             {{#each genres}}
@@ -31,6 +31,7 @@
                     </tr>
                 </tbody>
             </table>
+            <h2 class="modal-review__title">About</h2>
             <p class='modal-review'>{{overview}}</p>
 
             <div class='modal-btn-wrapper'>

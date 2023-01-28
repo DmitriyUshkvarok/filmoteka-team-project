@@ -32,7 +32,6 @@ function onCardClick(event) {
 }
 
 function onOpenCard(data) {
-  console.log(data);
   const markUp = modalFunction(data);
   const instance = basicLightBox.create(markUp);
   instance.show();
