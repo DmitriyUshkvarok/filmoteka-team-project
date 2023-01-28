@@ -5,28 +5,26 @@ import { Notify } from 'notiflix';
 
 const apiTheMovies = new ApiTheMovie();
 export let instanceTrailer = basicLightbox.create('');
-// закриття по ESC
-window.addEventListener('keydown', onKeydownWin);
 
-function onKeydownWin(evt) {
-  if (evt.code === 'Escape' && instanceTrailer.visible()) {
-    instanceTrailer.close();
-  }
-}
 export function searchTrailer() {
-  const imgModalWindow = document.querySelector('.modal-img');
-  imgModalWindow.addEventListener('click', onClickImgModal);
+  const imgContainer = document.querySelector('.img-container');
+  imgContainer.addEventListener('click', onClickImgModal);
 }
 
-function onClickImgModal(evt) {
+function onClickImgModal() {
+  const imgModalWindow = document.querySelector('.modal-img');
+  const btnWatchTrailer = document.querySelector('.modal-btn__trailer');
+
   //запросить данные о трейлере фильма на YouTube
-  fetchTraiiler(evt.target.dataset.id)
+  fetchTraiiler(imgModalWindow.dataset.id)
     .then(url => {
       showTrailer(url); //показать трейлер фильма
     })
     .catch(error => {
       console.log(error);
     });
+
+  btnWatchTrailer.blur();
 }
 
 function fetchTraiiler(movieId) {
@@ -44,6 +42,9 @@ function showTrailer(url) {
   const markUp = markUpIframe(url);
   instanceTrailer = basicLightbox.create(markUp);
   instanceTrailer.show();
+
+  window.addEventListener('keydown', onKeydownWin); // закриття по ESC
+
   const ins = instanceTrailer.element();
   console.log(ins);
 }
@@ -60,65 +61,18 @@ function getUrlTrailer(keyTrailer) {
 function markUpIframe(url) {
   return `
     <div>
-      <iframe src=${url} width="850" height="588" frameborder="0" allow="autoplay" allowfullscreen id='video_trailer'></iframe>
+      <iframe src=${url} width="650" height="450" frameborder="0" allow="autoplay" allowfullscreen id='video_trailer'></iframe>
      </div>
   `;
+}
+
+function onKeydownWin(evt) {
+  if (evt.code === 'Escape' && instanceTrailer.visible()) {
+    instanceTrailer.close();
+  } else window.removeEventListener('keydown', onKeydownWin);
 }
 
 // снять слушателя, когда модалка  с видео закроется
 // при закритті модалки видалити її розмітку - перевірити авто
 
 //`https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=f27eea818d2010463700365b0c06a16e`;
-
-// export function searchTrailer() {
-//   const imgModalWindow = document.querySelector('.modal-img');
-//   imgModalWindow.addEventListener('click', onClickImgModal);
-// }
-
-// function onClickImgModal(evt) {
-//   fetchTraiiler(evt.target.dataset.id); //запросить данные о трейлере фильма на YouTube
-// }
-
-// function fetchTraiiler(movieId) {
-//   apiTheMovies.setMovieId(movieId);
-//   apiTheMovies
-//     .fetchTrailerMovies()
-//     .then(openTrailer)
-//     .catch(error => {
-//       console.log(error);
-//       Notify.info('No trailer');
-//     });
-// }
-
-// function openTrailer({ results }) {
-//   const { key } = results[0];
-//   const urlTrailer = getUrlTrailer(key);
-//   showTrailer(urlTrailer);
-// }
-
-// function getUrlTrailer(keyTreiler) {
-//   return `https://www.youtube.com/embed/${keyTreiler}?eneblejapi=1&autoplay=1`;
-// }
-
-// function showTrailer(url) {
-//   const markUp = `
-//     <div>
-//       <iframe src=${url} width="850" height="588" frameborder="0" allowfullscreen id='video_trailer'></iframe>
-//      </div>
-//   `;
-//   const instance = basicLightbox.create(markUp);
-// const iframeTrailer = document.getElementById('video_trailer');
-// console.log('video_trailer', iframeTrailer);
-// iframeTrailer.contentWindow.postMessage(
-//   '{"event":"command","func":"playVideo","args":""}',   // НЕ РАБОТАЕТ автоматическая загрузка
-//   '*'
-// );
-// ТОЖЕ САМОЕ
-// document.getElementById('video_trailer').contentWindow.postMessage(
-//   '{"event":"command","func":"playVideo","args":""}', // НЕ РАБОТАЕТ автоматическая загрузка
-//   'https://www.youtube.com/'
-// );
-// instance.show();
-// const ins = instance.element();
-//  console.log(ins);
-//}
