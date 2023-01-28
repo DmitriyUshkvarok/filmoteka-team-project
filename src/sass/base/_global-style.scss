@@ -10,6 +10,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  margin: 0;
 }
 
 ul {
@@ -38,38 +39,30 @@ p {
   transition: transform 1000ms, opacity 1000ms;
 }
 
-// .container {
-//   max-width: 1280px;
-//   margin-left: auto;
-//   margin-right: auto;
-//   padding-left: 10px;
-//   padding-right: 10px;
-// }
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 
-@media screen and (min-width: 320px) {
-  .container {
+  @media screen and (min-width: 320px) {
     width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 10px;
   }
-}
 
-@media screen and (min-width: 768px) {
-  .container {
+  @media screen and (min-width: 768px) {
     width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .container {
-    width: 1280px;
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
   }
 }
 
 body {
-  font-family: var(--font-family), Arial, Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-size: 14px;
   background: #abbaab;
   background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
@@ -80,6 +73,12 @@ body {
   background-attachment: fixed;
   margin: 0;
   height: 100%;
+}
+
+body.toggle-theme {
+  background: #8e0e00;
+  background: -webkit-linear-gradient(to right, #1f1c18, #8e0e00);
+  background: linear-gradient(to right, #1f1c18, #8e0e00);
 }
 
 body.stop-fon {

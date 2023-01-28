@@ -84,7 +84,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // const database = getDatabase(app);
 const db = getDatabase(app);
-console.log(db);
 const analytics = getAnalytics(app);
 
 // наблюдаем за изминением состояния авторизации
