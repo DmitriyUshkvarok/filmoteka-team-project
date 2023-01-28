@@ -14,3 +14,4 @@ import './main.js/switcher';
 import './main.js/hidden-footer';
 import './main.js/preloader';
 // import './main.js/canvas';
+import './main.js/team-modal';
