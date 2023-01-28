@@ -1,17 +1,23 @@
+import { ApiTheMovie } from './fetch-class';
+const apiTheMovies = new ApiTheMovie();
 import movieWatches from '../templates/card-movie-watched.hbs';
-import movieQueue from '../templates/card-movie-queue.hbs';
+import * as basicLightBox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
+import modalLibrarry from '../templates/modal-watched-library.hbs';
+import modalLibrarryQue from '../templates/modal-queue-library.hbs';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-import { QUEUE_KEY } from './queue-library';
-import { watchedModalOpenOnCardClick } from './modal-watched-library';
-export const gallery = document.querySelector('.gallery');
-//== WATCHED LIBRARRY
+import { Notify } from 'notiflix';
 const WATCHED_KEY = 'watched-key';
+const QUEUE_KEY = 'queue-key';
 const watchLibBtn = document.querySelector('.watched');
+const QueBtn = document.querySelector('.queue');
 watchLibBtn.addEventListener('click', onOpenWatchLibrary);
-const showMeModal = document.querySelector('.gallery');
-//== відкриття модалки в бібліотеці Watched
-showMeModal.addEventListener('click', watchedModalOpenOnCardClick);
+QueBtn.addEventListener('click', onOpenQueueLibraty);
+const gallery = document.querySelector('.gallery');
+const galleryQue = document.querySelector('.gallery-Queue');
+galleryQue.addEventListener('click', queueModalOpenOnCardClick);
+gallery.addEventListener('click', watchedModalOpenOnCardClick);
 
 // получение списка фильмов из локального хранилища для библиотеки и проверка на пустую библиотеку
 export function getWatchesList() {
@@ -31,38 +37,120 @@ export function onOpenWatchLibrary() {
     .join('');
 
   gallery.innerHTML = markup;
+  galleryQue.innerHTML = '';
 
   if (!markup) {
     // gallery.innerHTML = noFilmsInLibrarry();
   }
 }
 
-//==QUEUE LIBRARRY
-const queueLibrBtn = document.querySelector('.queue');
-queueLibrBtn.addEventListener('click', onOpenQueueLibrary);
-// получение списка фильмов из локального хранилища для библиотеки и проверка на пустую библиотеку
-function getQueueList() {
-  const data = JSON.parse(localStorage.getItem(QUEUE_KEY));
-  console.log(data);
-  if (!data) {
+function watchedModalOpenOnCardClick(event) {
+  if (event.target === event.currentTarget) {
     return;
   }
-  return data;
+
+  const currentId = event.target.closest('.movie-card__item').dataset.id;
+  apiTheMovies.setMovieId(currentId);
+  apiTheMovies.fetchById(currentId).then(onOpenCard);
+}
+//== відкриття модалки
+function onOpenCard(respModal) {
+  let data = getWatchesList();
+  const markUp = modalLibrarry(respModal);
+  const instance = basicLightBox.create(markUp);
+  instance.show();
+  document.body.classList.add('stop-fon');
+
+  //== видалення з бібліотеки по клавіші а також з локального
+  const modalWatchedLibrBtn = document.querySelector('.modal-btn__watched');
+  modalWatchedLibrBtn.textContent = 'remove from watched';
+  modalWatchedLibrBtn.addEventListener('click', e => {
+    const currentIdBtnWatch = e.target.dataset.id;
+    if (data.find(film => film.id === Number(currentIdBtnWatch))) {
+      let data = getWatchesList();
+      data = data.filter(film => film.id !== Number(currentIdBtnWatch));
+      localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
+      instance.close();
+      Notify.warning('Фильм Удалён из библиотеки');
+      onOpenWatchLibrary();
+    }
+  });
+
+  //== закриття бекдропа ESC
+  window.addEventListener('keydown', onKeydownEsc);
+  function onKeydownEsc(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+      document.body.classList.remove('stop-fon');
+    }
+  }
+
+  //  закрытие модального окна по клику бекдропа
+  const basic = document.querySelector('.basicLightbox');
+  basic.addEventListener('click', onOffHidden);
+
+  function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
 }
 
-export function onOpenQueueLibrary(e) {
-  e.preventDefault();
-  let data = getQueueList();
-  console.log(data);
-  const markup = data
+// //==QUEUE LIBRARRY
+
+function getQueueList() {
+  const dataQ = JSON.parse(localStorage.getItem(QUEUE_KEY));
+  console.log(dataQ);
+  if (!dataQ) {
+    return;
+  }
+  return dataQ;
+}
+
+function onOpenQueueLibraty() {
+  let datas = getQueueList();
+  const markups = datas
     .map(el => {
-      return movieQueue(el);
+      return movieWatches(el);
     })
     .join('');
 
-  gallery.innerHTML = markup;
+  galleryQue.innerHTML = markups;
+  gallery.innerHTML = '';
 
-  if (!markup) {
+  if (!markups) {
     // gallery.innerHTML = noFilmsInLibrarry();
   }
+}
+
+function queueModalOpenOnCardClick(event) {
+  if (event.target === event.currentTarget) {
+    return;
+  }
+
+  const currentId = event.target.closest('.movie-card__item').dataset.id;
+  apiTheMovies.setMovieId(currentId);
+  apiTheMovies.fetchById(currentId).then(onOpenCardQue);
+}
+
+//== відкриття модалки
+function onOpenCardQue(respModal) {
+  let datas = getQueueList();
+  const markUp = modalLibrarryQue(respModal);
+  const instance = basicLightBox.create(markUp);
+  instance.show();
+  document.body.classList.add('stop-fon');
+
+  //== видалення з бібліотеки по клавіші а також з локального
+  const modalWatchedLibrBtnQue = document.querySelector('.modal-btn__queue');
+  modalWatchedLibrBtnQue.textContent = 'remove from watched';
+  modalWatchedLibrBtnQue.addEventListener('click', e => {
+    const currentIdBtnWatch = e.target.dataset.id;
+    if (datas.find(film => film.id === Number(currentIdBtnWatch))) {
+      let datas = getQueueList();
+      datas = datas.filter(film => film.id !== Number(currentIdBtnWatch));
+      localStorage.setItem(QUEUE_KEY, JSON.stringify(datas));
+      instance.close();
+      Notify.warning('Фильм Удалён из библиотеки');
+      onOpenQueueLibraty();
+    }
+  });
 }

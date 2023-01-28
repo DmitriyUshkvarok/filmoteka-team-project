@@ -38,11 +38,11 @@ function onOpenCard(data) {
   //==  міняємо ADD TO WATCHED на REMOVE FROM WATCHED
   let watchedList = getWatchedList();
   const modalWathcedLibraryBtn = document.querySelector('.modal-btn__watched');
-  // if (!watchedList.find(film => film.id === data.id)) {
-  //   modalWathcedLibraryBtn.textContent = 'Add to watched';
-  // } else {
-  //   modalWathcedLibraryBtn.textContent = 'Remove from watched';
-  // }
+  if (!watchedList.find(film => film.id === data.id)) {
+    modalWathcedLibraryBtn.textContent = 'Add to watched';
+  } else {
+    modalWathcedLibraryBtn.textContent = 'Remove from watched';
+  }
 
   //== міняємо ADD TO QUEUE на REMOVE FROM QUEUE
   let queueList = getQueueList();
