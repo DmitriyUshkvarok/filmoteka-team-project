@@ -17,3 +17,4 @@ import './main.js/preloader';
 import './main.js/team-modal';
 // import './main.js/modal-queue-library';
 // import './main.js/modal-watched-library';
+import './main.js/render-by-search';
