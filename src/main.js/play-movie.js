@@ -60,8 +60,8 @@ function getUrlTrailer(keyTrailer) {
 
 function markUpIframe(url) {
   return `
-    <div>
-      <iframe src=${url} width="650" height="450" frameborder="0" allow="autoplay" allowfullscreen id='video_trailer'></iframe>
+    <div class="wrapper-iframe">
+      <iframe src=${url} frameborder="0" allow="autoplay" allowfullscreen id='video_trailer'></iframe>
      </div>
   `;
 }
@@ -71,8 +71,8 @@ function onKeydownWin(evt) {
     instanceTrailer.close();
   } else window.removeEventListener('keydown', onKeydownWin);
 }
-
 // снять слушателя, когда модалка  с видео закроется
-// при закритті модалки видалити її розмітку - перевірити авто
 
 //`https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=f27eea818d2010463700365b0c06a16e`;
+
+//./images/sprite-play.svg#icon-iconfinder-play-4341313_120530
