@@ -67,17 +67,6 @@ async function removeAndRenderWatched(e) {
   }
 }
 
-//== якщо клікаємо на карточку - запускається рендер модалки
-//== (не актуально, йде перевірка з removeAndRenedrWatched)
-// function watchedModalOpenOnCardClick(event) {
-//   if (event.target === event.currentTarget) {
-//     return;
-//   }
-
-//   const currentId = event.target.closest('.movie-card__item').dataset.id;
-//   apiTheMovies.setMovieId(currentId);
-//   apiTheMovies.fetchById(currentId).then(onOpenCard);
-// }
 
 //== відкриття модалки
 function onOpenCard(respModal) {
@@ -116,6 +105,14 @@ function onOpenCard(respModal) {
   basic.addEventListener('click', onOffHidden);
 
   function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
+
+  //== закриття модалки при клікі на клавішу
+  const modalBtnClose = document.querySelector('.modal-btn__close');
+  modalBtnClose.addEventListener('click', onModalBtnClose)
+  function onModalBtnClose() {
+    instance.close();
     document.body.classList.remove('stop-fon');
   }
 }
@@ -168,17 +165,6 @@ async function removeAndRenderQueue(e) {
   }
 }
 
-//== також не актуально відкриваємо з попередньої функції
-// function queueModalOpenOnCardClick(event) {
-//   if (event.target === event.currentTarget) {
-//     return;
-//   }
-
-//   const currentId = event.target.closest('.movie-card__item').dataset.id;
-//   apiTheMovies.setMovieId(currentId);
-//   apiTheMovies.fetchById(currentId).then(onOpenCardQue);
-// }
-
 //== відкриття модалки
 function onOpenCardQue(respModal) {
   let datas = getQueueList();
@@ -216,6 +202,14 @@ function onOpenCardQue(respModal) {
   basic.addEventListener('click', onOffHidden);
 
   function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
+
+  //== закриття модалки при клікі на клавішу
+  const modalBtnClose = document.querySelector('.modal-btn__close');
+  modalBtnClose.addEventListener('click', onModalBtnClose)
+  function onModalBtnClose() {
+    instance.close();
     document.body.classList.remove('stop-fon');
   }
 }
