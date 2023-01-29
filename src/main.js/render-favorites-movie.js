@@ -5,7 +5,7 @@ import * as basicLightBox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import modalLibrarry from '../templates/modal-watched-library.hbs';
 import modalLibrarryQue from '../templates/modal-queue-library.hbs';
-import noFilmsInLibrary from '../templates/modal-no-films-library.hbs'
+import noFilmsInLibrary from '../templates/modal-no-films-library.hbs';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { Notify } from 'notiflix';
@@ -45,7 +45,6 @@ export function onOpenWatchLibrary() {
     //== якщо немає фільмів - покажи розмітку
     gallery.innerHTML = noFilmsInLibrary();
   }
- 
 }
 
 //== видалення при клікові на іконку на картці фільму WATCHED
@@ -64,11 +63,8 @@ async function removeAndRenderWatched(e) {
     Notify.warning('Фильм Удалён из библиотеки');
     onOpenWatchLibrary();
   } else {
-    await apiTheMovies
-      .fetchById(this.currentId)
-      .then(onOpenCard);
+    await apiTheMovies.fetchById(this.currentId).then(onOpenCard);
   }
-
 }
 
 //== якщо клікаємо на карточку - запускається рендер модалки
@@ -82,7 +78,6 @@ async function removeAndRenderWatched(e) {
 //   apiTheMovies.setMovieId(currentId);
 //   apiTheMovies.fetchById(currentId).then(onOpenCard);
 // }
-
 
 //== відкриття модалки
 function onOpenCard(respModal) {
@@ -169,11 +164,8 @@ async function removeAndRenderQueue(e) {
     Notify.warning('Фильм Удалён из библиотеки');
     onOpenQueueLibraty();
   } else {
-    await apiTheMovies
-      .fetchById(this.currentId)
-      .then(onOpenCardQue);
+    await apiTheMovies.fetchById(this.currentId).then(onOpenCardQue);
   }
-
 }
 
 //== також не актуально відкриваємо з попередньої функції
@@ -226,9 +218,6 @@ function onOpenCardQue(respModal) {
   function onOffHidden() {
     document.body.classList.remove('stop-fon');
   }
-  
 }
 
-
- 
-
+onOpenWatchLibrary();
