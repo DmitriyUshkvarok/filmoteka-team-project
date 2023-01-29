@@ -1,6 +1,7 @@
 @import './base/common';
 @import './util/mixins';
 @import './util/variables';
+@import './components/modal-form';
 @import './base/global-style';
 @import './components/button-up';
 @import './components/buttons';
@@ -9,10 +10,8 @@
 @import './layout/header-library';
 @import './layout/main';
 @import './layout/footer';
-@import './components/modal-form';
 @import './components/modal-video';
 @import './components/modal-movie';
 @import './components/select-location';
 @import './components/team-modal';
 @import './layout/galery';
-@import './components/canvas';

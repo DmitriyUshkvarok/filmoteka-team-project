@@ -67,7 +67,6 @@ async function removeAndRenderWatched(e) {
   }
 }
 
-
 //== відкриття модалки
 function onOpenCard(respModal) {
   let data = getWatchesList();
@@ -110,7 +109,7 @@ function onOpenCard(respModal) {
 
   //== закриття модалки при клікі на клавішу
   const modalBtnClose = document.querySelector('.modal-btn__close');
-  modalBtnClose.addEventListener('click', onModalBtnClose)
+  modalBtnClose.addEventListener('click', onModalBtnClose);
   function onModalBtnClose() {
     instance.close();
     document.body.classList.remove('stop-fon');
@@ -207,7 +206,7 @@ function onOpenCardQue(respModal) {
 
   //== закриття модалки при клікі на клавішу
   const modalBtnClose = document.querySelector('.modal-btn__close');
-  modalBtnClose.addEventListener('click', onModalBtnClose)
+  modalBtnClose.addEventListener('click', onModalBtnClose);
   function onModalBtnClose() {
     instance.close();
     document.body.classList.remove('stop-fon');
