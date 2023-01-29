@@ -31,7 +31,8 @@ function onCardClick(event) {
 }
 
 function onOpenCard(data) {
-  const markUp = modalFunction(data);
+  const movie = makeShortVoteAndPopularity(data);
+  const markUp = modalFunction(movie);
   const instance = basicLightBox.create(markUp);
   instance.show();
   document.body.classList.add('stop-fon');
@@ -78,3 +79,15 @@ function onOpenCard(data) {
   );
   modalQueueLibraryBtn.addEventListener('click', renderMoviesinQueueLibrary);
 }
+
+// Обрізання значень рейтингу та популярності до 1 знаку після коми
+
+function makeValidatesVoteAndPopularity(data) {
+  return data.toFixed(1);
+};
+
+export function makeShortVoteAndPopularity(movie) {
+  movie.vote_average = movie.vote_average ? makeValidatesVoteAndPopularity(movie.vote_average) : '';
+  movie.popularity = movie.popularity ? makeValidatesVoteAndPopularity(movie.popularity) : '';
+  return movie;
+};

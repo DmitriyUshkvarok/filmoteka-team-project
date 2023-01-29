@@ -1,5 +1,8 @@
 import { apiTheMovies } from './render-all-collection';
 import allCollection from '../templates/all-collection-movies.hbs';
+import { makeValidatesGenreName } from './render-all-collection';
+import { makeValidatesReleaseDate } from './render-all-collection';
+import { makeShortReleaseDate } from './render-all-collection';
 
 const genreList = document.querySelector('.genre-list');
 const gallery = document.querySelector('.gallery');
@@ -14,7 +17,10 @@ function onCallByGenre(e) {
   apiTheMovies.resetPage();
 
   apiTheMovies.genreId = e.target.dataset.id;
-  apiTheMovies.fetchByGenre(apiTheMovies.genreId).then(onRenderbyGenre);
+  apiTheMovies.fetchByGenre(apiTheMovies.genreId)
+    .then(makeValidatesGenreName)
+    .then(makeShortReleaseDate)
+    .then(onRenderbyGenre);
 }
 
 function onRenderbyGenre(owner) {

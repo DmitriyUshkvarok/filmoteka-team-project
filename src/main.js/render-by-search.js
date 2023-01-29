@@ -3,6 +3,8 @@ import { ApiTheMovie } from './fetch-class';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { async } from '@firebase/util';
+import { makeValidatesGenreName } from './render-all-collection';
+import { makeShortReleaseDate } from './render-all-collection';
 
 const apiTheMovies = new ApiTheMovie();
 const form = document.querySelector('.header-form');
@@ -16,7 +18,9 @@ async function onSubmit(e) {
   e.preventDefault();
 
   apiTheMovies.searchValue = input.value;
-  const res = await apiTheMovies.fetchBySearch();
+  const res = await apiTheMovies.fetchBySearch()
+    .then(makeValidatesGenreName)
+    .then(makeShortReleaseDate);
 
   if (res.total_results == 0) {
     warning.style.color = '#FF001B';

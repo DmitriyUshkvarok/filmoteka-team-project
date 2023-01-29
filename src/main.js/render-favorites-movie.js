@@ -8,6 +8,7 @@ import modalLibrarryQue from '../templates/modal-queue-library.hbs';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { Notify } from 'notiflix';
+import { makeShortVoteAndPopularity } from './render-by-id';
 const WATCHED_KEY = 'watched-key';
 const QUEUE_KEY = 'queue-key';
 const watchLibBtn = document.querySelector('.watched');
@@ -29,8 +30,9 @@ export function getWatchesList() {
 }
 
 export function onOpenWatchLibrary() {
-  let data = getWatchesList();
-  const markup = data
+    let data = getWatchesList();
+  const movie = makeValidateMovieData(data);
+  const markup = movie
     .map(el => {
       return movieWatches(el);
     })
@@ -56,7 +58,8 @@ function watchedModalOpenOnCardClick(event) {
 //== відкриття модалки
 function onOpenCard(respModal) {
   let data = getWatchesList();
-  const markUp = modalLibrarry(respModal);
+  const movie = makeShortVoteAndPopularity(respModal);
+  const markUp = modalLibrarry(movie);
   const instance = basicLightBox.create(markUp);
   instance.show();
   document.body.classList.add('stop-fon');
@@ -98,16 +101,17 @@ function onOpenCard(respModal) {
 
 function getQueueList() {
   const dataQ = JSON.parse(localStorage.getItem(QUEUE_KEY));
-  console.log(dataQ);
   if (!dataQ) {
     return;
   }
+  console.log(dataQ);
   return dataQ;
 }
 
 function onOpenQueueLibraty() {
   let datas = getQueueList();
-  const markups = datas
+  const movies = makeValidateMovieData(datas);
+  const markups = movies
     .map(el => {
       return movieWatches(el);
     })
@@ -125,7 +129,6 @@ function queueModalOpenOnCardClick(event) {
   if (event.target === event.currentTarget) {
     return;
   }
-
   const currentId = event.target.closest('.movie-card__item').dataset.id;
   apiTheMovies.setMovieId(currentId);
   apiTheMovies.fetchById(currentId).then(onOpenCardQue);
@@ -134,7 +137,8 @@ function queueModalOpenOnCardClick(event) {
 //== відкриття модалки
 function onOpenCardQue(respModal) {
   let datas = getQueueList();
-  const markUp = modalLibrarryQue(respModal);
+  const movie = makeShortVoteAndPopularity(respModal);
+  const markUp = modalLibrarryQue(movie);
   const instance = basicLightBox.create(markUp);
   instance.show();
   document.body.classList.add('stop-fon');
@@ -154,3 +158,20 @@ function onOpenCardQue(respModal) {
     }
   });
 }
+
+//Validation of movie object
+
+function makeValidateMovieData (movie) {
+  movie.forEach(movieEl => {
+    if (movieEl.genres) {
+      movieEl.genres = movieEl.genres.map(genre => genre.name);
+    } else {
+      movieEl.genres = '';
+    }
+    movieEl.release_date = movieEl.release_date
+      ? movieEl.release_date.slice(0, 4)
+      : '';
+    makeShortVoteAndPopularity(movieEl);
+  });
+  return movie;
+};

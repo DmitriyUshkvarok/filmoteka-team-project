@@ -22,11 +22,11 @@ let genres;
 
 // Make short date, like 2020
 
-const makeValidatesReleaseDate = data => {
+export function makeValidatesReleaseDate(data) {
   return data.slice(0, 4);
 };
 
-const makeShortReleaseDate = object => {
+export function makeShortReleaseDate (object) {
   object.results.forEach(movie => {
     movie.release_date = movie.release_date
       ? makeValidatesReleaseDate(movie.release_date)
@@ -48,7 +48,7 @@ const makeGenresList = () => {
 };
 makeGenresList();
 
-const makeValidatesGenreName = response => {
+export function makeValidatesGenreName (response) {
   genres = JSON.parse(localStorage.getItem('genres'));
   if (!genres) {
     return;
@@ -91,6 +91,7 @@ function onLoadAllMovies() {
     .then(makeValidatesGenreName)
     .then(makeShortReleaseDate)
     .then(renderMarkupAllMovieCard);
+  
   observer.observe(guard);
 }
 onLoadAllMovies();
