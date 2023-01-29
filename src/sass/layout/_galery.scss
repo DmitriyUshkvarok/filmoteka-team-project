@@ -129,3 +129,26 @@
 .rating-icon {
   color: gold;
 }
+
+.watched-delete::before {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 30px;
+  width: 30px;
+  background-image: url(../images/icons8-remove-bookmark-50.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: -5px;
+  right: -5px;
+}
+
+.watched-delete {
+  position: absolute;
+  display: block;
+  top: 5px;
+  right: 5px;
+  border-color: transparent;
+  background-color: transparent;
+}
