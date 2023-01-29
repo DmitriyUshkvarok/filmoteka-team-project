@@ -197,7 +197,7 @@ function onOpenCardQue(respModal) {
 
   //== видалення з бібліотеки по клавіші а також з локального
   const modalWatchedLibrBtnQue = document.querySelector('.modal-btn__queue');
-  modalWatchedLibrBtnQue.textContent = 'remove from watched';
+  modalWatchedLibrBtnQue.textContent = 'remove from queue';
   modalWatchedLibrBtnQue.addEventListener('click', e => {
     const currentIdBtnWatch = e.target.dataset.id;
     if (datas.find(film => film.id === Number(currentIdBtnWatch))) {
