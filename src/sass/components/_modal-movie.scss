@@ -3,10 +3,10 @@
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
-  overflow-y: scroll;
 
   @media screen and (max-width: 767px) {
     height: 100vh;
+    overflow-y: scroll;
   }
 
   @media screen and (min-width: 768px) {
@@ -50,12 +50,16 @@ body.toggle-theme .modal {
 }
 
 .modal-img {
+  @media screen and (min-width: 320px) {
+    width: 240px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+  }
   @media screen and (min-width: 768px) {
     width: 264px;
   }
-  @media screen and (min-width: 1199px) {
-    width: 100%;
-    border-radius: 10px 0 0 10px;
+  @media screen and (min-width: 1280px) {
+    width: 375px;
     cursor: pointer;
   }
 }
@@ -208,11 +212,30 @@ body.toggle-theme .modal-btn__queue {
   }
 }
 
-// .modal-btn__watched {
-//   color: var(--light-color);
-//   background-color: var(--orange-color);
-//   border-color: transparent;
-// }
+//== клавіша закриття модалки
+.modal-btn__close {
+  position: absolute;
+  display: block;
+  top: 30px;
+  right: 30px;
+  height: 30px;
+  width: 30px;
+  background-color: var(--light-color);
+  background-image: url(../images/icons8-close-24.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.modal-btn__close:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
 
 .img-container__trailer {
   width: 100%;

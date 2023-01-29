@@ -3,6 +3,12 @@
   display: block;
   margin-bottom: -30px;
 
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
@@ -65,9 +71,10 @@
   }
 }
 
-.movie-card__item:last-child {
-  margin-bottom: 0px;
-}
+//== розширює останню картку (не потрібно)
+// .movie-card__item:last-child {
+//   margin-bottom: 0px;
+// }
 
 .card-info {
   padding: 10px 5px 10px 5px;
@@ -128,4 +135,30 @@
 
 .rating-icon {
   color: gold;
+}
+
+.watched-delete {
+  position: absolute;
+  display: block;
+  top: 5px;
+  right: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: var(--ganre-orange-color);
+  background-image: url(../images/icons8-multiply-48.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+//== Стилль параграфа коли немає фільмів
+.library-container {
+  font-size: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-shadow: 0 0 3px #ff0000;
 }
