@@ -230,7 +230,6 @@ body.toggle-theme .modal-btn__queue {
   font-size: 30px;
   display: flex;
   opacity: 0;
-  cursor: pointer;
   align-items: center;
   justify-content: center;
   border-radius: 10px 0 0 10px;
@@ -290,5 +289,19 @@ body.toggle-theme .modal-btn__trailer {
   &:focus {
     color: var(--dark-color);
     background: #eb5757;
+  }
+}
+.play__span {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-image: url('../images/iconfinder-play.svg');
+  background-repeat: no-repeat;
+  transition: background-image var(--animationTransition),
+    transform var(--animationTransition);
+  &:hover {
+    transform: scale(1.2);
   }
 }

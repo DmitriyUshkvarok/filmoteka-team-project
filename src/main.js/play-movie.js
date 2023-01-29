@@ -5,7 +5,6 @@ import { Notify } from 'notiflix';
 
 const apiTheMovies = new ApiTheMovie();
 export let instanceTrailer = basicLightbox.create('');
-
 export function searchTrailer() {
   const imgContainer = document.querySelector('.img-container');
   imgContainer.addEventListener('click', onClickImgModal);
@@ -76,3 +75,7 @@ function onKeydownWin(evt) {
 //`https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=f27eea818d2010463700365b0c06a16e`;
 
 //./images/sprite-play.svg#icon-iconfinder-play-4341313_120530
+//./images/sprite-play.svg#icon-play-circle_icon-iconscom_69988
+
+//./images/sprite.svg#icon-google
+//"./images/love.svg"
