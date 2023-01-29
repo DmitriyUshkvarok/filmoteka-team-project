@@ -67,7 +67,7 @@ function onSubmit(e) {
     }, 3000);
     return;
   }
-  apiTheMovies.resetPage();
+  //   apiTheMovies.resetPage();
   apiTheMovies.fetchBySearch(apiTheMovies.searchValue).then(showMovie);
   form.elements.searchQuery.value = '';
 }
