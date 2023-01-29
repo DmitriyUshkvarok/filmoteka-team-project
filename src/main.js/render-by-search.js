@@ -31,9 +31,6 @@ function onSubmit(e) {
 }
 
 function showMovie(resultSearch) {
-  console.log(resultSearch);
-  const markupSearch = allCollectionFunction(resultSearch);
-
   if (resultSearch.total_results == 0) {
     warning.style.color = '#FF001B';
     warning.style.textAlign = 'center';
@@ -44,5 +41,6 @@ function showMovie(resultSearch) {
     }, 3000);
     return;
   }
+  const markupSearch = allCollectionFunction(resultSearch);
   gallery.innerHTML = markupSearch;
 }
