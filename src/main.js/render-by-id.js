@@ -35,18 +35,19 @@ function onOpenCard(data) {
   const instance = basicLightBox.create(markUp);
   instance.show();
   document.body.classList.add('stop-fon');
-  //==  міняємо ADD TO WATCHED на REMOVE FROM WATCHED
+  
+  //== якщо цього фільма немає - напис добавити, якщо є - видалити (СУТО текст)
   let watchedList = getWatchedList();
   const modalWathcedLibraryBtn = document.querySelector('.modal-btn__watched');
   if (!watchedList.find(film => film.id === data.id)) {
-    modalWathcedLibraryBtn.textContent = 'Add to watched';
-  } else {
-    modalWathcedLibraryBtn.textContent = 'Remove from watched';
-  }
+      modalWathcedLibraryBtn.textContent = 'Add to watched';
+    } else {
+      modalWathcedLibraryBtn.textContent = 'Remove from watched';
+    }
+  
 
-  //== міняємо ADD TO QUEUE на REMOVE FROM QUEUE
+  //== якщо цього фільма немає - напис добавити, якщо є - видалити (СУТО текст)
   let queueList = getQueueList();
-  console.log('this', queueList);
   const modalQueueLibraryBtn = document.querySelector('.modal-btn__queue');
   if (!queueList.find(film => film.id === data.id)) {
     modalQueueLibraryBtn.textContent = 'Add to Queue';
