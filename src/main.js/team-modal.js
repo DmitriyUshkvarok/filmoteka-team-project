@@ -9,27 +9,32 @@ const backdrop = document.querySelector('.team-modal__backdrop');
 
 
 teamLink.addEventListener('click', onModalClick);
-closeModalBtn.addEventListener('click', onModalClick);
+closeModalBtn.addEventListener('click', onCloseClick);
 
-function onModalClick(event) {
-    event.preventDefault();
-    modal.classList.toggle("is-hidden");
- 
-    window.addEventListener('keydown', onKeydownEsc);
-    function onKeydownEsc(event) {
-        if (event.code === 'Escape') {
-    modal.classList.add("is-hidden");
-        }
-            
+function onModalClick() {  
+document.body.style.overflow = "hidden";   
+modal.classList.toggle("is-hidden");
+window.addEventListener('keydown', onKeydownEsc);
+
+function onKeydownEsc(event) {
+    if (event.code === 'Escape') {
+        modal.classList.add("is-hidden");
+        document.body.style.overflow = "scroll";
+    }         
     }
-
-    modal.addEventListener('click', (event) => {
-        if (event.target === backdrop) {
-      modal.classList.add("is-hidden");
-  }
+    
+modal.addEventListener('click', (event) => {
+    if (event.target === backdrop) {
+        modal.classList.add("is-hidden");
+        document.body.style.overflow = "scroll";
+     }    
 }); 
 }
 
+function onCloseClick() {
+    modal.classList.toggle("is-hidden");
+    document.body.style.overflow = "scroll";
+}
 
 
 
