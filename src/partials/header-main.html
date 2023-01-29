@@ -1,29 +1,28 @@
 <header class="header">
-  <div class="header-container container">
-    <div class="header-wrapper">
-      <a class="header-logo" href="./index.html">
-        <svg class="header-logo-icon" width="24" height="24">
-          <use xlink:href="./images/sprite.svg#icon-film"></use>
-        </svg>
-        <span class="logo-title">Filmoteka</span>
-      </a>
-      <div class="info-user-container"></div>
+  <!-- <canvas></canvas> -->
+    <div class="container">
+        <div class="nav-wrapper">
+            <a class="logo" href="./index.html"> <svg class="icon-film"
+                    width="24" height="24">
+                    <use xlink:href="./images/sprite.svg#icon-film"></use>
+                </svg><span class="logo-text">Filmoteka</span></a>
+            <div class="info-user-container"></div>
 
-      <nav class="header-navigation">
-        <ul class="header-navigation-list">
-          <li class="header-navigation-item">
-            <a class="header-navigation-link" href="./index.html">Home</a>
-          </li>
-          <li class="header-navigation-item">
-            <a class="header-navigation-link" href="./library.html"
-              >My library</a
-            >
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-        <!-- кнопка переключения темы -->
+            <nav class="header-nav">
+                <ul class="header-nav-list">
+                    <li class="header-nav-item">
+                        <a class="header-nav-link current" href="./index.html">Home</a>
+                    </li>
+                    <li class="header-nav-item">
+                        <a class="header-nav-link" href="./library.html">My
+                            library</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="utils-wrapper">
+            <button class="btn-log-out" type="button">log out</button>
+            <!-- кнопка переключения темы -->
             <div class="theme-btn">
                 <label id="switch" class="switch" tabindex="1">
                     <input type="checkbox" class="switcher-toggle" id="slider"
@@ -32,88 +31,63 @@
                 </label>
             </div>
             <!--  -->
-
-    <div class="utils-wrapper">
-      <button class="btn-log-out" type="button">log out</button>
-      <!-- location -->
-      <div class="cont-lang">
-        <div class="wrapper-language" tabindex="2">
-          <p>Choose language</p>
+            <!-- location -->
+            <div class="cont-lang">
+                <div class="wrapper-language" tabindex="2">
+                    <p>Choose language</p>
+                </div>
+                <ul class="language">
+                    <li class="item-language" data-google-lang="en">english
+                        <img src="./images/gb.svg" alt="en"
+                            data-google-lang="en"
+                            width="12" height="10">
+                    </li>
+                    <li class="item-language" data-google-lang="de">deuthch
+                        <img src="./images/de.svg" alt="de"
+                            data-google-lang="de"
+                            width="12" height="10">
+                    </li>
+                    <li class="item-language" data-google-lang="es">espanio
+                        <img src="./images/es.svg" alt="es"
+                            data-google-lang="es"
+                            width="12" height="10">
+                    </li>
+                    <li class="item-language" data-google-lang="uk">ukraine
+                        <img src="./images/ua.svg" alt="uk"
+                            data-google-lang="uk"
+                            width="12" height="10">
+                    </li>
+                </ul>
+            </div>
+            <!--  -->
         </div>
-        <ul class="language">
-          <li class="item-language" data-google-lang="en">
-            english
-            <img
-              src="./images/gb.svg"
-              alt="en"
-              data-google-lang="en"
-              width="22"
-              height="15"
-            />
-          </li>
-          <li class="item-language" data-google-lang="de">
-            deuthch
-            <img
-              src="./images/de.svg"
-              alt="de"
-              data-google-lang="de"
-              width="22"
-              height="15"
-            />
-          </li>
-          <li class="item-language" data-google-lang="es">
-            espanio
-            <img
-              src="./images/es.svg"
-              alt="es"
-              data-google-lang="es"
-              width="22"
-              height="15"
-            />
-          </li>
-          <li class="item-language" data-google-lang="uk">
-            ukraine
-            <img
-              src="./images/ua.svg"
-              alt="uk"
-              data-google-lang="uk"
-              width="22"
-              height="15"
-            />
-          </li>
-        </ul>
-      </div>
     </div>
-
       <!-- Header input form -->
-      <div class="utils-wrapper-form">
-      <form class="header-form">
-        <div class="header-input-wrapper js-input-form">
-          <input
-            class="header-input"
-            type="text"
-            placeholder="Movie search"
-            name="searchFilm"
-            autocomplete="off"
-          />
-          <p class="header-input-info" hidden>
-            Search result not successful. Enter the correct movie name.
-          </p>
-          <button class="search-button js-search-button" type="submit">
-            <svg class="search-button-icon" width="12" height="12">
-              <use
-                class="search-icon"
-                href="./images/sprite.svg#icon-search-2"
-              ></use>
-            </svg>
-          </button>
-        </div>
+      <div>
+        <div class="utils-wrapper-form">
+        <form class="header-form">
+          <div class="header-input-wrapper">
+            <input
+              class="header-input"
+              type="text"
+              placeholder="Movie search"
+              name="searchQuery"
+              autocomplete="off"
+              />
+            <button class="search-button js-search-button" type="submit">
+              <svg class="search-button-icon" width="12" height="12">
+                <use
+                  class="search-icon"
+                  href="./images/sprite.svg#icon-search-2"></use>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    <p class="js-search" hidden>Search result not successful. Enter the correct movie name and search again</p>
+    </div>
         <button class="genres-button" type="button" data-open-genres>
-          Show a genres
-        </button>
-      </form>
+            Show a genres
+          </button>
     </div>
-    </div>
-  </div>
-</header>
-<!--  -->
+  </header>

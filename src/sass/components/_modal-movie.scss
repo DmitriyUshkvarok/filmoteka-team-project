@@ -3,10 +3,10 @@
   border-radius: 10px;
   padding: 20px;
   margin: 20px;
-  overflow-y: scroll;
 
   @media screen and (max-width: 767px) {
     height: 100vh;
+    overflow-y: scroll;
   }
 
   @media screen and (min-width: 768px) {
@@ -50,12 +50,16 @@ body.toggle-theme .modal {
 }
 
 .modal-img {
+  @media screen and (min-width: 320px) {
+    width: 240px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+  }
   @media screen and (min-width: 768px) {
     width: 264px;
   }
-  @media screen and (min-width: 1199px) {
-    width: 100%;
-    border-radius: 10px 0 0 10px;
+  @media screen and (min-width: 1280px) {
+    width: 375px;
     cursor: pointer;
   }
 }
@@ -208,8 +212,106 @@ body.toggle-theme .modal-btn__queue {
   }
 }
 
-// .modal-btn__watched {
-//   color: var(--light-color);
-//   background-color: var(--orange-color);
-//   border-color: transparent;
-// }
+//== клавіша закриття модалки
+.modal-btn__close {
+  position: absolute;
+  display: block;
+  top: 30px;
+  right: 30px;
+  height: 30px;
+  width: 30px;
+  background-color: var(--light-color);
+  background-image: url(../images/icons8-close-24.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.modal-btn__close:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
+
+.img-container__trailer {
+  width: 100%;
+  position: relative;
+}
+
+.img-overlay__trailer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  display: flex;
+  opacity: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 0 0 10px;
+  background: #c04848; /* fallback for old browsers */
+  background: linear-gradient(
+    rgb(72, 0, 72, 0.8),
+    rgb(192, 72, 72, 0.8)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: opacity var(--animationTransition);
+  &:hover,
+  &:focus {
+    opacity: 1;
+    transition: opacity var(--animationTransition);
+  }
+}
+
+.modal-btn__trailer {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  color: var(--light-color);
+
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5em 0.8em;
+
+  background-color: var(--orange-color);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: solid 1px transparent;
+  border-radius: 5px;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+
+  transition: var(--animationTransition);
+
+  &:hover,
+  &:focus {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border-color: currentColor;
+  }
+}
+
+body.toggle-theme .modal-btn__trailer {
+  border: solid 1px brown;
+  background: -webkit-linear-gradient(to right, #eb5757, #000000);
+  background: linear-gradient(to right, #eb5757, #000000);
+
+  &:hover,
+  &:focus {
+    color: var(--dark-color);
+    background: #eb5757;
+  }
+}

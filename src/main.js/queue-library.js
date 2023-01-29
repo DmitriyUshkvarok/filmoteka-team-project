@@ -20,14 +20,14 @@ export function renderMoviesinQueueLibrary(e) {
   const currentIdBtnQueue = e.target.dataset.id;
   if (data.find(film => film.id === Number(currentIdBtnQueue))) {
     const modalLibrarryBtn = document.querySelector('.modal-btn__queue');
-    modalLibrarryBtn.textContent = 'Add to watched';
+    modalLibrarryBtn.textContent = 'Add to queue';
     let data = getQueueList();
     data = data.filter(film => film.id !== Number(currentIdBtnQueue));
     localStorage.setItem(QUEUE_KEY, JSON.stringify(data));
     Notify.warning('Фильм Удалён из библиотеки');
   } else {
     const modalLibrarryBtn = document.querySelector('.modal-btn__queue');
-    modalLibrarryBtn.textContent = 'remove from watch';
+    modalLibrarryBtn.textContent = 'remove from queue';
     let data = getQueueList();
     localStorage.setItem(QUEUE_KEY, JSON.stringify(data));
     apiTheMovies.setMovieId(currentIdBtnQueue);
