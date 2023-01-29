@@ -65,9 +65,10 @@
   }
 }
 
-.movie-card__item:last-child {
-  margin-bottom: 0px;
-}
+//== розширює останню картку (не потрібно)
+// .movie-card__item:last-child {
+//   margin-bottom: 0px;
+// }
 
 .card-info {
   padding: 10px 5px 10px 5px;
