@@ -10,33 +10,10 @@
     </div>
     <div class='modal-info'>
       <h2 class='modal-title'>{{title}}</h2>
-  <div class='modal-wrapper'>
-    <div class='img-container'>
-      <div class='img-container__trailer'>
-        <img
-          class='modal-img'
-          src='https://image.tmdb.org/t/p/w500/{{poster_path}}'
-          alt='{{title}}'
-          data-id='{{id}}'
-        />
-        <div class='img-overlay__trailer'>
-          <span><svg class='play__svg' width='40' height='40'>
-              <use
-                href='./images/iconfinder-play.svg'
-                aria-label='icon-play'
-              ></use>
-            </svg>PLAY</span>
-        </div>
-      </div>
-      <button type='button' class='modal-btn__trailer'> Watch trailer</button>
-    </div>
-
-    <div class='modal-info'>
-      <h2 class='modal-title'>{{title}}</h2>
 
       <table class='modal-table'>
         <tbody>
-          <tr class='modal-table__string'>
+          <tr>
             <th class='modal-table__descr'>Vote/Votes</th>
             <td class='modal-table__value'><span
                 class='modal-table__value-avr'
@@ -44,15 +21,15 @@
               /
               <span class='modal-table__vote-count'>{{vote_count}}</span></td>
           </tr>
-          <tr class='modal-table__string'>
+          <tr>
             <th class='modal-table__descr'>Popularity</th>
             <td class='modal-table__value'>{{popularity}}</td>
           </tr>
-          <tr class='modal-table__string'>
+          <tr>
             <th class='modal-table__descr'>Original Title</th>
             <td class='modal-table__value'>{{original_title}}</td>
           </tr>
-          <tr class='modal-table__string'>
+          <tr>
             <th class='modal-table__descr'>Genre</th>
             <td class='modal-table__value'>
               {{#each genres}}
@@ -62,7 +39,6 @@
           </tr>
         </tbody>
       </table>
-      <h2 class='modal-review__title'>About</h2>
       <p class='modal-review'>{{overview}}</p>
 
       <div class='modal-btn-wrapper'>
@@ -71,14 +47,8 @@
           type='button'
           data-id='{{id}}'
           id='open'
-        >Add to Watched</button>
+        >Watched</button>
 
-        <button
-          class='modal-btn__queue'
-          type='button'
-          data-id='{{id}}'
-          id='open'
-        >Add to Queue</button>
       </div>
     </div>
   </div>
