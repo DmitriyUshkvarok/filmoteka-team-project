@@ -209,6 +209,24 @@ function onOpenCardQue(respModal) {
       onOpenQueueLibraty();
     }
   });
+
+  //== закриття бекдропа ESC
+  window.addEventListener('keydown', onKeydownEsc);
+  function onKeydownEsc(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+      document.body.classList.remove('stop-fon');
+    }
+  }
+
+  //  закрытие модального окна по клику бекдропа
+  const basic = document.querySelector('.basicLightbox');
+  basic.addEventListener('click', onOffHidden);
+
+  function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
+  
 }
 
 
