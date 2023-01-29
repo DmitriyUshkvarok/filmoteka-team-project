@@ -114,6 +114,7 @@ body.toggle-theme .btn-log-out {
 }
 
 .header-nav-link {
+  position: relative;
   font-family: var(--font-family);
   font-weight: var(--font-weight-media);
   @include font(12px, 14px);
@@ -124,6 +125,20 @@ body.toggle-theme .btn-log-out {
   &:focus {
     color: var(--orange-color);
   }
+    
+}
+
+.header-nav-link.current{
+    &::after {
+        position: absolute;
+        content: "";
+        display: block;
+        bottom: -1px;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-error);
+        border-radius: 2px;
+      }
 }
 
 body.toggle-theme .header-nav-link {
