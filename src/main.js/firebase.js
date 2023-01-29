@@ -8,9 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  FacebookAuthProvider,
   sendPasswordResetEmail,
-  signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
@@ -29,7 +27,6 @@ const refs = {
   forgotForm: document.querySelector('.forgoten-group-registaration'),
   googleLogIn: document.querySelector('.log-by-google-btn'),
   gitHubLogIn: document.querySelector('.log-by-github-btn'),
-  facebookBtn: document.querySelector('.log-by-facebook-btn'),
   resetPassword: document.querySelector('.btn-new-password'),
   inputMailForgot: document.querySelector('.forgoten-password'),
   manSvg: document.querySelector('.man-watch'),
@@ -43,7 +40,6 @@ refs.registerBtn.addEventListener('click', onRegisterUsers);
 refs.logIn.addEventListener('click', onLogInUsers);
 refs.googleLogIn.addEventListener('click', onLogInGoogle);
 refs.gitHubLogIn.addEventListener('click', onLogInGithub);
-refs.facebookBtn.addEventListener('click', onLoginFacebook);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
 refs.btnOut.addEventListener('click', onOutFunction);
 window.addEventListener('load', onStopBackground);
@@ -77,14 +73,9 @@ const firebaseConfig = {
   messagingSenderId: '837667202097',
   appId: '1:837667202097:web:2d2a12ed50e0f702782110',
   measurementId: 'G-NPG4Y8VLH9',
-  databaseURL:
-    'https://filmoteka-team-project-6e0d7-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
 const app = initializeApp(firebaseConfig);
-// const database = getDatabase(app);
-const db = getDatabase(app);
-const analytics = getAnalytics(app);
 
 // наблюдаем за изминением состояния авторизации
 const authStateChange = getAuth();
@@ -136,7 +127,6 @@ function onRegisterUsers(e) {
         Notify.success('Спасибо за регестрацию');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
-      // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -161,7 +151,6 @@ function onLogInUsers(e) {
         Notify.success('Рады тебя снова видеть на нашем сайте');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
-      console.log(user);
     })
     .catch(error => {
       onErrorValid(error);
@@ -184,19 +173,11 @@ function onLogInGoogle(e) {
       window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
-      // // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      // get(child(dbRef, `users/${user.uid}`)).then(snapshot => {
-      //   if (snapshot.exists()) {
-      //     // ....
-      //   } else {
-      //     writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      //   }
-      // });
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // const email = error.customData.email;
+      const email = error.customData.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
     });
 }
@@ -223,33 +204,6 @@ function onLogInGithub(e) {
       const errorMessage = error.message;
       const email = error.customData.email;
       const credential = GithubAuthProvider.credentialFromError(error);
-    });
-}
-
-// facebook авторизация
-
-function onLoginFacebook(e) {
-  e.preventDefault();
-  const authFace = getAuth();
-  const providerFacebook = new FacebookAuthProvider();
-  signInWithPopup(authFace, providerFacebook)
-    .then(result => {
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const user = result.user;
-      const accessToken = credential.accessToken;
-      console.log('uel');
-      refs.registrationModal.classList.add('is-hidden');
-      window.removeEventListener('load', onStopBackground);
-      refs.body.classList.remove('stop-fon');
-      Notify.success(`привет`);
-      localStorage.setItem(refs.TOKEN_KEY, token);
-      console.log('good');
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.customData.email;
-      const credential = FacebookAuthProvider.credentialFromError(error);
     });
 }
 
@@ -284,7 +238,6 @@ function onOutFunction() {
     'No',
     function okCb() {
       refs.registrationModal.classList.remove('is-hidden');
-      // signOut(authGit, auth, authSign, authForm);
       localStorage.removeItem(refs.TOKEN_KEY);
     },
     function cancelCb() {
@@ -322,13 +275,4 @@ function onErrorValid(error) {
     });
   }
   return;
-}
-
-// база/ запись данных
-function writeUserData(userId, name, email, imageUrl) {
-  set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-    profile_picture: imageUrl,
-  });
 }
