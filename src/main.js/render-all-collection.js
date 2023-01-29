@@ -60,7 +60,7 @@ const makeValidatesGenreName = (response) => {
       movieEl.genre_ids.forEach((idGenre, indexGenre) => {
         genres.forEach(objectNames => {
           if (objectNames.id === idGenre) {
-            movieEl.genre_ids.splice(indexGenre, 1, objectNames['name']);
+             movieEl.genre_ids.splice(indexGenre, 1, objectNames['name']);
           }
         });
       });
