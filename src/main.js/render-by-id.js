@@ -36,6 +36,7 @@ function onOpenCard(data) {
   instance.show();
   document.body.classList.add('stop-fon');
   
+  
   //== якщо цього фільма немає - напис добавити, якщо є - видалити (СУТО текст)
   let watchedList = getWatchedList();
   const modalWathcedLibraryBtn = document.querySelector('.modal-btn__watched');
@@ -69,6 +70,14 @@ function onOpenCard(data) {
   basic.addEventListener('click', onOffHidden);
 
   function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
+
+  //== закриття модалки при клікі на клавішу
+  const modalBtnClose = document.querySelector('.modal-btn__close');
+  modalBtnClose.addEventListener('click', onModalBtnClose)
+  function onModalBtnClose() {
+    instance.close();
     document.body.classList.remove('stop-fon');
   }
 

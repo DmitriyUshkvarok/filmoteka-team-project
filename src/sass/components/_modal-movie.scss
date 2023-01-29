@@ -208,8 +208,27 @@ body.toggle-theme .modal-btn__queue {
   }
 }
 
-// .modal-btn__watched {
-//   color: var(--light-color);
-//   background-color: var(--orange-color);
-//   border-color: transparent;
-// }
+//== клавіша закриття модалки
+.modal-btn__close {
+  position: absolute;
+  display: block;
+  top: 30px;
+  right: 30px;
+  height: 30px;
+  width: 30px;
+  background-color: var(--light-color);
+  background-image: url(../images/icons8-close-24.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.5s;
+}
+
+.modal-btn__close:hover {
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
