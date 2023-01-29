@@ -3,6 +3,12 @@
   display: block;
   margin-bottom: -30px;
 
+  @media screen and (min-width: 320px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;

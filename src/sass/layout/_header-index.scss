@@ -5,6 +5,7 @@
   background-size: cover;
   background-position: center;
   padding-top: 40px;
+  padding-bottom: 10px;
 
   @media (min-device-pixel-ratio: 2),
     (-webkit-min-device-pixel-ratio: 2),
@@ -125,20 +126,19 @@ body.toggle-theme .btn-log-out {
   &:focus {
     color: var(--orange-color);
   }
-    
 }
 
-.header-nav-link.current{
-    &::after {
-        position: absolute;
-        content: "";
-        display: block;
-        bottom: -1px;
-        width: 100%;
-        height: 2px;
-        background-color: var(--color-error);
-        border-radius: 2px;
-      }
+.header-nav-link.current {
+  &::after {
+    position: absolute;
+    content: '';
+    display: block;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-error);
+    border-radius: 2px;
+  }
 }
 
 body.toggle-theme .header-nav-link {
@@ -303,6 +303,10 @@ body.toggle-theme .wrapper-language {
   body.toggle-theme .info-user-email {
     color: brown;
   }
+
+  .header-nav-list {
+    column-gap: 30px;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -324,6 +328,11 @@ body.toggle-theme .wrapper-language {
         ),
         url('../images/main-header/lg@2x.jpg');
     }
+  }
+
+  .header-nav-list {
+    display: flex;
+    column-gap: 40px;
   }
 }
 
