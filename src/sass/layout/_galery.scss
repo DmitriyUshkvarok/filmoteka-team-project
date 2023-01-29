@@ -130,25 +130,32 @@
   color: gold;
 }
 
-.watched-delete::before {
-  content: '';
-  position: absolute;
-  display: block;
-  height: 30px;
-  width: 30px;
-  background-image: url(../images/icons8-remove-bookmark-50.png);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  top: 2px;
-  right: 2px;
-}
-
 .watched-delete {
   position: absolute;
   display: block;
-  top: 0px;
-  right: 0px;
+  top: 5px;
+  right: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: var(--ganre-orange-color);
+  background-image: url(../images/icons8-multiply-48.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-color: transparent;
-  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wathced-delete:hover {
+  background-color: red;
+}
+
+//== Стилль параграфа коли немає фільмів
+.library-container {
+  font-size: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-shadow: 0 0 3px #ff0000;
 }
