@@ -4,7 +4,6 @@ import Notiflix from 'notiflix';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
-
 // Intersection Observer
 
 const options = {
@@ -14,7 +13,6 @@ const options = {
 };
 
 const observer = new IntersectionObserver(onInfinityMoviesLoad, options);
-
 
 export const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
@@ -30,18 +28,19 @@ const makeValidatesReleaseDate = data => {
 
 const makeShortReleaseDate = object => {
   object.results.forEach(movie => {
-    movie.release_date = movie.release_date ? makeValidatesReleaseDate(movie.release_date) : '';
-  })
+    movie.release_date = movie.release_date
+      ? makeValidatesReleaseDate(movie.release_date)
+      : '';
+  });
   return object;
 };
 
 // Validating genre names
 
 const saveGenres = genres => {
-let genresList = [...genres];
+  let genresList = [...genres];
 
   localStorage.setItem('genres', JSON.stringify(genresList));
-
 };
 
 const makeGenresList = () => {
@@ -49,7 +48,7 @@ const makeGenresList = () => {
 };
 makeGenresList();
 
-const makeValidatesGenreName = (response) => {
+const makeValidatesGenreName = response => {
   genres = JSON.parse(localStorage.getItem('genres'));
   if (!genres) {
     return;
@@ -66,11 +65,11 @@ const makeValidatesGenreName = (response) => {
       });
     } else {
       movieEl.genre_ids = '';
-    };
+    }
   });
 
   return response;
-}
+};
 
 // Creating Markup
 
@@ -87,7 +86,8 @@ function renderMarkupAllMovieCard(responseAll) {
 // Rendering movies
 
 function onLoadAllMovies() {
-  apiTheMovies.fetchAllFilms(apiTheMovies.page)
+  apiTheMovies
+    .fetchAllFilms(apiTheMovies.page)
     .then(makeValidatesGenreName)
     .then(makeShortReleaseDate)
     .then(renderMarkupAllMovieCard);
@@ -102,12 +102,14 @@ export function onInfinityMoviesLoad(entries) {
     if (entry.isIntersecting) {
       apiTheMovies.incrementPage();
       if (apiTheMovies.genreId) {
-        apiTheMovies.fetchByGenre(this.genreId)
-          .then(renderMarkupAllMovieCard);
+        apiTheMovies.fetchByGenre(this.genreId).then(renderMarkupAllMovieCard);
       } else if (apiTheMovies.searchValue) {
-        apiTheMovies.fetchById(searchValue).then(renderMarkupAllMovieCard);
+        apiTheMovies
+          .fetchBySearch(apiTheMovies.searchValue)
+          .then(renderMarkupAllMovieCard);
       } else {
-        apiTheMovies.fetchAllFilms()
+        apiTheMovies
+          .fetchAllFilms()
           .then(makeValidatesGenreName)
           .then(renderMarkupAllMovieCard);
       }
