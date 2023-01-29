@@ -63,14 +63,15 @@
         </div>
     </div>
       <!-- Header input form -->
-      <div class="utils-wrapper-form">
+      <div>
+        <div class="utils-wrapper-form">
         <form class="header-form">
           <div class="header-input-wrapper">
             <input
               class="header-input"
               type="text"
               placeholder="Movie search"
-              name="searchFilm"
+              name="searchQuery"
               autocomplete="off"
               />
             <button class="search-button js-search-button" type="submit">
@@ -83,6 +84,8 @@
           </div>
         </form>
       </div>
+    <p class="js-search" hidden>Search result not successful. Enter the correct movie name and search again</p>
+    </div>
         <button class="genres-button" type="button" data-open-genres>
             Show a genres
           </button>

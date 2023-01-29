@@ -104,7 +104,9 @@ export function onInfinityMoviesLoad(entries) {
       if (apiTheMovies.genreId) {
         apiTheMovies.fetchByGenre(this.genreId).then(renderMarkupAllMovieCard);
       } else if (apiTheMovies.searchValue) {
-        apiTheMovies.fetchById(searchValue).then(renderMarkupAllMovieCard);
+        apiTheMovies
+          .fetchBySearch(apiTheMovies.searchValue)
+          .then(renderMarkupAllMovieCard);
       } else {
         apiTheMovies
           .fetchAllFilms()
