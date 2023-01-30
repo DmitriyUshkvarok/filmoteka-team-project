@@ -9,6 +9,8 @@ import noFilmsInLibrary from '../templates/modal-no-films-library.hbs';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { Notify } from 'notiflix';
+import { makeShortVoteAndPopularity } from './validate-movie-data';
+import { makeValidateMovieData } from './validate-movie-data';
 const WATCHED_KEY = 'watched-key';
 const QUEUE_KEY = 'queue-key';
 const watchLibBtn = document.querySelector('.watched');
@@ -32,6 +34,7 @@ export function getWatchesList() {
 //== WATCHED Library, рендер сторінки
 export function onOpenWatchLibrary() {
   let data = getWatchesList();
+  makeValidateMovieData(data);
   const markup = data
     .map(el => {
       return movieWatches(el);
@@ -70,6 +73,7 @@ async function removeAndRenderWatched(e) {
 //== відкриття модалки
 function onOpenCard(respModal) {
   let data = getWatchesList();
+  makeShortVoteAndPopularity(respModal);
   const markUp = modalLibrarry(respModal);
   const instance = basicLightBox.create(markUp);
   instance.show();
@@ -128,6 +132,7 @@ function getQueueList() {
 
 function onOpenQueueLibraty() {
   let datas = getQueueList();
+  makeValidateMovieData(datas);
   const markups = datas
     .map(el => {
       return movieWatches(el);
@@ -166,6 +171,7 @@ async function removeAndRenderQueue(e) {
 //== відкриття модалки
 function onOpenCardQue(respModal) {
   let datas = getQueueList();
+  makeShortVoteAndPopularity(respModal);
   const markUp = modalLibrarryQue(respModal);
   const instance = basicLightBox.create(markUp);
   instance.show();
