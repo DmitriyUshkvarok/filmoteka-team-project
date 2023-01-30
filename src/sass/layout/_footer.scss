@@ -32,6 +32,8 @@ body.toggle-theme footer {
   background: #eb5757;
   background: -webkit-linear-gradient(to right, #eb5757, #000000);
   background: linear-gradient(to right, #eb5757, #000000);
+  text-shadow: -1px 1px 10px red;
+  color: var(--vote-light-grey-color);
 }
 
 .footer__team-link {
@@ -40,6 +42,12 @@ body.toggle-theme footer {
   margin: 0;
   text-decoration: underline;
 }
+
+body.toggle-theme .footer__team-link {
+  text-shadow: -1px 1px 10px red;
+  color: var(--color-error);
+}
+
 @media screen and (min-width: 320px) {
   .copyright {
     margin: 0px;
