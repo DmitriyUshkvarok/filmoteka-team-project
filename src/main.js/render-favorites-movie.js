@@ -120,7 +120,6 @@ function onOpenCard(respModal) {
 
 function getQueueList() {
   const dataQ = JSON.parse(localStorage.getItem(QUEUE_KEY));
-  console.log(dataQ);
   if (!dataQ) {
     return;
   }
@@ -213,4 +212,9 @@ function onOpenCardQue(respModal) {
   }
 }
 
-onOpenWatchLibrary();
+
+window.addEventListener("load", () => {
+  onOpenWatchLibrary();
+  watchLibBtn.focus({focusVisible: true});
+});
+
