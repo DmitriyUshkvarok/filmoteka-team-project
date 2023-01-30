@@ -108,6 +108,13 @@ body.toggle-theme .movie-info-title {
   color: var(--ganre-orange-color);
 }
 
+.info-item-genre {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--ganre-orange-color);
+}
+
 .info-item-year::before {
   content: '';
   display: inline-block;
@@ -116,6 +123,10 @@ body.toggle-theme .movie-info-title {
   margin-left: 5px;
   margin-right: 5px;
   background-color: var(--ganre-orange-color);
+}
+.info-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .info-item-rating {
