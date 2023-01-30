@@ -21,34 +21,34 @@ export const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
 const guard = document.querySelector('.js-guard');
 
-makeGenresList();
+// makeGenresList();
 
-const makeValidatesGenreName = response => {
-  genres = JSON.parse(localStorage.getItem('genres'));
-  if (!genres) {
-    return;
-  }
+// const makeValidatesGenreName = response => {
+//   genres = JSON.parse(localStorage.getItem('genres'));
+//   if (!genres) {
+//     return;
+//   }
 
-  response.results.forEach(movieEl => {
-    if (movieEl.genre_ids) {
-      movieEl.genre_ids.forEach((idGenre, indexGenre) => {
-        genres.forEach(objectNames => {
-          if (objectNames.id === idGenre) {
-            movieEl.genre_ids.splice(indexGenre, 1, objectNames['name']);
-          }
-        });
-      });
-      if (movieEl.genre_ids.length > 3) {
-        movieEl.genre_ids = movieEl.genre_ids.slice(0, 2);
-        // movieEl.genre_ids.push('other..');
-      }
-    } else {
-      movieEl.genre_ids = '';
-    }
-  });
+//   response.results.forEach(movieEl => {
+//     if (movieEl.genre_ids) {
+//       movieEl.genre_ids.forEach((idGenre, indexGenre) => {
+//         genres.forEach(objectNames => {
+//           if (objectNames.id === idGenre) {
+//             movieEl.genre_ids.splice(indexGenre, 1, objectNames['name']);
+//           }
+//         });
+//       });
+//       if (movieEl.genre_ids.length > 3) {
+//         movieEl.genre_ids = movieEl.genre_ids.slice(0, 2);
+//         // movieEl.genre_ids.push('other..');
+//       }
+//     } else {
+//       movieEl.genre_ids = '';
+//     }
+//   });
 
-  return response;
-};
+//   return response;
+// };
 
 // Creating Markup
 
