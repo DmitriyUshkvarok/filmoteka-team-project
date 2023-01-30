@@ -8,13 +8,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  FacebookAuthProvider,
   sendPasswordResetEmail,
-  signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 
 // переменные для функционала регистрации и авторизации
 const refs = {
@@ -29,7 +25,6 @@ const refs = {
   forgotForm: document.querySelector('.forgoten-group-registaration'),
   googleLogIn: document.querySelector('.log-by-google-btn'),
   gitHubLogIn: document.querySelector('.log-by-github-btn'),
-  facebookBtn: document.querySelector('.log-by-facebook-btn'),
   resetPassword: document.querySelector('.btn-new-password'),
   inputMailForgot: document.querySelector('.forgoten-password'),
   manSvg: document.querySelector('.man-watch'),
@@ -43,7 +38,6 @@ refs.registerBtn.addEventListener('click', onRegisterUsers);
 refs.logIn.addEventListener('click', onLogInUsers);
 refs.googleLogIn.addEventListener('click', onLogInGoogle);
 refs.gitHubLogIn.addEventListener('click', onLogInGithub);
-refs.facebookBtn.addEventListener('click', onLoginFacebook);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
 refs.btnOut.addEventListener('click', onOutFunction);
 window.addEventListener('load', onStopBackground);
@@ -77,14 +71,9 @@ const firebaseConfig = {
   messagingSenderId: '837667202097',
   appId: '1:837667202097:web:2d2a12ed50e0f702782110',
   measurementId: 'G-NPG4Y8VLH9',
-  databaseURL:
-    'https://filmoteka-team-project-6e0d7-default-rtdb.europe-west1.firebasedatabase.app/',
 };
 
 const app = initializeApp(firebaseConfig);
-// const database = getDatabase(app);
-const db = getDatabase(app);
-const analytics = getAnalytics(app);
 
 // наблюдаем за изминением состояния авторизации
 const authStateChange = getAuth();
@@ -104,17 +93,7 @@ function authState() {
         </div>
       </div>`;
     } else {
-      // refs.userInfoWrapper.innerHTML = `<div class='info-user'>
-      //   <img
-      //     class='info-usrer-photo'
-      //     src='../images/OldTV.svg'
-      //     alt=''
-      //   />
-      //   <div class='info-container'>
-      //   <h3 class='info-user-name'>No Name</h3>
-      //   <div class='info-user-email'>No email</div>
-      //   </div>
-      // </div>`;
+      //  ...
     }
   });
 }
@@ -131,12 +110,12 @@ function onRegisterUsers(e) {
       const user = userCredential.user;
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
+        refs.registrationModal.style.dispalay = 'block';
         window.removeEventListener('load', onStopBackground);
         refs.body.classList.remove('stop-fon');
         Notify.success('Спасибо за регестрацию');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
-      // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
     })
     .catch(error => {
       const errorCode = error.code;
@@ -156,12 +135,12 @@ function onLogInUsers(e) {
       const user = userCredential.user;
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
+        refs.registrationModal.style.dispalay = 'block';
         window.removeEventListener('load', onStopBackground);
         refs.body.classList.remove('stop-fon');
         Notify.success('Рады тебя снова видеть на нашем сайте');
         localStorage.setItem(refs.TOKEN_KEY, token);
       }
-      console.log(user);
     })
     .catch(error => {
       onErrorValid(error);
@@ -180,23 +159,16 @@ function onLogInGoogle(e) {
       const token = credential.accessToken;
       const user = result.user.displayName;
       refs.registrationModal.classList.add('is-hidden');
+      refs.registrationModal.style.dispalay = 'block';
       refs.body.classList.remove('stop-fon');
       window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
-      // // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      // get(child(dbRef, `users/${user.uid}`)).then(snapshot => {
-      //   if (snapshot.exists()) {
-      //     // ....
-      //   } else {
-      //     writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-      //   }
-      // });
     })
     .catch(error => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // const email = error.customData.email;
+      const email = error.customData.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
     });
 }
@@ -213,6 +185,7 @@ function onLogInGithub(e) {
       const token = credential.accessToken;
       const user = result.user.displayName;
       refs.registrationModal.classList.add('is-hidden');
+      refs.registrationModal.style.dispalay = 'block';
       refs.body.classList.remove('stop-fon');
       window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
@@ -226,33 +199,6 @@ function onLogInGithub(e) {
     });
 }
 
-// facebook авторизация
-
-function onLoginFacebook(e) {
-  e.preventDefault();
-  const authFace = getAuth();
-  const providerFacebook = new FacebookAuthProvider();
-  signInWithPopup(authFace, providerFacebook)
-    .then(result => {
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const user = result.user;
-      const accessToken = credential.accessToken;
-      console.log('uel');
-      refs.registrationModal.classList.add('is-hidden');
-      window.removeEventListener('load', onStopBackground);
-      refs.body.classList.remove('stop-fon');
-      Notify.success(`привет`);
-      localStorage.setItem(refs.TOKEN_KEY, token);
-      console.log('good');
-    })
-    .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.customData.email;
-      const credential = FacebookAuthProvider.credentialFromError(error);
-    });
-}
-
 // сброс пароля
 const authPass = getAuth();
 authPass.languageCode = 'ru';
@@ -261,7 +207,6 @@ async function onSubmitNewPassword(e) {
   const mailValue = document.querySelector('.input-emails');
   e.preventDefault();
   const email = refs.inputMailForgot.value;
-  console.log(email);
 
   await sendPasswordResetEmail(authPass, email)
     .then(() => {
@@ -284,7 +229,7 @@ function onOutFunction() {
     'No',
     function okCb() {
       refs.registrationModal.classList.remove('is-hidden');
-      // signOut(authGit, auth, authSign, authForm);
+      refs.registrationModal.style.dispalay = 'none';
       localStorage.removeItem(refs.TOKEN_KEY);
     },
     function cancelCb() {
@@ -322,13 +267,4 @@ function onErrorValid(error) {
     });
   }
   return;
-}
-
-// база/ запись данных
-function writeUserData(userId, name, email, imageUrl) {
-  set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-    profile_picture: imageUrl,
-  });
 }

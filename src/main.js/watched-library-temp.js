@@ -26,8 +26,7 @@ export function renderMoviesinWatchedLibrary(e) {
     data = data.filter(film => film.id !== Number(currentIdBtnWatch));
     localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
     Notify.warning('Фильм Удалён из библиотеки');
-  }
-   else {
+  } else {
     //== добавити якщо немає
     const modalLibrarryBtn = document.querySelector('.modal-btn__watched');
     modalLibrarryBtn.textContent = 'remove from watch';

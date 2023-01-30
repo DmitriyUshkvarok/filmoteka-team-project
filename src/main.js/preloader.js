@@ -1,4 +1,6 @@
-window.addEventListener('load', () => {
+window.addEventListener('load', preloadFunction);
+
+function preloadFunction() {
   /* Страница загружена, включая все ресурсы */
   const preloader = document.querySelector(
     '.whirly-loader__wrapper'
@@ -6,4 +8,4 @@ window.addEventListener('load', () => {
   preloader.classList.add(
     'preloader_hidden'
   ); /* добавляем ему класс для скрытия */
-});
+}

@@ -5,6 +5,7 @@ import * as basicLightBox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import modalLibrarry from '../templates/modal-watched-library.hbs';
 import modalLibrarryQue from '../templates/modal-queue-library.hbs';
+import noFilmsInLibrary from '../templates/modal-no-films-library.hbs';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { Notify } from 'notiflix';
@@ -16,8 +17,8 @@ watchLibBtn.addEventListener('click', onOpenWatchLibrary);
 QueBtn.addEventListener('click', onOpenQueueLibraty);
 const gallery = document.querySelector('.gallery');
 const galleryQue = document.querySelector('.gallery-Queue');
-galleryQue.addEventListener('click', queueModalOpenOnCardClick);
-gallery.addEventListener('click', watchedModalOpenOnCardClick);
+galleryQue.addEventListener('click', removeAndRenderQueue);
+gallery.addEventListener('click', removeAndRenderWatched);
 
 // получение списка фильмов из локального хранилища для библиотеки и проверка на пустую библиотеку
 export function getWatchesList() {
@@ -28,6 +29,7 @@ export function getWatchesList() {
   return data;
 }
 
+//== WATCHED Library, рендер сторінки
 export function onOpenWatchLibrary() {
   let data = getWatchesList();
   const markup = data
@@ -40,19 +42,31 @@ export function onOpenWatchLibrary() {
   galleryQue.innerHTML = '';
 
   if (!markup) {
-    // gallery.innerHTML = noFilmsInLibrarry();
+    //== якщо немає фільмів - покажи розмітку
+    gallery.innerHTML = noFilmsInLibrary();
   }
 }
 
-function watchedModalOpenOnCardClick(event) {
-  if (event.target === event.currentTarget) {
+//== видалення при клікові на іконку на картці фільму WATCHED
+async function removeAndRenderWatched(e) {
+  if (e.target === e.currentTarget) {
     return;
   }
 
-  const currentId = event.target.closest('.movie-card__item').dataset.id;
+  const currentId = e.target.closest('.movie-card__item').dataset.id;
   apiTheMovies.setMovieId(currentId);
-  apiTheMovies.fetchById(currentId).then(onOpenCard);
+
+  if (e.target.id === 'close') {
+    let data = getWatchesList();
+    data = data.filter(film => film.id !== Number(currentId));
+    localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
+    Notify.warning('Фильм Удалён из библиотеки');
+    onOpenWatchLibrary();
+  } else {
+    await apiTheMovies.fetchById(this.currentId).then(onOpenCard);
+  }
 }
+
 //== відкриття модалки
 function onOpenCard(respModal) {
   let data = getWatchesList();
@@ -92,13 +106,20 @@ function onOpenCard(respModal) {
   function onOffHidden() {
     document.body.classList.remove('stop-fon');
   }
+
+  //== закриття модалки при клікі на клавішу
+  const modalBtnClose = document.querySelector('.modal-btn__close');
+  modalBtnClose.addEventListener('click', onModalBtnClose);
+  function onModalBtnClose() {
+    instance.close();
+    document.body.classList.remove('stop-fon');
+  }
 }
 
-// //==QUEUE LIBRARRY
+// //==QUEUE LIBRARRY, рендер сторінки
 
 function getQueueList() {
   const dataQ = JSON.parse(localStorage.getItem(QUEUE_KEY));
-  console.log(dataQ);
   if (!dataQ) {
     return;
   }
@@ -117,18 +138,29 @@ function onOpenQueueLibraty() {
   gallery.innerHTML = '';
 
   if (!markups) {
-    // gallery.innerHTML = noFilmsInLibrarry();
+    //== якщо немає фільмів - покажи розмітку
+    gallery.innerHTML = noFilmsInLibrary();
   }
 }
 
-function queueModalOpenOnCardClick(event) {
-  if (event.target === event.currentTarget) {
+//== видалення при клікові на іконку на картці фільму QUEUE
+async function removeAndRenderQueue(e) {
+  if (e.target === e.currentTarget) {
     return;
   }
 
-  const currentId = event.target.closest('.movie-card__item').dataset.id;
+  const currentId = e.target.closest('.movie-card__item').dataset.id;
   apiTheMovies.setMovieId(currentId);
-  apiTheMovies.fetchById(currentId).then(onOpenCardQue);
+
+  if (e.target.id === 'close') {
+    let data = getQueueList();
+    data = data.filter(film => film.id !== Number(currentId));
+    localStorage.setItem(QUEUE_KEY, JSON.stringify(data));
+    Notify.warning('Фильм Удалён из библиотеки');
+    onOpenQueueLibraty();
+  } else {
+    await apiTheMovies.fetchById(this.currentId).then(onOpenCardQue);
+  }
 }
 
 //== відкриття модалки
@@ -141,7 +173,7 @@ function onOpenCardQue(respModal) {
 
   //== видалення з бібліотеки по клавіші а також з локального
   const modalWatchedLibrBtnQue = document.querySelector('.modal-btn__queue');
-  modalWatchedLibrBtnQue.textContent = 'remove from watched';
+  modalWatchedLibrBtnQue.textContent = 'remove from queue';
   modalWatchedLibrBtnQue.addEventListener('click', e => {
     const currentIdBtnWatch = e.target.dataset.id;
     if (datas.find(film => film.id === Number(currentIdBtnWatch))) {
@@ -153,4 +185,31 @@ function onOpenCardQue(respModal) {
       onOpenQueueLibraty();
     }
   });
+
+  //== закриття бекдропа ESC
+  window.addEventListener('keydown', onKeydownEsc);
+  function onKeydownEsc(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+      document.body.classList.remove('stop-fon');
+    }
+  }
+
+  //  закрытие модального окна по клику бекдропа
+  const basic = document.querySelector('.basicLightbox');
+  basic.addEventListener('click', onOffHidden);
+
+  function onOffHidden() {
+    document.body.classList.remove('stop-fon');
+  }
+
+  //== закриття модалки при клікі на клавішу
+  const modalBtnClose = document.querySelector('.modal-btn__close');
+  modalBtnClose.addEventListener('click', onModalBtnClose);
+  function onModalBtnClose() {
+    instance.close();
+    document.body.classList.remove('stop-fon');
+  }
 }
+
+onOpenWatchLibrary();
