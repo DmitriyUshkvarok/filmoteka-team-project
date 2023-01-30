@@ -10,9 +10,7 @@ import {
   onAuthStateChanged,
   sendPasswordResetEmail,
 } from 'firebase/auth';
-import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
 
 // переменные для функционала регистрации и авторизации
 const refs = {
@@ -95,17 +93,7 @@ function authState() {
         </div>
       </div>`;
     } else {
-      // refs.userInfoWrapper.innerHTML = `<div class='info-user'>
-      //   <img
-      //     class='info-usrer-photo'
-      //     src='../images/OldTV.svg'
-      //     alt=''
-      //   />
-      //   <div class='info-container'>
-      //   <h3 class='info-user-name'>No Name</h3>
-      //   <div class='info-user-email'>No email</div>
-      //   </div>
-      // </div>`;
+      //  ...
     }
   });
 }
@@ -219,7 +207,6 @@ async function onSubmitNewPassword(e) {
   const mailValue = document.querySelector('.input-emails');
   e.preventDefault();
   const email = refs.inputMailForgot.value;
-  console.log(email);
 
   await sendPasswordResetEmail(authPass, email)
     .then(() => {

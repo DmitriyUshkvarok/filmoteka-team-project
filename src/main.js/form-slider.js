@@ -15,6 +15,5 @@ const swiper = new Swiper('.form-swiper', {
   },
   autoplay: {
     delay: 3000,
-    // disableOnInteraction: true,
   },
 });

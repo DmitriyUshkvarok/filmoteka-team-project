@@ -71,8 +71,3 @@ function onKeydownWin(evt) {
     instanceTrailer.close();
   } else window.removeEventListener('keydown', onKeydownWin);
 }
-// снять слушателя, когда модалка  с видео закроется
-
-//`https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=f27eea818d2010463700365b0c06a16e`;
-
-//./images/sprite-play.svg#icon-iconfinder-play-4341313_120530
