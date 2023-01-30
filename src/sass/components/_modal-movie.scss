@@ -253,10 +253,10 @@ body.toggle-theme .modal-btn__queue {
   font-size: 30px;
   display: flex;
   opacity: 0;
-  cursor: pointer;
   align-items: center;
   justify-content: center;
-  border-radius: 10px 0 0 10px;
+  // border-radius: 10px 0 0 10px;
+  border-radius: var(--border-radius);
   background: #c04848;
   background: linear-gradient(rgb(72, 0, 72, 0.8), rgb(192, 72, 72, 0.8));
   background-size: cover;
@@ -310,5 +310,21 @@ body.toggle-theme .modal-btn__trailer {
   &:focus {
     color: var(--dark-color);
     background: #eb5757;
+  }
+}
+.play__span {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-image: url('../images/iconfinder-play.svg');
+  background-repeat: no-repeat;
+  transition: background-image var(--animationTransition),
+    transform var(--animationTransition);
+  opacity: 0.8;
+  &:hover {
+    transform: scale(1.2);
+    opacity: 1;
   }
 }
