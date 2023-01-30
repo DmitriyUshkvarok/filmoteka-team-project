@@ -212,4 +212,9 @@ function onOpenCardQue(respModal) {
   }
 }
 
-onOpenWatchLibrary();
+
+window.addEventListener("load", () => {
+  onOpenWatchLibrary();
+  watchLibBtn.focus({focusVisible: true});
+});
+
