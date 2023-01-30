@@ -16,3 +16,5 @@ import './main.js/preloader';
 import './main.js/team-modal';
 import './main.js/play-movie';
 import './main.js/render-by-search';
+import './main.js/validate-movie-data';
+
