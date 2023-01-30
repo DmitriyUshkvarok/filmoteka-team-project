@@ -110,7 +110,6 @@ function onRegisterUsers(e) {
       const user = userCredential.user;
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
-        refs.registrationModal.style.dispalay = 'block';
         window.removeEventListener('load', onStopBackground);
         refs.body.classList.remove('stop-fon');
         Notify.success('Спасибо за регестрацию');
@@ -135,7 +134,6 @@ function onLogInUsers(e) {
       const user = userCredential.user;
       if (email && password) {
         refs.registrationModal.classList.add('is-hidden');
-        refs.registrationModal.style.dispalay = 'block';
         window.removeEventListener('load', onStopBackground);
         refs.body.classList.remove('stop-fon');
         Notify.success('Рады тебя снова видеть на нашем сайте');
@@ -159,7 +157,6 @@ function onLogInGoogle(e) {
       const token = credential.accessToken;
       const user = result.user.displayName;
       refs.registrationModal.classList.add('is-hidden');
-      refs.registrationModal.style.dispalay = 'block';
       refs.body.classList.remove('stop-fon');
       window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
@@ -185,7 +182,6 @@ function onLogInGithub(e) {
       const token = credential.accessToken;
       const user = result.user.displayName;
       refs.registrationModal.classList.add('is-hidden');
-      refs.registrationModal.style.dispalay = 'block';
       refs.body.classList.remove('stop-fon');
       window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);

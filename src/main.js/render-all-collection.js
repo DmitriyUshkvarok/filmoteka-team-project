@@ -1,6 +1,9 @@
 import allCollectionFunction from '../templates/all-collection-movies.hbs';
 import { ApiTheMovie } from './fetch-class';
 import Notiflix from 'notiflix';
+import { makeGenresList } from './validate-movie-data';
+import { makeValidatesGenreName } from './validate-movie-data';
+import { makeShortReleaseDate } from './validate-movie-data';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
@@ -18,34 +21,6 @@ export const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
 const guard = document.querySelector('.js-guard');
 
-let genres;
-
-// Make short date, like 2020
-
-const makeValidatesReleaseDate = data => {
-  return data.slice(0, 4);
-};
-
-const makeShortReleaseDate = object => {
-  object.results.forEach(movie => {
-    movie.release_date = movie.release_date
-      ? makeValidatesReleaseDate(movie.release_date)
-      : '';
-  });
-  return object;
-};
-
-// Validating genre names
-
-const saveGenres = genres => {
-  let genresList = [...genres];
-
-  localStorage.setItem('genres', JSON.stringify(genresList));
-};
-
-const makeGenresList = () => {
-  apiTheMovies.fetchAllgenres().then(saveGenres);
-};
 makeGenresList();
 
 const makeValidatesGenreName = response => {
@@ -66,7 +41,7 @@ const makeValidatesGenreName = response => {
       if (movieEl.genre_ids.length > 3) {
         movieEl.genre_ids = movieEl.genre_ids.slice(0, 2);
         // movieEl.genre_ids.push('other..');
-    }
+      }
     } else {
       movieEl.genre_ids = '';
     }
@@ -106,15 +81,22 @@ export function onInfinityMoviesLoad(entries) {
     if (entry.isIntersecting) {
       apiTheMovies.incrementPage();
       if (apiTheMovies.genreId) {
-        apiTheMovies.fetchByGenre(this.genreId).then(renderMarkupAllMovieCard);
+        apiTheMovies
+          .fetchByGenre(this.genreId)
+          .then(makeValidatesGenreName)
+          .then(makeShortReleaseDate)
+          .then(renderMarkupAllMovieCard);
       } else if (apiTheMovies.searchValue) {
         apiTheMovies
           .fetchBySearch(apiTheMovies.searchValue)
+          .then(makeValidatesGenreName)
+          .then(makeShortReleaseDate)
           .then(renderMarkupAllMovieCard);
       } else {
         apiTheMovies
           .fetchAllFilms()
           .then(makeValidatesGenreName)
+          .then(makeShortReleaseDate)
           .then(renderMarkupAllMovieCard);
       }
     }

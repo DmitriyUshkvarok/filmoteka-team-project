@@ -30,3 +30,14 @@ function onCloseClick() {
   modal.classList.toggle('is-hidden');
   document.body.style.overflow = 'scroll';
 }
+
+function externalLinks() {
+  let link = [];
+  let links = document.getElementsByTagName('a');
+  for (let i = 0; i < links.length; i++) {
+    link = links[i];
+    if (link.getAttribute('href') && link.getAttribute('rel') === 'external')
+      link.target = '_blank';
+  }
+}
+window.onload = externalLinks;

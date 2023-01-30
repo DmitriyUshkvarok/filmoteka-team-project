@@ -3,6 +3,8 @@ import { apiTheMovies } from './render-all-collection';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import Notiflix from 'notiflix';
+import { makeValidatesGenreName } from './validate-movie-data';
+import { makeShortReleaseDate } from './validate-movie-data';
 
 const form = document.querySelector('.header-form');
 const warning = document.querySelector('.js-search');
@@ -27,7 +29,10 @@ function onSubmit(e) {
     return;
   }
   apiTheMovies.resetPage();
-  apiTheMovies.fetchBySearch(apiTheMovies.searchValue).then(showMovie);
+  apiTheMovies.fetchBySearch(apiTheMovies.searchValue)
+    .then(makeValidatesGenreName)
+    .then(makeShortReleaseDate)
+    .then(showMovie);
   form.elements.searchQuery.value = '';
 }
 
