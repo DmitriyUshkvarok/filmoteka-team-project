@@ -13,10 +13,14 @@
   background: -webkit-linear-gradient(to right, #333333, #dd1818);
   background: linear-gradient(to right, #333333, #dd1818);
   display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal-form-registration.is-hidden {
   display: none;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .title-wrapper {
@@ -28,13 +32,6 @@
   flex-direction: column;
   margin-bottom: 120px;
 }
-
-// .slider-wrapper {
-//   position: absolute;
-//   top: 10%;
-//   left: 23%;
-//   transform: perspective(600px) translate(0px, -100%) rotateY(45deg);
-// }
 
 .slider-tv {
   position: relative;

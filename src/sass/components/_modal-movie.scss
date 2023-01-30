@@ -257,11 +257,8 @@ body.toggle-theme .modal-btn__queue {
   align-items: center;
   justify-content: center;
   border-radius: 10px 0 0 10px;
-  background: #c04848; /* fallback for old browsers */
-  background: linear-gradient(
-    rgb(72, 0, 72, 0.8),
-    rgb(192, 72, 72, 0.8)
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #c04848;
+  background: linear-gradient(rgb(72, 0, 72, 0.8), rgb(192, 72, 72, 0.8));
   background-size: cover;
   background-repeat: no-repeat;
   transition: opacity var(--animationTransition);

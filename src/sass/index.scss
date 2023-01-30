@@ -1,13 +1,13 @@
 @import './base/common';
 @import './util/mixins';
 @import './util/variables';
+@import './components/modal-form';
 @import './base/global-style';
 @import './components/button-up';
 @import './components/buttons';
 @import './components/preloader';
 @import './components/switcher-theme';
 @import './layout/header-index';
-@import './layout/main';
 @import './layout/galery';
 @import './layout/footer';
 @import'./components/heart';
@@ -18,4 +18,3 @@
 @import './components/select-location';
 @import './components/team-modal';
 @import './components/modal-video';
-@import './components/canvas';
