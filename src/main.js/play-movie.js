@@ -10,10 +10,13 @@ export function searchTrailer() {
   imgContainer.addEventListener('click', onClickImgModal);
 }
 
-function onClickImgModal() {
+function onClickImgModal(evt) {
   const imgModalWindow = document.querySelector('.modal-img');
   const btnWatchTrailer = document.querySelector('.modal-btn__trailer');
+  const imgOverlayTrailer = document.querySelector('.img-overlay__trailer');
 
+  if (evt.target === evt.currentTarget || evt.target === imgOverlayTrailer)
+    return;
   //запросить данные о трейлере фильма на YouTube
   fetchTraiiler(imgModalWindow.dataset.id)
     .then(url => {
@@ -21,6 +24,7 @@ function onClickImgModal() {
     })
     .catch(error => {
       console.log(error);
+      Notify.info('No trailer for this movie');
     });
 
   btnWatchTrailer.blur();
@@ -33,7 +37,7 @@ function fetchTraiiler(movieId) {
     .then(patchTrailer)
     .catch(error => {
       console.log(error);
-      Notify.info('No trailer');
+      Notify.info('No trailer for this movie');
     });
 }
 
@@ -43,9 +47,6 @@ function showTrailer(url) {
   instanceTrailer.show();
 
   window.addEventListener('keydown', onKeydownWin); // закриття по ESC
-
-  const ins = instanceTrailer.element();
-  console.log(ins);
 }
 
 function patchTrailer({ results }) {
@@ -68,14 +69,10 @@ function markUpIframe(url) {
 function onKeydownWin(evt) {
   if (evt.code === 'Escape' && instanceTrailer.visible()) {
     instanceTrailer.close();
-  } else window.removeEventListener('keydown', onKeydownWin);
+  } else window.removeEventListener('keydown', onKeydownWin); // снять слушателя, когда модалка  с видео закроется
 }
-// снять слушателя, когда модалка  с видео закроется
 
 //`https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=f27eea818d2010463700365b0c06a16e`;
 
 //./images/sprite-play.svg#icon-iconfinder-play-4341313_120530
 //./images/sprite-play.svg#icon-play-circle_icon-iconscom_69988
-
-//./images/sprite.svg#icon-google
-//"./images/love.svg"
