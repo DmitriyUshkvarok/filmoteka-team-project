@@ -179,6 +179,7 @@ body.toggle-theme .header-nav-link {
   &:focus {
     background-color: var(--orange-color);
     border: none;
+    outline: none;
   }
 }
 
@@ -192,6 +193,7 @@ body.toggle-theme .queue {
     background: -webkit-linear-gradient(to right, #eb5757, #000000);
     background: linear-gradient(to right, #eb5757, #000000);
     border: none;
+    outline: none;
   }
 }
 
