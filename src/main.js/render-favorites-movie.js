@@ -9,6 +9,8 @@ import noFilmsInLibrary from '../templates/modal-no-films-library.hbs';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { Notify } from 'notiflix';
+import { searchTrailer, instanceTrailer } from './play-movie';
+
 const WATCHED_KEY = 'watched-key';
 const QUEUE_KEY = 'queue-key';
 const watchLibBtn = document.querySelector('.watched');
@@ -93,7 +95,7 @@ function onOpenCard(respModal) {
   //== закриття бекдропа ESC
   window.addEventListener('keydown', onKeydownEsc);
   function onKeydownEsc(event) {
-    if (event.code === 'Escape') {
+    if (event.code === 'Escape' && !instanceTrailer.visible()) {
       instance.close();
       document.body.classList.remove('stop-fon');
     }
@@ -114,6 +116,7 @@ function onOpenCard(respModal) {
     instance.close();
     document.body.classList.remove('stop-fon');
   }
+  searchTrailer();
 }
 
 // //==QUEUE LIBRARRY, рендер сторінки
@@ -189,7 +192,7 @@ function onOpenCardQue(respModal) {
   //== закриття бекдропа ESC
   window.addEventListener('keydown', onKeydownEsc);
   function onKeydownEsc(event) {
-    if (event.code === 'Escape') {
+    if (event.code === 'Escape' && !instanceTrailer.visible()) {
       instance.close();
       document.body.classList.remove('stop-fon');
     }
@@ -210,6 +213,7 @@ function onOpenCardQue(respModal) {
     instance.close();
     document.body.classList.remove('stop-fon');
   }
+  searchTrailer();
 }
 
 onOpenWatchLibrary();
