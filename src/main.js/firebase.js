@@ -13,11 +13,14 @@ import {
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 
+const LOCALSTORAGE_KEY = "email-form-state";
+
 // переменные для функционала регистрации и авторизации
 const refs = {
   TOKEN_KEY: 'token',
   body: document.querySelector('body'),
   registrationModal: document.querySelector('.modal-form-registration'),
+  registrationForm: document.querySelector('.form-registration'),
   registerBtn: document.querySelector('.registration-btn'),
   logIn: document.querySelector('.log-in-btn'),
   emailSign: document.querySelector('#email'),
@@ -41,6 +44,7 @@ refs.googleLogIn.addEventListener('click', onLogInGoogle);
 refs.gitHubLogIn.addEventListener('click', onLogInGithub);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
 refs.btnOut.addEventListener('click', onOutFunction);
+refs.registrationModal.addEventListener('input', onSaveMessage);
 window.addEventListener('load', onStopBackground);
 const token = localStorage.getItem(refs.TOKEN_KEY);
 
@@ -105,6 +109,16 @@ function authState() {
 }
 authState();
 
+// Saving value from inputs
+
+let formData = {};
+
+function onSaveMessage(evt) {
+  console.log(evt.target.value);
+  formData[evt.target.name] = evt.target.value;
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
+}
+
 // регистрация новых пользователей
 const authRegistr = getAuth();
 function onRegisterUsers(e) {
@@ -117,6 +131,8 @@ function onRegisterUsers(e) {
       if (email && password) {
         Notify.success('Спасибо за регестрацию');
         localStorage.setItem(refs.TOKEN_KEY, token);
+        refs.registrationForm.reset();
+        localStorage.removeItem(LOCALSTORAGE_KEY);
       }
     })
     .catch(error => {
@@ -139,6 +155,8 @@ function onLogInUsers(e) {
       if (email && password) {
         Notify.success('Рады тебя снова видеть на нашем сайте');
         localStorage.setItem(refs.TOKEN_KEY, token);
+        refs.registrationForm.reset();
+        localStorage.removeItem(LOCALSTORAGE_KEY);
       }
     })
     .catch(error => {
@@ -146,6 +164,21 @@ function onLogInUsers(e) {
       onErrorValid(error);
     });
 }
+
+// Update registration form
+
+function updateForm() {
+  let data = localStorage.getItem(LOCALSTORAGE_KEY);
+  if (data) {
+    data = JSON.parse(data);
+    Object.entries(data).forEach(([name, value]) => {
+      formData[name] = value;
+      refs.registrationForm.elements[name].value = value;
+    });
+  }
+};
+
+updateForm();
 
 // google авторизация
 const authGoog = getAuth(app);
@@ -199,7 +232,6 @@ async function onSubmitNewPassword(e) {
   const mailValue = document.querySelector('.input-emails');
   e.preventDefault();
   const email = refs.inputMailForgot.value;
-
   await sendPasswordResetEmail(authPass, email)
     .then(() => {
       Notify.success(`привет! письмо отправлено`);
@@ -269,3 +301,4 @@ function onErrorValid(error) {
   }
   return;
 }
+
