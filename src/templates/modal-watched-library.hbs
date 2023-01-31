@@ -1,12 +1,18 @@
 <div class='modal'>
   <div class='modal-wrapper'>
     <div class='img-container'>
-      <img
-        class='modal-img'
-        src='https://image.tmdb.org/t/p/w500/{{poster_path}}'
-        alt='{{title}}'
-        data-id='{{id}}'
-      />
+      <div class='img-container__trailer'>
+        <img
+          class='modal-img'
+          src='https://image.tmdb.org/t/p/w500/{{poster_path}}'
+          alt='{{title}}'
+          data-id='{{id}}'
+        />
+        <div class='img-overlay__trailer'>
+          <span class='play__span'></span>
+        </div>
+      </div>
+      <button type='button' class='modal-btn__trailer'> Watch trailer</button>
     </div>
     <div class='modal-info'>
       <h2 class='modal-title'>{{title}}</h2>
@@ -49,7 +55,7 @@
           id='open'
         >Watched</button>
 
-        <button class='modal-btn__close' type="button"></button>
+        <button class='modal-btn__close' type='button'></button>
 
       </div>
     </div>
