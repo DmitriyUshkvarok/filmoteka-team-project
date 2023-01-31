@@ -9,14 +9,18 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  signOut,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+
+const LOCALSTORAGE_KEY = "email-form-state";
 
 // переменные для функционала регистрации и авторизации
 const refs = {
   TOKEN_KEY: 'token',
   body: document.querySelector('body'),
   registrationModal: document.querySelector('.modal-form-registration'),
+  registrationForm: document.querySelector('.form-registration'),
   registerBtn: document.querySelector('.registration-btn'),
   logIn: document.querySelector('.log-in-btn'),
   emailSign: document.querySelector('#email'),
@@ -40,6 +44,7 @@ refs.googleLogIn.addEventListener('click', onLogInGoogle);
 refs.gitHubLogIn.addEventListener('click', onLogInGithub);
 refs.resetPassword.addEventListener('click', onSubmitNewPassword);
 refs.btnOut.addEventListener('click', onOutFunction);
+refs.registrationModal.addEventListener('input', onSaveMessage);
 window.addEventListener('load', onStopBackground);
 const token = localStorage.getItem(refs.TOKEN_KEY);
 
@@ -53,6 +58,8 @@ if (token) {
   refs.registrationModal.classList.add('is-hidden');
   refs.body.classList.remove('stop-fon');
   window.removeEventListener('load', onStopBackground);
+} else {
+  //  ...
 }
 
 // открыть панель для сброса пароля
@@ -81,6 +88,9 @@ function authState() {
   onAuthStateChanged(authStateChange, user => {
     if (user) {
       const uid = user.uid;
+      refs.registrationModal.classList.add('is-hidden');
+      refs.body.classList.remove('stop-fon');
+      window.removeEventListener('load', onStopBackground);
       refs.userInfoWrapper.innerHTML = `<div class='info-user'>
         <img
           class='info-usrer-photo'
@@ -93,11 +103,21 @@ function authState() {
         </div>
       </div>`;
     } else {
-      //  ...
+      refs.registrationModal.classList.remove('is-hidden');
     }
   });
 }
 authState();
+
+// Saving value from inputs
+
+let formData = {};
+
+function onSaveMessage(evt) {
+  console.log(evt.target.value);
+  formData[evt.target.name] = evt.target.value;
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
+}
 
 // регистрация новых пользователей
 const authRegistr = getAuth();
@@ -109,15 +129,14 @@ function onRegisterUsers(e) {
     .then(userCredential => {
       const user = userCredential.user;
       if (email && password) {
-        refs.registrationModal.classList.add('is-hidden');
-        refs.registrationModal.style.dispalay = 'block';
-        window.removeEventListener('load', onStopBackground);
-        refs.body.classList.remove('stop-fon');
         Notify.success('Спасибо за регестрацию');
         localStorage.setItem(refs.TOKEN_KEY, token);
+        refs.registrationForm.reset();
+        localStorage.removeItem(LOCALSTORAGE_KEY);
       }
     })
     .catch(error => {
+      refs.registrationModal.classList.remove('is-hidden');
       const errorCode = error.code;
       const errorMessage = error.message;
       onErrorValid(error);
@@ -134,18 +153,32 @@ function onLogInUsers(e) {
     .then(userCredential => {
       const user = userCredential.user;
       if (email && password) {
-        refs.registrationModal.classList.add('is-hidden');
-        refs.registrationModal.style.dispalay = 'block';
-        window.removeEventListener('load', onStopBackground);
-        refs.body.classList.remove('stop-fon');
         Notify.success('Рады тебя снова видеть на нашем сайте');
         localStorage.setItem(refs.TOKEN_KEY, token);
+        refs.registrationForm.reset();
+        localStorage.removeItem(LOCALSTORAGE_KEY);
       }
     })
     .catch(error => {
+      refs.registrationModal.classList.remove('is-hidden');
       onErrorValid(error);
     });
 }
+
+// Update registration form
+
+function updateForm() {
+  let data = localStorage.getItem(LOCALSTORAGE_KEY);
+  if (data) {
+    data = JSON.parse(data);
+    Object.entries(data).forEach(([name, value]) => {
+      formData[name] = value;
+      refs.registrationForm.elements[name].value = value;
+    });
+  }
+};
+
+updateForm();
 
 // google авторизация
 const authGoog = getAuth(app);
@@ -158,10 +191,6 @@ function onLogInGoogle(e) {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user.displayName;
-      refs.registrationModal.classList.add('is-hidden');
-      refs.registrationModal.style.dispalay = 'block';
-      refs.body.classList.remove('stop-fon');
-      window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
     })
@@ -184,10 +213,6 @@ function onLogInGithub(e) {
       const credential = GithubAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user.displayName;
-      refs.registrationModal.classList.add('is-hidden');
-      refs.registrationModal.style.dispalay = 'block';
-      refs.body.classList.remove('stop-fon');
-      window.removeEventListener('load', onStopBackground);
       Notify.success(`привет ${user}`);
       localStorage.setItem(refs.TOKEN_KEY, token);
     })
@@ -207,7 +232,6 @@ async function onSubmitNewPassword(e) {
   const mailValue = document.querySelector('.input-emails');
   e.preventDefault();
   const email = refs.inputMailForgot.value;
-
   await sendPasswordResetEmail(authPass, email)
     .then(() => {
       Notify.success(`привет! письмо отправлено`);
@@ -228,9 +252,18 @@ function onOutFunction() {
     'Yes',
     'No',
     function okCb() {
-      refs.registrationModal.classList.remove('is-hidden');
-      refs.registrationModal.style.dispalay = 'none';
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+        })
+        .catch(error => {
+          // An error happened.
+        });
       localStorage.removeItem(refs.TOKEN_KEY);
+      refs.registrationModal.classList.remove('is-hidden');
+      refs.body.classList.add('stop-fon');
+      window.addEventListener('load', onStopBackground);
     },
     function cancelCb() {
       return;
@@ -268,3 +301,4 @@ function onErrorValid(error) {
   }
   return;
 }
+

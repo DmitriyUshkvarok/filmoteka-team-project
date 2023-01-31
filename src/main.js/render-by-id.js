@@ -6,6 +6,7 @@ import { renderMoviesinWatchedLibrary } from './watched-library-temp';
 import { renderMoviesinQueueLibrary } from './queue-library';
 import { getQueueList } from './queue-library';
 import { searchTrailer, instanceTrailer } from './play-movie';
+import { makeShortVoteAndPopularity } from './validate-movie-data';
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
@@ -32,6 +33,7 @@ function onCardClick(event) {
 }
 
 function onOpenCard(data) {
+  makeShortVoteAndPopularity(data);
   const markUp = modalFunction(data);
   const instance = basicLightBox.create(markUp);
   instance.show();

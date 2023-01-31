@@ -70,11 +70,9 @@
     }
   }
 }
-
-//== розширює останню картку (не потрібно)
-// .movie-card__item:last-child {
-//   margin-bottom: 0px;
-// }
+body.toggle-theme .movie-card__item:hover {
+  box-shadow: 0px 8px 43px rgb(252, 3, 3, 0.6);
+}
 
 .card-info {
   padding: 10px 5px 10px 5px;
@@ -96,9 +94,21 @@
   }
 }
 
+body.toggle-theme .movie-info-title {
+  text-shadow: -1px 1px 10px red;
+  color: var(--ganre-orange-color);
+}
+
 .info-item-year {
   display: flex;
   align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--ganre-orange-color);
+}
+
+.info-item-genre {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
@@ -113,6 +123,10 @@
   margin-left: 5px;
   margin-right: 5px;
   background-color: var(--ganre-orange-color);
+}
+.info-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .info-item-rating {
@@ -161,4 +175,9 @@
   display: flex;
   justify-content: center;
   text-shadow: 0 0 3px #ff0000;
+}
+
+body.toggle-theme .info-item-genre {
+  text-shadow: -1px 1px 10px red;
+  color: var(--light-color);
 }

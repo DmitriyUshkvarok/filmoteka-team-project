@@ -11,11 +11,27 @@
   border-radius: var(--border-radius);
   transition: var(--animationTransition);
   text-transform: uppercase;
+  
+  .form-icon{
+    display: none;
+  }
 
   &:hover,
   &:focus {
     background-color: var(--orange-color);
     border: 2px solid var(--orange-color);
     color: var(--light-color);
+    scale: 1.5;
+    transition: 500ms;
+    
+      .btn-content {
+        display: none;
+      }
+
+      .form-icon{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+      }
   }
 }
