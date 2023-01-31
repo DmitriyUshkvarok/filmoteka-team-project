@@ -1,3 +1,4 @@
+import { preloaderSetTimeOut } from './preloader';
 const themeBtn = document.querySelector('.switcher-toggle');
 const currentTheme = localStorage.getItem('theme');
 
@@ -11,6 +12,7 @@ if (currentTheme == 'dark') {
 themeBtn.addEventListener('click', onToggleTheme);
 
 function onToggleTheme() {
+  preloaderSetTimeOut();
   document.body.classList.toggle('toggle-theme');
 
   // Допустим, тема светлая

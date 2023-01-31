@@ -7,6 +7,7 @@ import { renderMoviesinQueueLibrary } from './queue-library';
 import { getQueueList } from './queue-library';
 import { searchTrailer, instanceTrailer } from './play-movie';
 import { makeShortVoteAndPopularity } from './validate-movie-data';
+import { preloaderSetTimeOut } from './preloader';
 
 const apiTheMovies = new ApiTheMovie();
 const gallery = document.querySelector('.gallery');
@@ -23,10 +24,10 @@ function getWatchedList() {
 gallery.addEventListener('click', onCardClick);
 
 function onCardClick(event) {
+  preloaderSetTimeOut();
   if (event.target === event.currentTarget) {
     return;
   }
-
   const currentId = event.target.closest('.movie-card__item').dataset.id;
   apiTheMovies.setMovieId(currentId);
   apiTheMovies.fetchById(currentId).then(onOpenCard);
@@ -38,17 +39,15 @@ function onOpenCard(data) {
   const instance = basicLightBox.create(markUp);
   instance.show();
   document.body.classList.add('stop-fon');
-  
-  
+
   //== якщо цього фільма немає - напис добавити, якщо є - видалити (СУТО текст)
   let watchedList = getWatchedList();
   const modalWathcedLibraryBtn = document.querySelector('.modal-btn__watched');
   if (!watchedList.find(film => film.id === data.id)) {
-      modalWathcedLibraryBtn.textContent = 'Add to watched';
-    } else {
-      modalWathcedLibraryBtn.textContent = 'Remove from watched';
-    }
-  
+    modalWathcedLibraryBtn.textContent = 'Add to watched';
+  } else {
+    modalWathcedLibraryBtn.textContent = 'Remove from watched';
+  }
 
   //== якщо цього фільма немає - напис добавити, якщо є - видалити (СУТО текст)
   let queueList = getQueueList();
@@ -63,6 +62,7 @@ function onOpenCard(data) {
   window.addEventListener('keydown', onKeydownEsc);
   function onKeydownEsc(event) {
     if (event.code === 'Escape' && !instanceTrailer.visible()) {
+      preloaderSetTimeOut();
       instance.close();
       document.body.classList.remove('stop-fon');
     }
@@ -73,13 +73,15 @@ function onOpenCard(data) {
   basic.addEventListener('click', onOffHidden);
 
   function onOffHidden() {
+    preloaderSetTimeOut();
     document.body.classList.remove('stop-fon');
   }
 
   //== закриття модалки при клікі на клавішу
   const modalBtnClose = document.querySelector('.modal-btn__close');
-  modalBtnClose.addEventListener('click', onModalBtnClose)
+  modalBtnClose.addEventListener('click', onModalBtnClose);
   function onModalBtnClose() {
+    preloaderSetTimeOut();
     instance.close();
     document.body.classList.remove('stop-fon');
   }

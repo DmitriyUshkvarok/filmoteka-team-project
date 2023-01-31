@@ -12,6 +12,7 @@ import { Notify } from 'notiflix';
 import { makeShortVoteAndPopularity } from './validate-movie-data';
 import { makeValidateMovieData } from './validate-movie-data';
 import { searchTrailer, instanceTrailer } from './play-movie';
+import { preloaderSetTimeOut } from './preloader';
 
 const WATCHED_KEY = 'watched-key';
 const QUEUE_KEY = 'queue-key';
@@ -35,6 +36,7 @@ export function getWatchesList() {
 
 //== WATCHED Library, рендер сторінки
 export function onOpenWatchLibrary() {
+  preloaderSetTimeOut();
   let data = getWatchesList();
   makeValidateMovieData(data);
   const markup = data
@@ -62,6 +64,7 @@ async function removeAndRenderWatched(e) {
   apiTheMovies.setMovieId(currentId);
 
   if (e.target.id === 'close') {
+    preloaderSetTimeOut();
     let data = getWatchesList();
     data = data.filter(film => film.id !== Number(currentId));
     localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
@@ -74,6 +77,7 @@ async function removeAndRenderWatched(e) {
 
 //== відкриття модалки
 function onOpenCard(respModal) {
+  preloaderSetTimeOut();
   let data = getWatchesList();
   makeShortVoteAndPopularity(respModal);
   const markUp = modalLibrarry(respModal);
@@ -90,6 +94,7 @@ function onOpenCard(respModal) {
       let data = getWatchesList();
       data = data.filter(film => film.id !== Number(currentIdBtnWatch));
       localStorage.setItem(WATCHED_KEY, JSON.stringify(data));
+      preloaderSetTimeOut();
       instance.close();
       Notify.warning('Фильм Удалён из библиотеки');
       onOpenWatchLibrary();
@@ -100,6 +105,7 @@ function onOpenCard(respModal) {
   window.addEventListener('keydown', onKeydownEsc);
   function onKeydownEsc(event) {
     if (event.code === 'Escape' && !instanceTrailer.visible()) {
+      preloaderSetTimeOut();
       instance.close();
       document.body.classList.remove('stop-fon');
     }
@@ -110,6 +116,7 @@ function onOpenCard(respModal) {
   basic.addEventListener('click', onOffHidden);
 
   function onOffHidden() {
+    preloaderSetTimeOut();
     document.body.classList.remove('stop-fon');
   }
 
@@ -117,6 +124,7 @@ function onOpenCard(respModal) {
   const modalBtnClose = document.querySelector('.modal-btn__close');
   modalBtnClose.addEventListener('click', onModalBtnClose);
   function onModalBtnClose() {
+    preloaderSetTimeOut();
     instance.close();
     document.body.classList.remove('stop-fon');
   }
@@ -134,6 +142,7 @@ function getQueueList() {
 }
 
 function onOpenQueueLibraty() {
+  preloaderSetTimeOut();
   let datas = getQueueList();
   makeValidateMovieData(datas);
   const markups = datas
@@ -166,6 +175,7 @@ async function removeAndRenderQueue(e) {
     localStorage.setItem(QUEUE_KEY, JSON.stringify(data));
     Notify.warning('Фильм Удалён из библиотеки');
     onOpenQueueLibraty();
+    preloaderSetTimeOut();
   } else {
     await apiTheMovies.fetchById(this.currentId).then(onOpenCardQue);
   }
@@ -173,6 +183,7 @@ async function removeAndRenderQueue(e) {
 
 //== відкриття модалки
 function onOpenCardQue(respModal) {
+  preloaderSetTimeOut();
   let datas = getQueueList();
   makeShortVoteAndPopularity(respModal);
   const markUp = modalLibrarryQue(respModal);
@@ -192,6 +203,7 @@ function onOpenCardQue(respModal) {
       instance.close();
       Notify.warning('Фильм Удалён из библиотеки');
       onOpenQueueLibraty();
+      preloaderSetTimeOut();
     }
   });
 
@@ -199,6 +211,7 @@ function onOpenCardQue(respModal) {
   window.addEventListener('keydown', onKeydownEsc);
   function onKeydownEsc(event) {
     if (event.code === 'Escape' && !instanceTrailer.visible()) {
+      preloaderSetTimeOut();
       instance.close();
       document.body.classList.remove('stop-fon');
     }
@@ -209,6 +222,7 @@ function onOpenCardQue(respModal) {
   basic.addEventListener('click', onOffHidden);
 
   function onOffHidden() {
+    preloaderSetTimeOut();
     document.body.classList.remove('stop-fon');
   }
 
@@ -216,6 +230,7 @@ function onOpenCardQue(respModal) {
   const modalBtnClose = document.querySelector('.modal-btn__close');
   modalBtnClose.addEventListener('click', onModalBtnClose);
   function onModalBtnClose() {
+    preloaderSetTimeOut();
     instance.close();
     document.body.classList.remove('stop-fon');
   }
@@ -223,6 +238,7 @@ function onOpenCardQue(respModal) {
 }
 
 window.addEventListener('load', () => {
+  preloaderSetTimeOut();
   onOpenWatchLibrary();
   watchLibBtn.focus({ focusVisible: true });
 });

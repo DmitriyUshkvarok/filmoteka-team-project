@@ -12,8 +12,9 @@ import {
   signOut,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { preloaderSetTimeOut } from './preloader';
 
-const LOCALSTORAGE_KEY = "email-form-state";
+const LOCALSTORAGE_KEY = 'email-form-state';
 
 // переменные для функционала регистрации и авторизации
 const refs = {
@@ -65,6 +66,7 @@ if (token) {
 // открыть панель для сброса пароля
 function onOpenForgotForm(e) {
   e.preventDefault();
+  preloaderSetTimeOut();
   refs.forgotForm.classList.toggle('hidden');
   refs.manSvg.classList.toggle('hidden');
 }
@@ -123,6 +125,7 @@ function onSaveMessage(evt) {
 const authRegistr = getAuth();
 function onRegisterUsers(e) {
   e.preventDefault();
+  preloaderSetTimeOut();
   const email = refs.emailSign.value;
   const password = refs.passwordSign.value;
   createUserWithEmailAndPassword(authRegistr, email, password)
@@ -147,6 +150,7 @@ function onRegisterUsers(e) {
 const authSign = getAuth();
 function onLogInUsers(e) {
   e.preventDefault();
+  preloaderSetTimeOut();
   const email = refs.emailSign.value;
   const password = refs.passwordSign.value;
   signInWithEmailAndPassword(authSign, email, password)
@@ -176,7 +180,7 @@ function updateForm() {
       refs.registrationForm.elements[name].value = value;
     });
   }
-};
+}
 
 updateForm();
 
@@ -186,6 +190,7 @@ const providerGoogle = new GoogleAuthProvider();
 
 function onLogInGoogle(e) {
   e.preventDefault();
+  preloaderSetTimeOut();
   signInWithPopup(authGoog, providerGoogle)
     .then(result => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -208,6 +213,7 @@ const providerGitHub = new GithubAuthProvider();
 
 function onLogInGithub(e) {
   e.preventDefault();
+  preloaderSetTimeOut();
   signInWithPopup(authGit, providerGitHub)
     .then(result => {
       const credential = GithubAuthProvider.credentialFromResult(result);
@@ -229,8 +235,8 @@ const authPass = getAuth();
 authPass.languageCode = 'ru';
 
 async function onSubmitNewPassword(e) {
-  const mailValue = document.querySelector('.input-emails');
   e.preventDefault();
+  preloaderSetTimeOut();
   const email = refs.inputMailForgot.value;
   await sendPasswordResetEmail(authPass, email)
     .then(() => {
@@ -301,4 +307,3 @@ function onErrorValid(error) {
   }
   return;
 }
-

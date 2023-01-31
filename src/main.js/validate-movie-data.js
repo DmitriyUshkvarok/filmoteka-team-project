@@ -6,7 +6,6 @@ let genres;
 
 const saveGenres = genres => {
   let genresList = [...genres];
-
   localStorage.setItem('genres', JSON.stringify(genresList));
 };
 

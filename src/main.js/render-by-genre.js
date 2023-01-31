@@ -2,6 +2,7 @@ import { apiTheMovies } from './render-all-collection';
 import allCollection from '../templates/all-collection-movies.hbs';
 import { makeValidatesGenreName } from './validate-movie-data';
 import { makeShortReleaseDate } from './validate-movie-data';
+import { preloaderSetTimeOut } from './preloader';
 
 const genreList = document.querySelector('.genre-list');
 const gallery = document.querySelector('.gallery');
@@ -9,6 +10,7 @@ const gallery = document.querySelector('.gallery');
 genreList.addEventListener('click', onCallByGenre);
 
 function onCallByGenre(e) {
+  preloaderSetTimeOut();
   if (e.currentTarget === e.target) {
     return;
   }
@@ -16,14 +18,14 @@ function onCallByGenre(e) {
   apiTheMovies.resetPage();
 
   apiTheMovies.genreId = e.target.dataset.id;
-  apiTheMovies.fetchByGenre(apiTheMovies.genreId)
+  apiTheMovies
+    .fetchByGenre(apiTheMovies.genreId)
     .then(makeValidatesGenreName)
     .then(makeShortReleaseDate)
     .then(onRenderbyGenre);
 }
 
 function onRenderbyGenre(owner) {
-  console.log(owner);
   const markupGenre = allCollection(owner);
   gallery.innerHTML = markupGenre;
 }
@@ -34,6 +36,7 @@ btnShowGenre.addEventListener('click', onShowGenres);
 const genres = document.querySelector('#genres');
 
 function onShowGenres() {
+  preloaderSetTimeOut();
   slideToggle(genres, 400);
 }
 

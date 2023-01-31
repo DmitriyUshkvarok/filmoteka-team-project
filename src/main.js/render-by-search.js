@@ -5,6 +5,7 @@ import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import Notiflix from 'notiflix';
 import { makeValidatesGenreName } from './validate-movie-data';
 import { makeShortReleaseDate } from './validate-movie-data';
+import { preloaderSetTimeOut } from './preloader';
 
 const form = document.querySelector('.header-form');
 const warning = document.querySelector('.js-search');
@@ -15,6 +16,7 @@ form.addEventListener('submit', onSubmit);
 
 function onSubmit(e) {
   e.preventDefault();
+  preloaderSetTimeOut();
   apiTheMovies.searchValue = input.value.trim();
 
   if (!apiTheMovies.searchValue) {
@@ -29,7 +31,8 @@ function onSubmit(e) {
     return;
   }
   apiTheMovies.resetPage();
-  apiTheMovies.fetchBySearch(apiTheMovies.searchValue)
+  apiTheMovies
+    .fetchBySearch(apiTheMovies.searchValue)
     .then(makeValidatesGenreName)
     .then(makeShortReleaseDate)
     .then(showMovie);

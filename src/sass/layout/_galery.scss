@@ -1,28 +1,18 @@
 .gallery,
 .gallery-Queue {
-  display: block;
-  margin-bottom: -30px;
-
-  @media screen and (min-width: 320px) {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
-  }
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  row-gap: 20px;
 
   @media screen and (min-width: 768px) {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 30px;
+    gap: 32px;
   }
-}
 
-.movie {
-  padding-top: 20px;
-  padding-bottom: 40px;
-
-  @media screen and (min-width: 768px) {
-    padding-top: 10px;
-    padding-bottom: 50px;
+  @media screen and (min-width: 1280px) {
+    column-gap: 16px;
+    row-gap: 32px;
   }
 }
 
@@ -37,7 +27,7 @@
 }
 
 .movie-card__item {
-  margin-bottom: 30px;
+  width: 280px;
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
@@ -49,16 +39,12 @@
     filter: saturate(165%);
   }
 
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    flex-basis: calc(100% / 2 - 30px);
-    margin-left: 30px;
-    width: 294px;
+  @media screen and (min-width: 768px) {
+    width: 336px;
   }
 
-  @media screen and (min-width: 1024px) {
-    flex-basis: calc(100% / 3 - 30px);
-    margin-left: 30px;
-    width: 274px;
+  @media screen and (min-width: 1280px) {
+    width: 394px;
   }
 
   &:hover {
@@ -124,6 +110,7 @@ body.toggle-theme .movie-info-title {
   margin-right: 5px;
   background-color: var(--ganre-orange-color);
 }
+
 .info-wrapper {
   display: flex;
   align-items: center;
