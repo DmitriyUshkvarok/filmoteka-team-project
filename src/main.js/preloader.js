@@ -14,5 +14,5 @@ export function preloaderSetTimeOut() {
   preloader.style.display = 'block';
   setTimeout(function () {
     preloader.style.display = 'none';
-  }, 1000);
+  }, 500);
 }
